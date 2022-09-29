@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>學生資訊系統</title>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.1/css/bootstrap.min.css' integrity='sha512-siwe/oXMhSjGCwLn+scraPOWrJxHlUgMBMZXdPe2Tnk3I0x3ESCoLz7WZ5NTH6SZrywMY+PB1cjyqJ5jAluCOg==' crossorigin='anonymous'/>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.1/js/bootstrap.min.js' integrity='sha512-vyRAVI0IEm6LI/fVSv/Wq/d0KUfrg3hJq2Qz5FlfER69sf3ZHlOrsLriNm49FxnpUGmhx+TaJKwJ+ByTLKT+Yg==' crossorigin='anonymous'></script>
 </head>
 <body>
     <p>
@@ -25,36 +26,10 @@
             <tr align="center">
                 <th>學號</th>
                 <th>姓名</th>
-                <th colspan="2">聽</th>
-                <th colspan="2">說</th>
+                <th>功能</th>
             </tr>
         </thead>
-        <tbody id="sList">
-            <tr>
-                <td>10910110</td>
-                <td>陳宏恩</td>
-                <td>
-                    <select name="" id="">
-                        <option value="聆聽並分享想法">聆聽並分享想法</option>
-                        <option value="重述故事">重述故事</option>
-                        <option value="說出故事大意/心得">說出故事大意/心得</option>
-                    </select>
-                </td>
-                <td>
-                    <textarea name="" id="" cols="10" rows="1"></textarea>
-                </td>
-                <td>
-                    <select name="" id="">
-                        <option value="聆聽並分享想法">聆聽並分享想法</option>
-                        <option value="重述故事">重述故事</option>
-                        <option value="說出故事大意/心得">說出故事大意/心得</option>
-                    </select>
-                </td>
-                <td>
-                    <textarea name="" id="" cols="10" rows="1"></textarea>
-                </td>
-            </tr>
-        </tbody>
+        <tbody id="sList"></tbody>
     </table>
     
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js' integrity='sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==' crossorigin='anonymous'></script>
