@@ -18,7 +18,7 @@ $('#class').change((e) => {
                         `<td>
                         <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
+查看資料
 </button>
 
 <!-- Modal -->
@@ -26,11 +26,11 @@ $('#class').change((e) => {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="exampleModalLabel">${v[2]} 同學</h5>
+        <button type="button" c lass="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
       </div>
       <div class="modal-body">
-        ...
+        使用者自定義內容
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -39,7 +39,6 @@ $('#class').change((e) => {
     </div>
   </div>
 </div>
-
                         </td>` +
                         '</tr>'
                     )
@@ -48,11 +47,11 @@ $('#class').change((e) => {
         })
     }
     else
-    {
-        $('#sList').append(
-            '<tr>' +
-            '<td colspan=3>尚未選擇班級</td>' +
-            '</tr>'
-        )
-    }
+        $('#sList').append('<tr><td colspan=3>尚未選擇班級</td></tr>')
 })
+
+
+function studentDialog()
+{
+
+}

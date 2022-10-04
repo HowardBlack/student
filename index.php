@@ -21,6 +21,23 @@
             <option value="資三f">資三F</option>
         </select>
     </p>
+    <p>
+        <span>月份</span>
+        <select name="month" id="month">
+            <option value="9">九月</option>
+            <option value="10">十月</option>
+            <option value="11">十一月</option>
+            <option value="12">十二月</option>
+            <option value="1">一月</option>
+            <option value="2">二月</option>
+            <option value="3">三月</option>
+            <option value="4">四月</option>
+            <option value="5">五月</option>
+            <option value="6">六月</option>
+            <option value="7">七月</option>
+            <option value="8">八月</option>
+        </select>
+    </p>
     <table border="1" class="">
         <thead>
             <tr align="center">
@@ -29,7 +46,9 @@
                 <th>功能</th>
             </tr>
         </thead>
-        <tbody id="sList"></tbody>
+        <tbody id="sList">
+            <tr><td colspan="3">尚未選擇班級！</td></tr>
+        </tbody>
     </table>
     
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js' integrity='sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==' crossorigin='anonymous'></script>
