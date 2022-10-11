@@ -9,12 +9,12 @@ $('#class').change((e) => {
             type: 'POST',
             dataType: 'JSON',
             success: (result) => {
-                Object.values(result).forEach((v) => {
+                Object.values(result).forEach((v, i) => {
                     $('#sList').append(`
                       <tr align=center>
                         <td>${v[0]}</td>
                         <td>${v[1]}</td>
-                        <td>${studentDialog(v[1])}</td>                        
+                        <td>${studentDialog(value, i, v[1])}</td>                        
                       </tr>`)
                 })
             },
@@ -27,9 +27,8 @@ $('#class').change((e) => {
         $('#sList').append('<tr><td colspan=3>尚未選擇班級</td></tr>')
 })
 
-function studentDialog(name)
-{  
-  console.log(name)
+function studentDialog(className, index, name)
+{
   return `<!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   查看資料
@@ -44,7 +43,7 @@ function studentDialog(name)
           <button type="button" c lass="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
         </div>
         <div class="modal-body">
-          ${optionDropDown()}
+          ${optionDropDown(className, index)}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -55,21 +54,20 @@ function studentDialog(name)
   </div>`
 }
 
-function optionDropDown()
+// 資料庫訪問率太高 => 每次都需要訪問，降低效能
+function optionDropDown(className, index)
 {
-  // $("#columnName").empty()
    $.ajax({
     url: './db/loadColumn.php',
-    data: {class: '資三a'},
+    data: {class: className},
     type: 'POST',
     dataType: 'JSON',
     success: (result) => {
-        console.log(result.length)
         Object.values(result).forEach((v) => {
-           $('#columnName').append(`
-              <tr>            
+           $(`#columnName${index}`).append(`
+              <tr>
                 <td>${v[1]}</td>
-                <td>${detailsOpt()}</td>
+                <td>${detailsOpt(className, v[0], index)}</td>
               </tr>
            `)
         })
@@ -81,27 +79,39 @@ function optionDropDown()
   
   return `
     <table class="table">
-    <thead>
-      <tr>
-        <td>欄位</td>
-        <td>詳細資料</td>
-      </tr>
-    </thead>
-    <tbody id="columnName">              
-    </toby>
-  </table>
+      <thead>
+        <tr>
+          <td>欄位</td>
+          <td>詳細資料</td>
+        </tr>
+      </thead>
+      <tbody id="columnName${index}"></toby>
+    </table>
   `
 }
 
-function detailsOpt()
+function detailsOpt(className, columnCode, index)
 {
+  $.ajax({
+    url: './db/loadItems.php',
+    data: {class: className, code: columnCode},
+    type: 'POST',
+    dataType: 'JSON',
+    success: (result) => {        
+        Object.values(result).forEach((v) => {
+          $(`#${columnCode}${index}`).append(`<option value=${v[2]}>${v[2]}</option>`)          
+        })
+    },
+    error: () => {
+      $(`#${columnCode}${index}`).append('<option value=暫無新增選項>暫無新增選項</option>')
+    }
+  })
+
   return `
-    <select id=>
-      <option value=聆聽並分享想法>聆聽並分享想法</option>
-      <option value=重述故事>重述故事</option>
-      <option value=說出故事大意/心得>說出故事大意/心得</option>
-      <option value=口說表達清楚並語意完整>口說表達清楚並語意完整</option>
+    <select id=${columnCode}${index}>
+      
     </select>
     <textarea style=resize: both; cols=10 rows=1></textarea>
   `
 }
+
