@@ -9,12 +9,12 @@ $('#class').change((e) => {
             type: 'POST',
             dataType: 'JSON',
             success: (result) => {
-                Object.values(result).forEach((v, i) => {
+                Object.values(result).forEach((studenInfo, i) => {
                     $('#sList').append(`
                       <tr align=center>
-                        <td>${v[0]}</td>
-                        <td>${v[1]}</td>
-                        <td>${studentDialog(value, i, v[1])}</td>                        
+                        <td>${studenInfo[0]}</td>
+                        <td>${studenInfo[1]}</td>
+                        <td>${studentDialog(value, i, studenInfo)}</td>                        
                       </tr>`)
                 })
             },
@@ -27,27 +27,26 @@ $('#class').change((e) => {
         $('#sList').append('<tr><td colspan=3>尚未選擇班級</td></tr>')
 })
 
-function studentDialog(className, index, name)
-{
+function studentDialog(className, index, sInfo) {
   return `<!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#show${index}">
   查看資料
   </button>
   
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="show${index}" tabindex="-1" aria-labelledby="lab${index}" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">${name} 同學</h5>
-          <button type="button" c lass="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+          <h5 class="modal-title" id="lab${index}">${sInfo[1]} 同學</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           ${optionDropDown(className, index)}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" id=btnSubmit${index} onclick=btnSubmit(${index})>Save changes</button>
         </div>
       </div>
     </div>
@@ -55,8 +54,7 @@ function studentDialog(className, index, name)
 }
 
 // 資料庫訪問率太高 => 每次都需要訪問，降低效能
-function optionDropDown(className, index)
-{
+function optionDropDown(className, index) {
    $.ajax({
     url: './db/loadColumn.php',
     data: {class: className},
@@ -73,7 +71,7 @@ function optionDropDown(className, index)
         })
     },
     error: () => {
-      $('#columnName').append('<tr><td colspan=2>尚未建立欄位項目！</td></tr>')      
+      $('#columnName').append('<tr><td colspan=2>尚未建立欄位項目！</td></tr>')
     }
   })
   
@@ -90,28 +88,33 @@ function optionDropDown(className, index)
   `
 }
 
-function detailsOpt(className, columnCode, index)
-{
+// 資料庫訪問率太高 => 每次都需要訪問，降低效能
+function detailsOpt(className, columnCode, index) {
   $.ajax({
     url: './db/loadItems.php',
     data: {class: className, code: columnCode},
     type: 'POST',
     dataType: 'JSON',
-    success: (result) => {        
+    success: (result) => {
+      $(`#${columnCode}${index}`).append(`<option value=請選擇}>請選擇</option>`)
         Object.values(result).forEach((v) => {
-          $(`#${columnCode}${index}`).append(`<option value=${v[2]}>${v[2]}</option>`)          
+          $(`#${columnCode}${index}`).append(`<option value=${v[2]}>${v[2]}</option>`)
         })
     },
     error: () => {
-      $(`#${columnCode}${index}`).append('<option value=暫無新增選項>暫無新增選項</option>')
+      $(`#${columnCode}${index}`).append('<option value=暫無選項>暫無選項</option>')
     }
   })
 
   return `
-    <select id=${columnCode}${index}>
-      
-    </select>
-    <textarea style=resize: both; cols=10 rows=1></textarea>
+    <select id=${columnCode}${index}></select>
+    <textarea id=ta${columnCode}${index} style=resize: both; cols=10 rows=1></textarea>
   `
 }
 
+function btnSubmit(index) {
+  $(`#btnSubmit${index}`).click((e) => {
+    // alert(e.target.id)
+    console.log(e.target.id)
+  })
+}
