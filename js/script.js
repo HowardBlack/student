@@ -8,17 +8,16 @@ $('#class').change((e) => {
             data: {class: value},
             type: 'POST',
             dataType: 'JSON',
-            success: (result) => {
-                Object.values(result).forEach((studenInfo, i) => {
-                    $('#sList').append(`
-                      <tr align=center>
-                        <td>${studenInfo[0]}</td>
-                        <td>${studenInfo[1]}</td>
-                        <td>${studentDialog(value, i, studenInfo)}</td>                        
-                      </tr>`)
-                })
+            success(result) {
+              result.forEach((studenInfo, index) => {
+                $('#sList').append(`<tr align=center>
+                    <td>${studenInfo[0]}</td>
+                    <td>${studenInfo[1]}</td>
+                    <td>${studentDialog(value, index, studenInfo)}</td>
+                  </tr>`)
+              })
             },
-            error: () => {
+            error() {
               $('#sList').append('<tr><td colspan=3>尚未建立班級資料庫</td></tr>')      
             }
         })
@@ -46,7 +45,7 @@ function studentDialog(className, index, sInfo) {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id=btnSubmit${index} onclick=btnSubmit(${index})>Save changes</button>
+          <button type="button" class="btn btn-primary" id=btnSubmit${index} onclick=upload(${index})>Save changes</button>
         </div>
       </div>
     </div>
@@ -60,17 +59,15 @@ function optionDropDown(className, index) {
     data: {class: className},
     type: 'POST',
     dataType: 'JSON',
-    success: (result) => {
-        Object.values(result).forEach((v) => {
-           $(`#columnName${index}`).append(`
-              <tr>
-                <td>${v[1]}</td>
-                <td>${detailsOpt(className, v[0], index)}</td>
-              </tr>
-           `)
-        })
+    success(result) {
+      result.forEach((option) => {
+        $(`#columnName${index}`).append(`<tr>
+              <td>${option[1]}</td>
+              <td>${detailsOpt(className, option[0], index)}</td>
+            </tr>`)
+      })
     },
-    error: () => {
+    error() {
       $('#columnName').append('<tr><td colspan=2>尚未建立欄位項目！</td></tr>')
     }
   })
@@ -95,13 +92,13 @@ function detailsOpt(className, columnCode, index) {
     data: {class: className, code: columnCode},
     type: 'POST',
     dataType: 'JSON',
-    success: (result) => {
+    success(result) {
       $(`#${columnCode}${index}`).append(`<option value=請選擇}>請選擇</option>`)
-        Object.values(result).forEach((v) => {
-          $(`#${columnCode}${index}`).append(`<option value=${v[2]}>${v[2]}</option>`)
-        })
+      result.forEach((optDetails) => {
+        $(`#${columnCode}${index}`).append(`<option value=${optDetails[2]}>${optDetails[2]}</option>`)
+      })
     },
-    error: () => {
+    error() {
       $(`#${columnCode}${index}`).append('<option value=暫無選項>暫無選項</option>')
     }
   })
@@ -112,9 +109,6 @@ function detailsOpt(className, columnCode, index) {
   `
 }
 
-function btnSubmit(index) {
-  $(`#btnSubmit${index}`).click((e) => {
-    // alert(e.target.id)
-    console.log(e.target.id)
-  })
+function upload(index) {
+  console.log(index)
 }
