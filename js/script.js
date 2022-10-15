@@ -1,19 +1,18 @@
 $('#class').change((e) => {
     $('#sList').empty()
-    const value = e.target.value
-    if (value != '請選擇')
-    {
+    const className = e.target.value
+    if (className != '請選擇') {
         $.ajax({
             url: './db/loadClass.php',
-            data: {class: value},
+            data: {class: className},
             type: 'POST',
             dataType: 'JSON',
             success(result) {
               result.forEach((studenInfo, index) => {
                 $('#sList').append(`<tr align=center>
-                    <td>${studenInfo[0]}</td>
+                    <td id=sid${index}>${studenInfo[0]}</td>
                     <td>${studenInfo[1]}</td>
-                    <td>${studentDialog(value, index, studenInfo)}</td>
+                    <td>${studentDialog(className, index, studenInfo)}</td>
                   </tr>`)
               })
             },
@@ -87,28 +86,57 @@ function optionDropDown(className, index) {
 
 // 資料庫訪問率太高 => 每次都需要訪問，降低效能
 function detailsOpt(className, columnCode, index) {
+  const optId = `${columnCode}${index}`
   $.ajax({
     url: './db/loadItems.php',
     data: {class: className, code: columnCode},
     type: 'POST',
     dataType: 'JSON',
     success(result) {
-      $(`#${columnCode}${index}`).append(`<option value=請選擇}>請選擇</option>`)
+      $(`#${optId}`).append(`<option value=請選擇}>請選擇</option>`)
       result.forEach((optDetails) => {
-        $(`#${columnCode}${index}`).append(`<option value=${optDetails[2]}>${optDetails[2]}</option>`)
+        $(`#${optId}`).append(`<option value=${optDetails[2]}>${optDetails[2]}</option>`)
       })
     },
     error() {
-      $(`#${columnCode}${index}`).append('<option value=暫無選項>暫無選項</option>')
+      $(`#${optId}`).append('<option value=暫無選項>暫無選項</option>')
     }
   })
 
   return `
-    <select id=${columnCode}${index}></select>
-    <textarea id=ta${columnCode}${index} style=resize: both; cols=10 rows=1></textarea>
+    <select id=${optId} onchange=optionEvent('${className}','${columnCode}','${index}')></select>
+    <textarea id=ta${optId} style=resize: both; cols=10 rows=1></textarea>
   `
 }
 
+/* sid, type, item, recordTime ==> 辨別資料是否已存在資料庫
+
+*/
+function optionEvent(className, type, index) {
+  const sid = $(`#sid${index}`).text()
+  const itemValue = $(`#${type}${index}`).val()
+  const month = $('#month').val()
+  // console.log(sid)
+  // console.log(type)
+  // console.log(itemValue)
+  // console.log(month)
+  $.ajax({
+    url: './db/queryItems.php',
+    data: {class: className, sid: sid, type: type, item: itemValue, month: month},
+    type: 'POST',
+    dataType: 'JSON',
+    success(result) {
+
+    },
+    error() {
+
+    }, 
+  })
+}
+
+/* 上傳資料庫
+
+*/
 function upload(index) {
   console.log(index)
 }
