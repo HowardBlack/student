@@ -44,7 +44,7 @@ function studentDialog(className, index, sInfo) {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id=btnSubmit${index} onclick=upload(${index})>Save changes</button>
+          <button type="button" class="btn btn-primary" id=btnSubmit${index} onclick=upload('${className}',${index})>Save changes</button>
         </div>
       </div>
     </div>
@@ -91,9 +91,10 @@ function detailsOpt(className, columnCode, index) {
     url: './db/loadItems.php',
     data: {class: className, code: columnCode},
     type: 'POST',
+
     dataType: 'JSON',
     success(result) {
-      $(`#${optId}`).append(`<option value=請選擇}>請選擇</option>`)
+      $(`#${optId}`).append(`<option value=請選擇>請選擇</option>`)
       result.forEach((optDetails) => {
         $(`#${optId}`).append(`<option value=${optDetails[2]}>${optDetails[2]}</option>`)
       })
@@ -105,7 +106,7 @@ function detailsOpt(className, columnCode, index) {
 
   return `
     <select id=${optId} onchange=optionEvent('${className}','${columnCode}','${index}')></select>
-    <textarea id=ta${optId} style=resize: both; cols=10 rows=1></textarea>
+    <textarea id=ta${optId} oninput=textareaInput('${className}','${columnCode}','${index}') style=resize: both; cols=10 rows=1 disabled></textarea>
   `
 }
 
@@ -116,27 +117,41 @@ function optionEvent(className, type, index) {
   const sid = $(`#sid${index}`).text()
   const itemValue = $(`#${type}${index}`).val()
   const month = $('#month').val()
-  // console.log(sid)
-  // console.log(type)
-  // console.log(itemValue)
-  // console.log(month)
-  $.ajax({
-    url: './db/queryItems.php',
-    data: {class: className, sid: sid, type: type, item: itemValue, month: month},
-    type: 'POST',
-    dataType: 'JSON',
-    success(result) {
 
-    },
-    error() {
+  if (itemValue != '請選擇') {
+    $(`#ta${type}${index}`).prop('disabled', false)
+    $.ajax({
+      url: './db/queryItems.php',
+      data: {class: className, sid: sid, type: type, item: itemValue, month: month},
+      type: 'POST',
+      dataType: 'JSON',
+      success(result) {
 
-    }, 
-  })
+      },
+      error() {
+  
+      }, 
+    })
+  }
+  else {
+    $(`#ta${type}${index}`).prop('disabled', true)
+  }
+  
+}
+
+function textareaInput(className, type, index) {
+  const sid = $(`#sid${index}`).text()
+  const itemValue = $(`#${type}${index}`).val()
+  console.log(className)
+  console.log(sid)
+  console.log(type)
+  console.log(itemValue)
 }
 
 /* 上傳資料庫
 
 */
 function upload(index) {
-  console.log(index)
+  // 如何確認欄列個數？
+
 }
