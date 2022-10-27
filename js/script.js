@@ -1,11 +1,14 @@
+let columns = []
+
 $('#class').change((e) => {
     $('#sList').empty()
+    columns = []
     const className = e.target.value
     if (className != '請選擇') {
         $.ajax({
             url: './db/loadClass.php',
             data: {class: className},
-            type: 'POST',
+            method: 'POST',
             dataType: 'JSON',
             success(result) {
               result.forEach((studenInfo, index) => {
@@ -56,10 +59,11 @@ function optionDropDown(className, index) {
    $.ajax({
     url: './db/loadColumn.php',
     data: {class: className},
-    type: 'POST',
+    method: 'POST',
     dataType: 'JSON',
     success(result) {
       result.forEach((option) => {
+
         $(`#columnName${index}`).append(`<tr>
               <td>${option[1]}</td>
               <td>${detailsOpt(className, option[0], index)}</td>
@@ -90,14 +94,15 @@ function detailsOpt(className, columnCode, index) {
   $.ajax({
     url: './db/loadItems.php',
     data: {class: className, code: columnCode},
-    type: 'POST',
-
+    method: 'POST',
     dataType: 'JSON',
     success(result) {
+      columns.push(columnCode)
+      columns = [...new Set(columns)]
       $(`#${optId}`).append(`<option value=請選擇>請選擇</option>`)
       result.forEach((optDetails) => {
         $(`#${optId}`).append(`<option value=${optDetails[2]}>${optDetails[2]}</option>`)
-      })
+      })      
     },
     error() {
       $(`#${optId}`).append('<option value=暫無選項>暫無選項</option>')
@@ -106,7 +111,7 @@ function detailsOpt(className, columnCode, index) {
 
   return `
     <select id=${optId} onchange=optionEvent('${className}','${columnCode}','${index}')></select>
-    <textarea id=ta${optId} oninput=textareaInput('${className}','${columnCode}','${index}') style=resize: both; cols=10 rows=1 disabled></textarea>
+    <textarea id=ta${optId} style=resize: both; cols=10 rows=1 disabled></textarea>
   `
 }
 
@@ -123,8 +128,8 @@ function optionEvent(className, type, index) {
     $.ajax({
       url: './db/queryItems.php',
       data: {class: className, sid: sid, type: type, item: itemValue, month: month},
-      type: 'POST',
-      dataType: 'JSON',
+      method: 'POST',
+      // dataType: 'JSON',
       success(result) {
 
       },
@@ -139,19 +144,39 @@ function optionEvent(className, type, index) {
   
 }
 
-function textareaInput(className, type, index) {
-  const sid = $(`#sid${index}`).text()
-  const itemValue = $(`#${type}${index}`).val()
-  console.log(className)
-  console.log(sid)
-  console.log(type)
-  console.log(itemValue)
-}
-
 /* 上傳資料庫
 
 */
-function upload(index) {
-  // 如何確認欄列個數？
+function upload(className, index) {
 
+  const sid = $(`#sid${index}`).text()
+  const month = $('#month').val()
+  let record = []
+
+  for(let type of columns) {
+    const item = $(`#${type}${index}`).val()
+    const itemValue = $(`#ta${type}${index}`).val()
+    
+    if (item != '請選擇' && itemValue != '') {
+      record.push([sid, type, item, itemValue, month])
+    }
+  }
+
+  if (record.length) {
+    $.ajax({
+      url: './db/upload.php',
+      data: {class: className, data: record},
+      method: 'POST',
+      success(result) {
+        alert('資料新增/修改成功！')
+      },
+      error(e) {
+        alert('無法連線或回傳錯誤！')
+      },
+    })
+  }else {
+    alert('請確認資料是否填寫正確！')
+  }
+
+  console.log(record)
 }
