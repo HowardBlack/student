@@ -8,9 +8,10 @@ for ($i=0; $i < count($data); $i++) {
     $row = $data[$i];
 
     // data exist
-    $search = "SELECT * FROM choiceitem WHERE (sid = '$row[0]' AND type = '$row[1]') AND item = '$row[2]'";
+    $search = "SELECT * FROM choiceitem WHERE (sid = '$row[0]' AND type = '$row[1]') AND item = '$row[2]'";    
+    $queryData = mysqli_query($conn, $search);
 
-    if (mysqli_query($conn, $search)) {
+    if (mysqli_num_rows($queryData)) {
         // update data
         $sql = "UPDATE choiceitem SET remark = '$row[3]' WHERE (sid = '$row[0]' AND type = '$row[1]') AND item = '$row[2]'";
     }else {
