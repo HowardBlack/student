@@ -90,9 +90,11 @@ function optionDropDown(className, index) {
 $('#month').change(function() {
     let allSelect = document.querySelectorAll('tbody select')
     let allTextArea = document.querySelectorAll('tbody textarea')
-    allSelect.forEach(element => {
-      element.text("請選擇")
-    });
+    allSelect.forEach(element => {element.selectedIndex = 0})
+    allTextArea.forEach(element => {
+      element.disabled = true
+      element.value = ""
+    }) 
 })
 
 // 資料庫訪問率太高 => 每次都需要訪問，降低效能
