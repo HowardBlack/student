@@ -63,7 +63,6 @@ function optionDropDown(className, index) {
     dataType: 'JSON',
     success(result) {
       result.forEach((option) => {
-
         $(`#columnName${index}`).append(`<tr>
               <td>${option[1]}</td>
               <td>${detailsOpt(className, option[0], index)}</td>
@@ -88,6 +87,14 @@ function optionDropDown(className, index) {
   `
 }
 
+$('#month').change(function() {
+    let allSelect = document.querySelectorAll('tbody select')
+    let allTextArea = document.querySelectorAll('tbody textarea')
+    allSelect.forEach(element => {
+      element.text("請選擇")
+    });
+})
+
 // 資料庫訪問率太高 => 每次都需要訪問，降低效能
 function detailsOpt(className, columnCode, index) {
   const optId = `${columnCode}${index}`
@@ -105,7 +112,7 @@ function detailsOpt(className, columnCode, index) {
       })      
     },
     error() {
-      $(`#${optId}`).append('<option value=暫無選項>暫無選項</option>')
+      $(`#${optId}`).append(`<option value=請選擇>請選擇</option>`)
     }
   })
 
@@ -122,6 +129,7 @@ function optionEvent(className, type, index) {
   const sid = $(`#sid${index}`).text()
   const itemValue = $(`#${type}${index}`).val()
   const month = $('#month').val()
+  console.log(month)
 
   if (itemValue != '請選擇') {
     $(`#ta${type}${index}`).prop('disabled', false)
@@ -129,17 +137,14 @@ function optionEvent(className, type, index) {
       url: './db/queryItems.php',
       data: {class: className, sid: sid, type: type, item: itemValue, month: month},
       method: 'POST',
-      // dataType: 'JSON',
       success(result) {
-
+        $(`#ta${type}${index}`).val(result)        
       },
-      error() {
-  
-      }, 
     })
   }
   else {
     $(`#ta${type}${index}`).prop('disabled', true)
+    $(`#ta${type}${index}`).val("")
   }
   
 }
@@ -178,5 +183,4 @@ function upload(className, index) {
     alert('請確認資料是否填寫正確！')
   }
 
-  console.log(record)
 }
