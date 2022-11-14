@@ -20,7 +20,7 @@ $('#class').change((e) => {
               })
             },
             error() {
-              $('#sList').append('<tr><td colspan=3>尚未建立班級資料庫</td></tr>')      
+              $('#sList').append('<tr><td colspan=3>查無資料！</td></tr>')      
             }
         })
     }
