@@ -1,32 +1,28 @@
-let columns = []
-
-$('#class').change((e) => {
-    $('#sList').empty()
-    columns = []
-    const className = e.target.value
-    if (className != '請選擇') {
-        $.ajax({
-            url: './db/loadClass.php',
-            data: {class: className},
-            method: 'POST',
-            dataType: 'JSON',
-            success(result) {
-              result.forEach((studenInfo, index) => {
-                $('#sList').append(`<tr align=center>
-                    <td id=sid${index}>${studenInfo[0]}</td>
-                    <td>${studenInfo[1]}</td>
-                    <td>${studentDialog(className, index, studenInfo)}</td>
-                  </tr>`)
-              })
-            },
-            error() {
-              $('#sList').append('<tr><td colspan=3>查無資料！</td></tr>')      
-            }
-        })
-    }
-    else
-        $('#sList').append('<tr><td colspan=3>尚未選擇班級</td></tr>')
-})
+function loadClass(className) {
+  $('#sList').empty()  
+  if (className != '請選擇') {
+    $.ajax({
+        url: './db/loadClass.php',
+        data: {class: className},
+        method: 'POST',
+        dataType: 'JSON',
+        success(result) {
+          result.forEach((studenInfo, index) => {
+            $('#sList').append(`<tr align=center>
+                <td id=sid${index}>${studenInfo[0]}</td>
+                <td>${studenInfo[1]}</td>
+                <td>${studentDialog(className, index, studenInfo)}</td>
+              </tr>`)
+          })
+        },
+        error() {
+          $('#sList').append('<tr><td colspan=3>查無資料！</td></tr>')      
+        }
+    })
+}
+else
+    $('#sList').append('<tr><td colspan=3>尚未選擇班級</td></tr>')
+}
 
 function studentDialog(className, index, sInfo) {
   return `<!-- Button trigger modal -->
@@ -174,10 +170,10 @@ function upload(className, index) {
       url: './db/upload.php',
       data: {class: className, data: record},
       method: 'POST',
-      success(result) {
+      success() {
         alert('資料新增/修改成功！')
       },
-      error(e) {
+      error() {
         alert('無法連線或回傳錯誤！')
       },
     })

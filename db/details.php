@@ -2,7 +2,9 @@
 
 require_once('db.php');
 
-$sql = 'SELECT * FROM studentinfo';
+$tableName = $_POST['tableName'];
+
+$sql = "SELECT * FROM $tableName";
 
 $data = mysqli_query($conn, $sql);
 
