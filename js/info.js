@@ -13,7 +13,7 @@ function loadInfo(className) {
                     <td>${studenInfo[1]}</td>
                     <td>
                         ${info(index, studenInfo)}
-                        <button class='btn btn-danger' onclick=delInfo(${studenInfo[0]})>刪除</button>
+                        <button class='btn btn-danger' onclick=delInfo('${studenInfo[0]}')>刪除</button>
                     </td>
                   </tr>`)
               })
@@ -49,7 +49,7 @@ function info(index, sInfo) {
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id=updateInfo${index} data-bs-dismiss="modal" onclick=updateInfo(${index},${sInfo[0]})>UPDATE</button>
+            <button type="button" class="btn btn-primary" id=updateInfo${index} data-bs-dismiss="modal" onclick=updateInfo(${index},'${sInfo[0]}')>UPDATE</button>
           </div>
         </div>
       </div>

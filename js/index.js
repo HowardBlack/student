@@ -13,11 +13,12 @@ function refresh(className) {
     loadInfo(className)
     loadCol(className)
     loadItems(className)
+    loadAllRecord(className)
     defaultAddType(className)
 }
 
 function validDB(className) {
-    if (className != '請選擇') {
+    if (valid_dbName(className)) {
         $.ajax({
             url: './db/db.php',
             method: 'POST',
@@ -32,4 +33,8 @@ function validDB(className) {
     }else {
         alert('請選擇班級！')
     }
+}
+
+function valid_dbName(className) {
+    return (className != '請選擇') ? true : false
 }

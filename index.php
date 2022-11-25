@@ -10,39 +10,40 @@
 </head>
 <body>
     <div class="container">
-        <p>
-            <span>班級</span>
-            <select name="class" id="class">
-                <option value="請選擇">請選擇</option>
-                <option value="資三a">資三A</option>
-                <option value="資三b">資三B</option>
-                <option value="資三c">資三C</option>
-                <option value="資三d">資三D</option>
-                <option value="資三e">資三E</option>
-                <option value="資三f">資三F</option>
-            </select>
-        </p>
-
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="pills-learn-record-tab" data-bs-toggle="pill" data-bs-target="#learn-record" type="button" aria-selected="true">學習記錄</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#info" type="button" aria-selected="false">基本資料</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-col-tab" data-bs-toggle="pill" data-bs-target="#col" type="button" aria-selected="false">欄位項目</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-items-tab" data-bs-toggle="pill" data-bs-target="#items" type="button" aria-selected="false">欄位細項</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-query-tab" data-bs-toggle="pill" data-bs-target="#query" type="button" aria-selected="false">學生記錄查詢</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="pills-create-tab" data-bs-toggle="pill" data-bs-target="#create" type="button" aria-selected="false">新增資料</button>
-            </li>
-        </ul>
+        <div class="header">
+            <p>
+                <span>班級</span>
+                <select name="class" id="class">
+                    <option value="請選擇">請選擇</option>
+                    <option value="資三a">資三A</option>
+                    <option value="資三b">資三B</option>
+                    <option value="資三c">資三C</option>
+                    <option value="資三d">資三D</option>
+                    <option value="資三e">資三E</option>
+                    <option value="資三f">資三F</option>
+                </select>
+            </p>
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-learn-record-tab" data-bs-toggle="pill" data-bs-target="#learn-record" type="button" aria-selected="true">學習記錄</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#info" type="button" aria-selected="false">基本資料</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-col-tab" data-bs-toggle="pill" data-bs-target="#col" type="button" aria-selected="false">欄位項目</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-items-tab" data-bs-toggle="pill" data-bs-target="#items" type="button" aria-selected="false">欄位細項</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-query-tab" data-bs-toggle="pill" data-bs-target="#query" type="button" aria-selected="false">學生記錄查詢</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-create-tab" data-bs-toggle="pill" data-bs-target="#create" type="button" aria-selected="false">新增資料</button>
+                </li>
+            </ul>
+        </div>
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="learn-record">
                 <p>
@@ -119,6 +120,27 @@
             </div>
             <div class="tab-pane fade" id="query">
                 <!-- 學號、姓名、月份 -->
+                <p>
+                    <span>姓名</span>
+                    <select id="nameList">
+                        <option value="尚未選擇班級">尚未選擇班級</option>
+                    </select>
+                </p>
+                <p>
+                    <span>月份</span>
+                    <input type="checkbox" name="chBox" value="9"><span>9月</span>
+                    <input type="checkbox" name="chBox" value="10"><span>10月</span>
+                    <input type="checkbox" name="chBox" value="11"><span>11月</span>
+                    <input type="checkbox" name="chBox" value="12"><span>12月</span>
+                    <input type="checkbox" name="chBox" value="1"><span>1月</span>
+                    <input type="checkbox" name="chBox" value="2"><span>2月</span>
+                    <input type="checkbox" name="chBox" value="3"><span>3月</span>
+                    <input type="checkbox" name="chBox" value="4"><span>4月</span>
+                    <input type="checkbox" name="chBox" value="5"><span>5月</span>
+                    <input type="checkbox" name="chBox" value="6"><span>6月</span>
+                    <input type="checkbox" name="chBox" value="7"><span>7月</span>
+                    <input type="checkbox" name="chBox" value="8"><span>8月</span>
+                </p>
                 <table class="table table-border table-hover table-sm">
                     <thead>
                         <tr align="center">
@@ -126,10 +148,12 @@
                             <th>項目</th>
                             <th>細項</th>
                             <th>備註</th>
+                            <th>月份</th>
+                            <th>功能</th>
                         </tr>
                     </thead>
                     <tbody id="queryList">
-                        <tr><td colspan="3">尚未選擇班級！</td></tr>
+                        <tr><td colspan="6">尚未選擇班級！</td></tr>
                     </tbody>
                 </table>
             </div>

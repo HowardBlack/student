@@ -107,7 +107,7 @@ function detailsOpt(className, columnCode, index) {
       $(`#${optId}`).append(`<option value=請選擇>請選擇</option>`)
       result.forEach((optDetails) => {
         $(`#${optId}`).append(`<option value=${optDetails[2]}>${optDetails[2]}</option>`)
-      })      
+      })
     },
     error() {
       $(`#${optId}`).append(`<option value=請選擇>請選擇</option>`)
@@ -127,7 +127,6 @@ function optionEvent(className, type, index) {
   const sid = $(`#sid${index}`).text()
   const itemValue = $(`#${type}${index}`).val()
   const month = $('#month').val()
-  console.log(month)
 
   if (itemValue != '請選擇') {
     $(`#ta${type}${index}`).prop('disabled', false)
@@ -139,8 +138,7 @@ function optionEvent(className, type, index) {
         $(`#ta${type}${index}`).val(result)        
       },
     })
-  }
-  else {
+  }else {
     $(`#ta${type}${index}`).prop('disabled', true)
     $(`#ta${type}${index}`).val("")
   }
@@ -160,9 +158,8 @@ function upload(className, index) {
     const item = $(`#${type}${index}`).val()
     const itemValue = $(`#ta${type}${index}`).val()
     
-    if (item != '請選擇' && itemValue != '') {
+    if (item != '請選擇' && itemValue != '')
       record.push([sid, type, item, itemValue, month])
-    }
   }
 
   if (record.length) {
@@ -170,8 +167,14 @@ function upload(className, index) {
       url: './db/upload.php',
       data: {class: className, data: record},
       method: 'POST',
-      success() {
-        alert('資料新增/修改成功！')
+      success(bool) {
+        if (!bool) {
+          refresh(className)
+          setTimeout(() => {
+            alert('資料新增/修改成功！')
+          }, 0.5)
+        }else
+          alert('資料新增/修改失敗！')
       },
       error() {
         alert('無法連線或回傳錯誤！')

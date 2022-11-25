@@ -19,7 +19,11 @@ for ($i=0; $i < count($data); $i++) {
         $sql = "INSERT INTO choiceitem(sid, type, item, remark, recordMonth) VALUES('$row[0]', '$row[1]', '$row[2]', '$row[3]', '$row[4]')";        
     }
 
-    if (mysqli_query($conn, $sql)) echo 'success'; else echo 'fail';
+    // if (mysqli_query($conn, $sql)) echo ; else echo 'fail';
+    try {
+        $status = mysqli_query($conn, $sql);
+    }catch (Exception $err) {
+        echo false;
+        break;
+    }
 }
-
-mysqli_close($conn);
