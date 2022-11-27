@@ -1,30 +1,37 @@
 function loadInfo(className) {
     $('#infoList').empty()
-    if (className != '請選擇') {
+    $('#nameList').empty()
+    if (valid_dbName(className)) {
         $.ajax({
             url: './db/loadClass.php',
             data: {class: className},
             method: 'POST',
             dataType: 'JSON',
             success(result) {
+              $('#nameList').append(new Option(`請選擇`, `請選擇`))
               result.forEach((studenInfo, index) => {
-                $('#infoList').append(`<tr align=center>
+                $('#infoList').append(
+                  `<tr align=center>
                     <td id=sidInfo${index}>${studenInfo[0]}</td>
                     <td>${studenInfo[1]}</td>
                     <td>
                         ${info(index, studenInfo)}
                         <button class='btn btn-danger' onclick=delInfo('${studenInfo[0]}')>刪除</button>
                     </td>
-                  </tr>`)
+                  </tr>`
+                )                
+                $('#nameList').append(new Option(`${studenInfo[1]}`, `${studenInfo[1]}`))
               })
             },
             error() {
-              $('#infoList').append('<tr><td colspan=3>查無資料！</td></tr>')      
+              $('#infoList').append('<tr><td colspan=3>查無資料！</td></tr>')
+              $('#nameList').append(new Option('查無資料', '查無資料'))
             }
         })
+    }else {
+      $('#infoList').append('<tr><td colspan=3>尚未選擇班級</td></tr>')
+      $('#nameList').append(new Option('尚未選擇班級', '尚未選擇班級'))
     }
-    else
-        $('#infoList').append('<tr><td colspan=3>尚未選擇班級</td></tr>')
 }
 
 function info(index, sInfo) {

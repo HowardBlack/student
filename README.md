@@ -1,8 +1,18 @@
+# 111(2022)/11/27
+## 已完成
+1. 學習記錄更新資料已可取消 modal
+2. 學習紀錄已完成 search
+## 待完成
+1. 學年、學期問題
+2. 新增資料使用 file upload to database
+3. student learn record output excel file
+4. UI/UX、frontEnd、backEnd、set up a server for outsiders to use
+5. coding review ==> clean code
+
 # 111(2022)/11/26
 #
 1. 學習記錄更新資料沒辦法取消 modal
 2. 學習記錄尚未做 search => name and month
-
 
 # 111(2022)/11/17
 #

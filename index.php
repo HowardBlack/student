@@ -12,6 +12,9 @@
     <div class="container">
         <div class="header">
             <p>
+                <span>學年</span>
+            </p>
+            <p>
                 <span>班級</span>
                 <select name="class" id="class">
                     <option value="請選擇">請選擇</option>
@@ -128,23 +131,60 @@
                 </p>
                 <p>
                     <span>月份</span>
-                    <input type="checkbox" name="chBox" value="9"><span>9月</span>
-                    <input type="checkbox" name="chBox" value="10"><span>10月</span>
-                    <input type="checkbox" name="chBox" value="11"><span>11月</span>
-                    <input type="checkbox" name="chBox" value="12"><span>12月</span>
-                    <input type="checkbox" name="chBox" value="1"><span>1月</span>
-                    <input type="checkbox" name="chBox" value="2"><span>2月</span>
-                    <input type="checkbox" name="chBox" value="3"><span>3月</span>
-                    <input type="checkbox" name="chBox" value="4"><span>4月</span>
-                    <input type="checkbox" name="chBox" value="5"><span>5月</span>
-                    <input type="checkbox" name="chBox" value="6"><span>6月</span>
-                    <input type="checkbox" name="chBox" value="7"><span>7月</span>
-                    <input type="checkbox" name="chBox" value="8"><span>8月</span>
+                    <label>
+                        <input type="checkbox" name="chBox" value="9">
+                        9月
+                    </label>
+                    <label>
+                        <input type="checkbox" name="chBox" value="10">
+                        10月
+                    </label>
+                    <label>
+                        <input type="checkbox" name="chBox" value="11">
+                        11月
+                    </label>
+                    <label>
+                        <input type="checkbox" name="chBox" value="12">
+                        12月
+                    </label>
+                    <label>
+                        <input type="checkbox" name="chBox" value="1">
+                        1月
+                    </label>
+                    <label>
+                        <input type="checkbox" name="chBox" value="2">
+                        2月
+                    </label>
+                    <label>
+                        <input type="checkbox" name="chBox" value="3">
+                        3月
+                    </label>
+                    <label>
+                        <input type="checkbox" name="chBox" value="4">
+                        4月
+                    </label>
+                    <label>
+                        <input type="checkbox" name="chBox" value="5">
+                        5月
+                    </label>
+                    <label>
+                        <input type="checkbox" name="chBox" value="6">
+                        6月
+                    </label>
+                    <label>
+                        <input type="checkbox" name="chBox" value="7">
+                        7月
+                    </label>
+                    <label>
+                        <input type="checkbox" name="chBox" value="8">
+                        8月
+                    </label>
                 </p>
                 <table class="table table-border table-hover table-sm">
                     <thead>
                         <tr align="center">
                             <th>學號</th>
+                            <th>姓名</th>
                             <th>項目</th>
                             <th>細項</th>
                             <th>備註</th>
@@ -153,7 +193,7 @@
                         </tr>
                     </thead>
                     <tbody id="queryList">
-                        <tr><td colspan="6">尚未選擇班級！</td></tr>
+                        <tr><td colspan="7">尚未選擇班級！</td></tr>
                     </tbody>
                 </table>
             </div>

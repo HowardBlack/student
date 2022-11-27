@@ -1,4 +1,25 @@
-function loadAllRecord(className) {
+let searchData = 'none'
+let checkMonth = []
+$('#nameList').change((e) => {
+    const selectValue = e.target.value
+    searchData = (selectValue != '請選擇') ? selectValue : 'none'
+    loadAllRecord(className, searchData, checkMonth)
+})
+
+const allchBox = document.querySelectorAll('input[type=checkbox]')
+allchBox.forEach((checkbox) => {
+    checkbox.addEventListener('change', (e) => {
+        if (e.target.checked) {
+            checkMonth.push(e.target.value)
+        }else {
+            checkMonth.splice(checkMonth.indexOf(e.target.value), 1)
+        }
+        loadAllRecord(className, searchData, checkMonth)
+    })
+})
+
+function loadAllRecord(className, searchData='none', chMonth='none') {
+    if (chMonth.length == 0) chMonth = 'none'
     $('#queryList').empty()
     if (valid_dbName(className)) {
         $.ajax({
@@ -7,29 +28,35 @@ function loadAllRecord(className) {
             dataType: 'JSON',
             data: {
                 class: className,
+                search: searchData,
+                month: chMonth,
             },
             success(data) {
-                for (let row of data) {
-                    $('#queryList').append(
-                        `<tr align=center>
-                            <td>${row[1]}</td>
-                            <td>${row[2]}</td>
-                            <td>${row[3]}</td>
-                            <td>${row[4]}</td>
-                            <td>${row[5]}</td>
-                            <td>
-                                <button class='btn btn-danger' onclick=delRecord(${row[0]})>刪除</button>
-                            </td>
-                        </tr>`
-                    )
-                }
+                if (data.length) {
+                    for (let row of data) {
+                        $('#queryList').append(
+                            `<tr align=center>
+                                <td>${row[1]}</td>
+                                <td>${row[2]}</td>
+                                <td>${row[3]}</td>
+                                <td>${row[4]}</td>
+                                <td>${row[5]}</td>
+                                <td>${row[6]}</td>
+                                <td>
+                                    <button class='btn btn-danger' onclick=delRecord(${row[0]})>刪除</button>
+                                </td>
+                            </tr>`
+                        )
+                    }
+                }else
+                    $('#queryList').append(`<tr><td colspan=${row.length - 1}>查無資料！</td></tr>`)                    
             },
             error() {
-                $('#queryList').append('<tr><td colspan=6>查無資料！</td></tr>')
+                $('#queryList').append(`<tr><td colspan=7>查無資料！</td></tr>`)
             }
         })
     }else {
-        $('#queryList').append('<tr><td colspan=4>尚未選擇班級！</td></tr>')
+        $('#queryList').append(`<tr><td colspan=7>尚未選擇班級！</td></tr>`)
     }
 }
 

@@ -13,7 +13,7 @@ function refresh(className) {
     loadInfo(className)
     loadCol(className)
     loadItems(className)
-    loadAllRecord(className)
+    loadAllRecord(className, searchData, checkMonth)
     defaultAddType(className)
 }
 

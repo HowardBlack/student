@@ -1,6 +1,6 @@
 function loadClass(className) {
   $('#sList').empty()  
-  if (className != '請選擇') {
+  if (valid_dbName(className)) {
     $.ajax({
         url: './db/loadClass.php',
         data: {class: className},
@@ -11,7 +11,7 @@ function loadClass(className) {
             $('#sList').append(`<tr align=center>
                 <td id=sid${index}>${studenInfo[0]}</td>
                 <td>${studenInfo[1]}</td>
-                <td>${studentDialog(className, index, studenInfo)}</td>
+                <td>${studentDialog(index, studenInfo)}</td>
               </tr>`)
           })
         },
@@ -24,7 +24,7 @@ else
     $('#sList').append('<tr><td colspan=3>尚未選擇班級</td></tr>')
 }
 
-function studentDialog(className, index, sInfo) {
+function studentDialog(index, sInfo) {
   return `<!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#show${index}">
   查看資料
@@ -43,7 +43,7 @@ function studentDialog(className, index, sInfo) {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id=btnSubmit${index} onclick=upload('${className}',${index})>Save changes</button>
+          <button type="button" class="btn btn-primary" id=btnSubmit${index} data-bs-dismiss="modal" onclick=upload('${className}',${index})>Save changes</button>
         </div>
       </div>
     </div>
@@ -59,10 +59,12 @@ function optionDropDown(className, index) {
     dataType: 'JSON',
     success(result) {
       result.forEach((option) => {
-        $(`#columnName${index}`).append(`<tr>
-              <td>${option[1]}</td>
-              <td>${detailsOpt(className, option[0], index)}</td>
-            </tr>`)
+        $(`#columnName${index}`).append(
+          `<tr>
+            <td>${option[1]}</td>
+            <td>${detailsOpt(className, option[0], index)}</td>
+          </tr>`
+        )
       })
     },
     error() {
@@ -167,14 +169,11 @@ function upload(className, index) {
       url: './db/upload.php',
       data: {class: className, data: record},
       method: 'POST',
-      success(bool) {
-        if (!bool) {
-          refresh(className)
-          setTimeout(() => {
-            alert('資料新增/修改成功！')
-          }, 0.5)
-        }else
-          alert('資料新增/修改失敗！')
+      success() {
+        refresh(className)
+        setTimeout(() => {
+          alert('資料新增/修改成功！')
+        }, 0.5)
       },
       error() {
         alert('無法連線或回傳錯誤！')
