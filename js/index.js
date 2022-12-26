@@ -38,3 +38,4 @@ function validDB(className) {
 function valid_dbName(className) {
     return (className != '請選擇') ? true : false
 }
+

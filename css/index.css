@@ -1,0 +1,11 @@
+.card {
+    margin-bottom: 10px;
+}
+
+.card-header:hover {
+    cursor: pointer;
+}
+
+.addCol {
+    width: 100px;
+}

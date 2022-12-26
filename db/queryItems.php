@@ -14,3 +14,5 @@ if (mysqli_num_rows($dataQuery))
     echo mysqli_fetch_assoc($dataQuery)['remark'];
 else
     echo '';
+
+mysqli_close($conn);

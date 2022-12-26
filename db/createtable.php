@@ -28,7 +28,8 @@ if (mysqli_query($conn, $sql))
                 type VARCHAR(10) NOT NULL,
                 item VARCHAR(30) NOT NULL,
                 remark VARCHAR(255) NOT NULL,
-                recordMonth INT(2) NOT NULL
+                recordMonth INT(2) NOT NULL,
+                lastRecordTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
             )";
             if (mysqli_query($conn, $sql))
                 echo true;

@@ -14,10 +14,3 @@ try {
         require_once('./createtable.php');
     }
 }
-
-// if (!$conn) {
-//     $conn = mysqli_connect('localhost', 'root', '');
-//     $sql = "CREATE DATABASE $class";
-//     if (mysqli_query($conn, $sql)) require_once('./createtable.php');
-// }
-
