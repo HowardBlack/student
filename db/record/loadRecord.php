@@ -7,7 +7,7 @@ $month = $_POST['month'];
 $sql = '';
 
 if ($search == 'none' and $month == 'none')
-    $sql = "SELECT i.id, i.sid, s.name, i.type, i.item, i.remark, i.recordMonth
+    $sql = "SELECT i.id, i.sid, s.name, i.type, i.typeLevel, i.item, i.remark, i.recordMonth
             from choiceitem i
             JOIN studentinfo s
             ON i.sid = s.sid
@@ -18,14 +18,14 @@ elseif ($search != 'none' and is_array($month)) {
     foreach ($month as $key => $value)
         $arr[$key] = $value;
     $or .= implode(', ', $arr) . ')';
-    $sql = "SELECT i.id, i.sid, s.name, i.type, i.item, i.remark, i.recordMonth
+    $sql = "SELECT i.id, i.sid, s.name, i.type, i.typeLevel, i.item, i.remark, i.recordMonth
             from choiceitem i 
             JOIN studentinfo s 
             ON i.sid = s.sid 
             WHERE s.name = '$search' and i.recordMonth IN $or
             ORDER BY i.sid, i.recordMonth DESC";
 }elseif ($search != 'none')
-    $sql = "SELECT i.id, i.sid, s.name, i.type, i.item, i.remark, i.recordMonth
+    $sql = "SELECT i.id, i.sid, s.name, i.type, i.typeLevel, i.item, i.remark, i.recordMonth
             from choiceitem i 
             JOIN studentinfo s 
             ON i.sid = s.sid 
@@ -37,7 +37,7 @@ else {
     foreach ($month as $key => $value)
         $arr[$key] = $value;
     $or .= implode(', ', $arr) . ')';
-    $sql = "SELECT i.id, i.sid, s.name, i.type, i.item, i.remark, i.recordMonth
+    $sql = "SELECT i.id, i.sid, s.name, i.type, i.typeLevel, i.item, i.remark, i.recordMonth
             from choiceitem i 
             JOIN studentinfo s 
             ON i.sid = s.sid 

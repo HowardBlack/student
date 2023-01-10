@@ -1,40 +1,40 @@
-async function loadCol(className) {
-    $('#colList').empty()
+async function loadLevel(className) {
+    $('#levelList').empty()
     if (className != '請選擇') {
         $.ajax({
-            url: './db/loadColumn.php',
-            data: {class: className},
+            url: '../db/details.php',
+            data: {class: className, tableName: 'itemLevel'},
             method: 'POST',
             dataType: 'JSON',
             success(data) {
-              data.forEach((colInfo, index) => {
-                $('#colList').append(`<tr align=center>
-                    <td id=col${index}>${colInfo[0]}</td>
-                    <td>${colInfo[1]}</td>
+              data.forEach((levelInfo, index) => {
+                $('#levelList').append(`<tr align=center>
+                    <td id=lev${index}>${levelInfo[0]}</td>
+                    <td>${levelInfo[1]}</td>
                     <td>
-                        ${column(index, colInfo)}
-                        <button class='btn btn-danger' onclick=delInfo('${colInfo[0]}')>刪除</button>
+                        ${level(index, levelInfo)}
+                        <button class='btn btn-danger' onclick=delLevel('${levelInfo[0]}')>刪除</button>
                     </td>
                   </tr>`)
               })
             },
             error() {
-              $('#colList').append('<tr><td colspan=3>查無資料！</td></tr>')      
+              $('#levelList').append('<tr><td colspan=3>查無資料！</td></tr>')      
             }
         })
     }
     else
-        $('#colList').append('<tr><td colspan=3>尚未選擇班級</td></tr>')
+        $('#levelList').append('<tr><td colspan=3>尚未選擇班級</td></tr>')
 }
 
-function column(index, colInfo) {
+function level(index, levelInfo) {
     return `<!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#column${index}">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#level${index}">
     修改資料
     </button>
     
     <!-- Modal -->
-    <div class="modal fade" id="column${index}" tabindex="-1" aria-labelledby="column${index}" aria-hidden="true">
+    <div class="modal fade" id="level${index}" tabindex="-1" aria-labelledby="level${index}" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -43,24 +43,24 @@ function column(index, colInfo) {
           </div>
           <div class="modal-body">
             <p>
-                <span>欄位名稱</span>
-                <input type=text id=colName${index} value=${colInfo[1]}>
+                <span>程度名稱</span>
+                <input type=text id=l${index} value=${levelInfo[1]}>
             </p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id=updateCol${index} data-bs-dismiss="modal" onclick=updateCol(${index},'${colInfo[0]}')>UPDATE</button>
+            <button type="button" class="btn btn-primary" id=updateLevel${index} data-bs-dismiss="modal" onclick=updateLevel('${index}','${levelInfo[0]}')>UPDATE</button>
           </div>
         </div>
       </div>
     </div>`
 }
 
-function updateCol(index, type) {
+function updateLevel(index, type) {
     $.ajax({
-        url: './db/col/update.php',
+        url: './db/level/update.php',
         method: 'POST',
-        data: {class: className, data: [type, $(`#colName${index}`).val()]},
+        data: {class: className, data: [type, $(`#l${index}`).val()]},
         success(bool) {
             if (bool) {
                 refresh(className)
@@ -76,11 +76,11 @@ function updateCol(index, type) {
     })
 }
 
-function delCol(type) {
+function delLevel(type) {
     const status = confirm('確定刪除嗎?')
     if (status) {
         $.ajax({
-            url: './db/col/del.php',
+            url: './db/level/del.php',
             method: 'POST',
             data: {class: className, type: type},
             success(bool) {

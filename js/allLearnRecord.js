@@ -42,6 +42,7 @@ function loadAllRecord(className, searchData='none', chMonth='none') {
                                 <td>${row[4]}</td>
                                 <td>${row[5]}</td>
                                 <td>${row[6]}</td>
+                                <td>${row[7]}</td>
                                 <td>
                                     <button class='btn btn-danger' onclick=delRecord(${row[0]})>刪除</button>
                                 </td>

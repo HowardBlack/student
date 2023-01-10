@@ -1,4 +1,4 @@
-function defaultAddType(className) {
+async function defaultAddType(className) {
     $('#defaultType').empty()
     $.ajax({
         url: './db/loadColumn.php',
@@ -23,8 +23,6 @@ function defaultAddType(className) {
         }
     })
 }
-
-let dtName = ""
 
 function addInfo() {
     if (valid_dbName(className)) {
@@ -80,6 +78,23 @@ function addItem() {
         alert('請選擇班級！')
 }
 
+function addLevel() {
+    if (valid_dbName(className)) {
+        const add_typeLevel = $('#addLevel').val()
+        const add_itemLevel = $('#addItemLevel').val()
+        if (add_typeLevel != "" && add_itemLevel != "") {
+            dtName = "itemlevel"
+            addDataTable({
+                'className': className, 
+                'dataTable': dtName, 
+                'data': [add_typeLevel, add_itemLevel],
+            })
+        }else
+            alert('請填寫完整資料')
+    }else
+        alert('請選擇班級！')
+}
+
 function addDataTable({className, dataTable, data}) {
     $.ajax({
         url: `./db/add/insert.php`,
@@ -87,7 +102,7 @@ function addDataTable({className, dataTable, data}) {
         data: {
             class: className,
             datatable: dataTable,
-            data: data,
+            data: data
         },
         success(bool) {
             if (bool) {
@@ -97,7 +112,7 @@ function addDataTable({className, dataTable, data}) {
                   alert('新增成功')
                 }, 0.5)
             }else
-                alert('新增失敗！請檢查資料是否重複')
+                alert('新增失敗！請檢查資料是否重複或資料表不存在')
         },
         error() {
             alert('無法連接')
@@ -112,4 +127,6 @@ function init() {
     $('#addTypeName').val('')
     // $('#defaultType').val('')
     $('#addItemName').val('')
+    $('#addLevel').val('')
+    $('#addItemLevel').val('')
 }

@@ -1,5 +1,12 @@
 let columns = []
+let dtName = ""
 let className = "請選擇"
+
+// $(() => {
+//     columns = []
+//     className = $('#class').val()
+//     refresh(className)
+// })
 
 $('#class').change((e) => {
     columns = []
@@ -13,11 +20,12 @@ function refresh(className) {
     loadInfo(className)
     loadCol(className)
     loadItems(className)
+    loadLevel(className)
     loadAllRecord(className, searchData, checkMonth)
     defaultAddType(className)
 }
 
-function validDB(className) {
+async function validDB(className) {
     if (valid_dbName(className)) {
         $.ajax({
             url: './db/db.php',
