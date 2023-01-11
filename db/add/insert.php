@@ -5,17 +5,29 @@ require_once('../db.php');
 $dataTable = $_POST['datatable'];
 $data = $_POST['data'];
 
-$sql = "INSERT INTO $dataTable VALUES('$data[0]', '$data[1]')";
+$bool = true;
 
-try {
-    $status = mysqli_query($conn, $sql);
-    echo true;
-}catch (Exception $err) {
-    try {
-        $sql = "INSERT INTO $dataTable VALUES(null, '$data[0]', '$data[1]')";
+for ($i = 0; $i < count($data); $i++) {
+    $row = $data[$i];    
+    try
+    {
+        $sql = "INSERT INTO $dataTable VALUES('$row[0]', '$row[1]')";
         $status = mysqli_query($conn, $sql);
-        echo true;
-    }catch (Exception $err) {
-        echo false;
+        $bool = $status;
+    }
+    catch (Exception $err)
+    {
+        try
+        {
+            $sql = "INSERT INTO $dataTable VALUES(null, '$row[0]', '$row[1]')";
+            $status = mysqli_query($conn, $sql);
+            $bool = $status;
+        }
+        catch (Exception $err)
+        {
+            $bool = false;
+        }
     }
 }
+
+echo $bool;

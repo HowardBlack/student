@@ -7,36 +7,27 @@ async function loadItems(className) {
             method: 'POST',
             dataType: 'JSON',
             success(data) {
-            //   data.forEach((colInfo, index) => {
-            //     $('#itemsList').append(`<tr align=center>
-            //         <td id=col${index}>${colInfo[0]}</td>
-            //         <td>${colInfo[1]}</td>
-            //         <td>
-            //             ${column(index, colInfo)}
-            //             <button class='btn btn-danger' onclick=delInfo('${colInfo[0]}')>刪除</button>
-            //         </td>
-            //       </tr>`)
-            //   })
-              // for
               for (let item of data) {
                 const index = item[0]
                 $('#itemsList').append(`<tr align=center>
+                    <td>
+                      <input type=checkbox name=item value=${item[0]}>
+                    </td>
                     <td id=items${index}>${item[1]}</td>
                     <td>${item[2]}</td>
                     <td>
                         ${items(index, item)}
-                        <button class='btn btn-danger' onclick=delItem(${item[0]})>刪除</button>
                     </td>
                   </tr>`)
               }
             },
             error() {
-              $('#itemsList').append('<tr><td colspan=3>查無資料！</td></tr>')      
+              $('#itemsList').append('<tr><td colspan=4>查無資料！</td></tr>')      
             }
         })
     }
     else
-        $('#itemsList').append('<tr><td colspan=3>尚未選擇班級</td></tr>')
+        $('#itemsList').append('<tr><td colspan=4>尚未選擇班級</td></tr>')
 }
 
 function items(index, itemInfo) {
@@ -88,25 +79,25 @@ function updateItem(index, type) {
     })
 }
 
-function delItem(index) {
-    const status = confirm('確定刪除嗎?')
-    if (status) {
-        $.ajax({
-            url: './db/items/del.php',
-            method: 'POST',
-            data: {class: className, index: index},
-            success(bool) {
-                if (bool) {
-                    refresh(className)
-                    setTimeout(() => {
-                      alert('更新成功')
-                    }, 0.5)
-                }else
-                    alert('刪除失敗')
-            },
-            error() {
-                alert('無法連接')
-            }
-        })
-    }
-}
+// function delItem(index) {
+//     const status = confirm('確定刪除嗎?')
+//     if (status) {
+//         $.ajax({
+//             url: './db/items/del.php',
+//             method: 'POST',
+//             data: {class: className, index: index},
+//             success(bool) {
+//                 if (bool) {
+//                     refresh(className)
+//                     setTimeout(() => {
+//                       alert('更新成功')
+//                     }, 0.5)
+//                 }else
+//                     alert('刪除失敗')
+//             },
+//             error() {
+//                 alert('無法連接')
+//             }
+//         })
+//     }
+// }

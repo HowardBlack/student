@@ -9,3 +9,13 @@
 .addCol {
     width: 100px;
 }
+
+.addcount {
+    width: 100px;
+    text-align: center;
+}
+
+.addcount::-webkit-inner-spin-button, 
+.addcount::-webkit-outer-spin-button {
+    opacity: 1;
+}

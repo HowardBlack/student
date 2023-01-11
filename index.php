@@ -11,13 +11,14 @@
 </head>
 <body>
     <div class="container">
-        <!-- header -->
+    <!-- header -->
         <div class="container-fluid p-3 mb-3 bg-black text-white text-center">
             <h1>學習記錄</h1>
         </div>
 
-        <!-- content -->
+    <!-- content -->
         <div class="content">
+            <!-- 選單 -->  
             <p>
                 <span>班級</span>
                 <select name="class" id="class">
@@ -35,19 +36,19 @@
                     <button class="nav-link active" id="pills-learn-record-tab" data-bs-toggle="pill" data-bs-target="#learn-record" type="button" aria-selected="true">學習記錄</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#info" type="button" aria-selected="false">基本資料</button>
+                    <button class="nav-link" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#info" type="button" aria-selected="false" onclick="setBlockMean('info', 'studentinfo')">基本資料</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-col-tab" data-bs-toggle="pill" data-bs-target="#col" type="button" aria-selected="false">欄位項目</button>
+                    <button class="nav-link" id="pills-col-tab" data-bs-toggle="pill" data-bs-target="#col" type="button" aria-selected="false" onclick="setBlockMean('col', 'columnname')">欄位項目</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-items-tab" data-bs-toggle="pill" data-bs-target="#items" type="button" aria-selected="false">欄位細項</button>
+                    <button class="nav-link" id="pills-items-tab" data-bs-toggle="pill" data-bs-target="#items" type="button" aria-selected="false" onclick="setBlockMean('item', 'columnitems')">欄位細項</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-level-tab" data-bs-toggle="pill" data-bs-target="#level" type="button" aria-selected="false">程度項目</button>
+                    <button class="nav-link" id="pills-level-tab" data-bs-toggle="pill" data-bs-target="#level" type="button" aria-selected="false" onclick="setBlockMean('level', 'itemlevel')">程度項目</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-query-tab" data-bs-toggle="pill" data-bs-target="#query" type="button" aria-selected="false">學生記錄查詢</button>
+                    <button class="nav-link" id="pills-query-tab" data-bs-toggle="pill" data-bs-target="#query" type="button" aria-selected="false" onclick="setBlockMean('choice', 'choiceitem')">學生記錄查詢</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-create-tab" data-bs-toggle="pill" data-bs-target="#create" type="button" aria-selected="false">新增資料</button>
@@ -91,13 +92,14 @@
                     <table class="table table-border table-hover table-sm">
                         <thead>
                             <tr align="center">
+                                <th><button class="btn btn-danger" id="infoBoxDel">刪除</button></th>
                                 <th>學號</th>
                                 <th>姓名</th>
                                 <th>功能</th>
                             </tr>
                         </thead>
                         <tbody id="infoList">
-                            <tr><td colspan="3">尚未選擇班級！</td></tr>
+                            <tr><td colspan="4">尚未選擇班級！</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -106,13 +108,14 @@
                     <table class="table table-border table-hover table-sm">
                         <thead>
                             <tr align="center">
+                                <th><button class="btn btn-danger" id="colBoxDel">刪除</button></th>
                                 <th>代號</th>
                                 <th>名稱</th>
                                 <th>功能</th>
                             </tr>
                         </thead>
                         <tbody id="colList">
-                            <tr><td colspan="3">尚未選擇班級！</td></tr>
+                            <tr><td colspan="4">尚未選擇班級！</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -121,13 +124,14 @@
                     <table class="table table-border table-hover table-sm">
                         <thead>
                             <tr align="center">
+                                <th><button class="btn btn-danger" id="itemBoxDel">刪除</button></th>
                                 <th>欄位代號</th>
                                 <th>項目名稱</th>
                                 <th>功能</th>
                             </tr>
                         </thead>
                         <tbody id="itemsList">
-                            <tr><td colspan="3">尚未選擇班級！</td></tr>
+                            <tr><td colspan="4">尚未選擇班級！</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -136,13 +140,14 @@
                     <table class="table table-border table-hover table-sm">
                         <thead>
                             <tr align="center">
+                                <th><button class="btn btn-danger" id="levelBoxDel">刪除</button></th>
                                 <th>代號</th>
                                 <th>名稱</th>
                                 <th>功能</th>
                             </tr>
                         </thead>
                         <tbody id="levelList">
-                            <tr><td colspan="3">尚未選擇班級！</td></tr>
+                            <tr><td colspan="4">尚未選擇班級！</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -152,7 +157,21 @@
                     <p>
                         <span>姓名</span>
                         <select id="nameList">
-                            <option value="尚未選擇班級">尚未選擇班級</option>
+                            <option value="請選擇班級">請選擇班級</option>
+                        </select>
+                    </p>
+                <!-- 欄位項目 -->
+                    <p>
+                        <span>欄位名稱</span>
+                        <select id="searchColList">
+                            <option value="請選擇班級">請選擇班級</option>
+                        </select>
+                    </p>
+                <!-- 欄位細項 -->
+                    <p>
+                        <span>欄位細項</span>
+                        <select id="searchItemList">
+                            <option value="請選擇欄位項目">請選擇欄位項目</option>
                         </select>
                     </p>
                 <!-- 查詢月份 -->
@@ -211,6 +230,7 @@
                     <table class="table table-border table-hover table-sm">
                         <thead>
                             <tr align="center">
+                                <th><button class="btn btn-danger" id="choiceBoxDel">刪除</button></th>
                                 <th>學號</th>
                                 <th>姓名</th>
                                 <th>項目</th>
@@ -218,7 +238,6 @@
                                 <th>細項</th>
                                 <th>備註</th>
                                 <th>月份</th>
-                                <th>功能</th>
                             </tr>
                         </thead>
                         <tbody id="queryList">
@@ -232,37 +251,29 @@
                         <div id="accordion">
                         <!-- 學生基本資料 -->
                             <div class="card">
-                            <div class="card-header" data-bs-toggle="collapse" href="#collapseOne">
+                            <div class="card-header" data-bs-toggle="collapse" href="#collapseOne" onclick="setBlock('info', 'studentinfo')">
                                 學生基本資料
                             </div>
                             <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
                                 <div class="card-body">
-                                    <!-- <p>
+                                    <p>
                                         <span>新增</span>
-                                        <input type="text" id="infoCount" value="1" size="3">
+                                        <input class="addcount" type="number" id="infoCount" value="1" min="1">
                                         <span>筆資料</span>
-                                    </p>                              -->
+                                        <button class="btn btn-primary" id="addInfoCount">新增筆數</button>
+                                        <button class="btn btn-success" onclick="addInfo()">上傳</button>
+                                    </p>
                                     <table class="table table-sm" >
                                         <thead>
-                                            <th></th>
+                                            <th>
+                                                <button class="btn btn-danger" id="delAddInfoBox">刪除勾選</button>
+                                                <button class="btn btn-warning" onclick="checkedBoxAll()">全選</button>
+                                            </th>
                                             <th>筆數</th>
                                             <th>學號</th>
                                             <th>姓名</th>
                                         </thead>
-                                        <tbody id="bodyInfo">
-                                            <tr>
-                                                <td class="col-2"><input type="checkbox" name="delBox"></td>
-                                                <td class="col-2">1</td>
-                                                <td class="col-1"><input type="text" id='addSid' placeholder="EX: 10910110"></td>
-                                                <td class="col-1"><input type="text" id='addName' placeholder="EX: 陳宏恩"></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="4">
-                                                    <button class="btn btn-success" onclick="addInfo()">ADD</button>
-                                                    <button class="btn btn-danger">刪除勾選項目</button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                        <tbody id="infoInfo"></tbody>
                                     </table>
                                     <!-- <input type="file" id="userFile">
                                     <input type="button" id="upload_file" class="btn btn-primary" value="上傳檔案"> -->
@@ -271,60 +282,88 @@
                             </div>
                         <!-- 欄位項目 -->
                             <div class="card">
-                            <div class="card-header" data-bs-toggle="collapse" href="#collapseTwo">
+                            <div class="card-header" data-bs-toggle="collapse" href="#collapseTwo" onclick="setBlock('col', 'columnname')">
                                 欄位項目
                             </div>
                             <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
                                 <div class="card-body">
                                     <p>
-                                        <span>代號</span>
-                                        <input type="text" id="addType" placeholder="EX: read">
+                                        <span>新增</span>
+                                        <input class="addcount" type="number" id="colCount" value="1" min="1">
+                                        <span>筆資料</span>
+                                        <button class="btn btn-primary" id="addColCount">新增筆數</button>
+                                        <button class="btn btn-success" onclick="addCol()">上傳</button>
                                     </p>
-                                    <p>
-                                        <span>名稱</span>
-                                        <input type="text" id="addTypeName" placeholder="EX: 讀">
-                                    </p>
-                                    <button class="btn btn-primary" onclick="addCol()">ADD</button>
+                                    <table class="table table-sm" >
+                                        <thead>
+                                            <th>
+                                                <button class="btn btn-danger" id="delAddColBox">刪除勾選</button>
+                                                <button class="btn btn-warning" onclick="checkedBoxAll()">全選</button>
+                                            </th>
+                                            <th>筆數</th>
+                                            <th>代號</th>
+                                            <th>名稱</th>
+                                        </thead>
+                                        <tbody id="colInfo"></tbody>
+                                    </table>
                                 </div>
                             </div>
                             </div>
                         <!-- 欄位細項 -->
                             <div class="card">
-                            <div class="card-header" data-bs-toggle="collapse" href="#collapseThree">
+                            <div class="card-header" data-bs-toggle="collapse" href="#collapseThree" onclick="setBlock('item', 'columnitems')">
                                 欄位細項
                             </div>
                             <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
                                 <div class="card-body">
                                     <p>
-                                        <span>代號</span>
-                                        <select id="defaultType">
-                                            <option value="none">尚未選擇班級！</option>
-                                        </select>
+                                        <span>新增</span>
+                                        <input class="addcount" type="number" id="itemCount" value="1" min="1">
+                                        <span>筆資料</span>
+                                        <button class="btn btn-primary" id="addItemCount">新增筆數</button>
+                                        <button class="btn btn-success" onclick="addItem()">上傳</button>
                                     </p>
-                                    <p>
-                                        <span>項目名稱</span>
-                                        <input type="text" id="addItemName" placeholder="EX: 聆聽並分享想法">
-                                    </p>
-                                    <button class="btn btn-primary" onclick="addItem()">ADD</button>                            
+                                    <table class="table table-sm" >
+                                        <thead>
+                                            <th>
+                                                <button class="btn btn-danger" id="delAddItemBox">刪除勾選</button>
+                                                <button class="btn btn-warning" onclick="checkedBoxAll()">全選</button>
+                                            </th>
+                                            <th>筆數</th>
+                                            <th>代號</th>
+                                            <th>名稱</th>
+                                        </thead>
+                                        <tbody id="itemInfo"></tbody>
+                                    </table>
                                 </div>
                             </div>
                             </div>
                         <!-- 程度項目 -->
                             <div class="card">
-                            <div class="card-header" data-bs-toggle="collapse" href="#collapseFour">
+                            <div class="card-header" data-bs-toggle="collapse" href="#collapseFour" onclick="setBlock('level', 'itemlevel')">
                                 程度項目
                             </div>
                             <div id="collapseFour" class="collapse" data-bs-parent="#accordion">
                                 <div class="card-body">
                                     <p>
-                                        <span>代號</span>
-                                        <input type="text" id="addLevel" placeholder="EX: High">
+                                        <span>新增</span>
+                                        <input class="addcount" type="number" id="levelCount" value="1" min="1">
+                                        <span>筆資料</span>
+                                        <button class="btn btn-primary" id="addLevelCount">新增筆數</button>
+                                        <button class="btn btn-success" onclick="addLevel()">上傳</button>
                                     </p>
-                                    <p>
-                                        <span>程度名稱</span>
-                                        <input type="text" id="addItemLevel" placeholder="EX: 強">
-                                    </p>
-                                    <button class="btn btn-primary" onclick="addLevel()">ADD</button>
+                                    <table class="table table-sm" >
+                                        <thead>
+                                            <th>
+                                                <button class="btn btn-danger" id="delAddLevelBox">刪除勾選</button>
+                                                <button class="btn btn-warning" onclick="checkedBoxAll()">全選</button>
+                                            </th>
+                                            <th>筆數</th>
+                                            <th>代號</th>
+                                            <th>名稱</th>
+                                        </thead>
+                                        <tbody id="levelInfo"></tbody>
+                                    </table>
                                 </div>
                             </div>
                             </div>
@@ -343,6 +382,8 @@
     <script src="./js/allLearnRecord.js"></script>
     <script src="./js/add.js"></script>
     <script src="./js/level.js"></script>
+    <script src="./js/addCount.js"></script>
+    <script src="./js/delCheckBox.js"></script>
 
     <!-- <script src="./js/addFile.js"></script> -->
 </body>

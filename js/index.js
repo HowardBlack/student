@@ -1,6 +1,8 @@
 let columns = []
-let dtName = ""
+let dtName = "studentinfo"
 let className = "請選擇"
+let block = 'info'
+let blockMenu = 'info'
 
 // $(() => {
 //     columns = []

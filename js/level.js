@@ -9,23 +9,25 @@ async function loadLevel(className) {
             success(data) {
               data.forEach((levelInfo, index) => {
                 $('#levelList').append(`<tr align=center>
+                    <td>
+                      <input type=checkbox name=level value=${levelInfo[0]}>
+                    </td>
                     <td id=lev${index}>${levelInfo[0]}</td>
                     <td>${levelInfo[1]}</td>
                     <td>
                         ${level(index, levelInfo)}
-                        <button class='btn btn-danger' onclick=delLevel('${levelInfo[0]}')>刪除</button>
                     </td>
                   </tr>`)
               })
             },
             error() {
-              $('#levelList').append('<tr><td colspan=3>查無資料！</td></tr>')      
+              $('#levelList').append('<tr><td colspan=4>查無資料！</td></tr>')      
             }
         })
     }
     else
-        $('#levelList').append('<tr><td colspan=3>尚未選擇班級</td></tr>')
-}
+        $('#levelList').append('<tr><td colspan=4>尚未選擇班級</td></tr>')
+} 
 
 function level(index, levelInfo) {
     return `<!-- Button trigger modal -->
@@ -76,25 +78,25 @@ function updateLevel(index, type) {
     })
 }
 
-function delLevel(type) {
-    const status = confirm('確定刪除嗎?')
-    if (status) {
-        $.ajax({
-            url: './db/level/del.php',
-            method: 'POST',
-            data: {class: className, type: type},
-            success(bool) {
-                if (bool) {
-                    refresh(className)
-                    setTimeout(() => {
-                      alert('更新成功')
-                    }, 0.5)
-                }else
-                    alert('刪除失敗')
-            },
-            error() {
-                alert('無法連接')
-            }
-        })
-    }
-}
+// function delLevel(type) {
+//     const status = confirm('確定刪除嗎?')
+//     if (status) {
+//         $.ajax({
+//             url: './db/level/del.php',
+//             method: 'POST',
+//             data: {class: className, type: type},
+//             success(bool) {
+//                 if (bool) {
+//                     refresh(className)
+//                     setTimeout(() => {
+//                       alert('更新成功')
+//                     }, 0.5)
+//                 }else
+//                     alert('刪除失敗')
+//             },
+//             error() {
+//                 alert('無法連接')
+//             }
+//         })
+//     }
+// }

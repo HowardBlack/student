@@ -12,11 +12,13 @@ async function loadInfo(className) {
               result.forEach((studenInfo, index) => {
                 $('#infoList').append(
                   `<tr align=center>
+                    <td>
+                      <input type=checkbox name=info value=${studenInfo[0]}>
+                    </td>
                     <td id=sidInfo${index}>${studenInfo[0]}</td>
                     <td>${studenInfo[1]}</td>
                     <td>
                         ${info(index, studenInfo)}
-                        <button class='btn btn-danger' onclick=delInfo('${studenInfo[0]}')>刪除</button>
                     </td>
                   </tr>`
                 )                
@@ -24,12 +26,12 @@ async function loadInfo(className) {
               })
             },
             error() {
-              $('#infoList').append('<tr><td colspan=3>查無資料！</td></tr>')
+              $('#infoList').append('<tr><td colspan=4>查無資料！</td></tr>')
               $('#nameList').append(new Option('查無資料', '查無資料'))
             }
         })
     }else {
-      $('#infoList').append('<tr><td colspan=3>尚未選擇班級</td></tr>')
+      $('#infoList').append('<tr><td colspan=4>尚未選擇班級</td></tr>')
       $('#nameList').append(new Option('尚未選擇班級', '尚未選擇班級'))
     }
 }
@@ -56,7 +58,7 @@ function info(index, sInfo) {
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id=updateInfo${index} data-bs-dismiss="modal" onclick=updateInfo(${index},'${sInfo[0]}')>UPDATE</button>
+            <button type="button" class="btn btn-primary" id=updateInfo${index} data-bs-dismiss="modal" onclick=updateInfo(${index},'${sInfo[0]}')>UPDATE</button>        
           </div>
         </div>
       </div>
@@ -83,25 +85,25 @@ function updateInfo(index, sid) {
     })
 }
 
-function delInfo(sid) {
-    const status = confirm('確定刪除嗎?')
-    if (status) {
-        $.ajax({
-            url: './db/info/del.php',
-            method: 'POST',
-            data: {class: className, sid: sid},
-            success(bool) {
-                if (bool) {
-                    refresh(className)
-                    setTimeout(() => {
-                      alert('更新成功')
-                    }, 0.5)
-                }else
-                    alert('刪除失敗')
-            },
-            error() {
-                alert('無法連接')
-            }
-        })
-    }
-}
+// function delInfo(sid) {
+//     const status = confirm('確定刪除嗎?')
+//     if (status) {
+//         $.ajax({
+//             url: './db/info/del.php',
+//             method: 'POST',
+//             data: {class: className, sid: sid},
+//             success(bool) {
+//                 if (bool) {
+//                     refresh(className)
+//                     setTimeout(() => {
+//                       alert('更新成功')
+//                     }, 0.5)
+//                 }else
+//                     alert('刪除失敗')
+//             },
+//             error() {
+//                 alert('無法連接')
+//             }
+//         })
+//     }
+// }

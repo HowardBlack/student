@@ -9,22 +9,24 @@ async function loadCol(className) {
             success(data) {
               data.forEach((colInfo, index) => {
                 $('#colList').append(`<tr align=center>
+                    <td>
+                      <input type=checkbox name=col value=${colInfo[0]}>
+                    </td>
                     <td id=col${index}>${colInfo[0]}</td>
                     <td>${colInfo[1]}</td>
                     <td>
                         ${column(index, colInfo)}
-                        <button class='btn btn-danger' onclick=delInfo('${colInfo[0]}')>刪除</button>
                     </td>
                   </tr>`)
               })
             },
             error() {
-              $('#colList').append('<tr><td colspan=3>查無資料！</td></tr>')      
+              $('#colList').append('<tr><td colspan=4>查無資料！</td></tr>')      
             }
         })
     }
     else
-        $('#colList').append('<tr><td colspan=3>尚未選擇班級</td></tr>')
+        $('#colList').append('<tr><td colspan=4>尚未選擇班級</td></tr>')
 }
 
 function column(index, colInfo) {
@@ -49,7 +51,7 @@ function column(index, colInfo) {
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id=updateCol${index} data-bs-dismiss="modal" onclick=updateCol(${index},'${colInfo[0]}')>UPDATE</button>
+            <button type="button" class="btn btn-primary" id=updateCol${index} data-bs-dismiss="modal" onclick=updateCol(${index},'${colInfo[0]}')>UPDATE</button>       
           </div>
         </div>
       </div>
@@ -76,25 +78,25 @@ function updateCol(index, type) {
     })
 }
 
-function delCol(type) {
-    const status = confirm('確定刪除嗎?')
-    if (status) {
-        $.ajax({
-            url: './db/col/del.php',
-            method: 'POST',
-            data: {class: className, type: type},
-            success(bool) {
-                if (bool) {
-                    refresh(className)
-                    setTimeout(() => {
-                      alert('更新成功')
-                    }, 0.5)
-                }else
-                    alert('刪除失敗')
-            },
-            error() {
-                alert('無法連接')
-            }
-        })
-    }
-}
+// function delCol(type) {
+//     const status = confirm('確定刪除嗎?')
+//     if (status) {
+//         $.ajax({
+//             url: './db/col/del.php',
+//             method: 'POST',
+//             data: {class: className, type: type},
+//             success(bool) {
+//                 if (bool) {
+//                     refresh(className)
+//                     setTimeout(() => {
+//                       alert('更新成功')
+//                     }, 0.5)
+//                 }else
+//                     alert('刪除失敗')
+//             },
+//             error() {
+//                 alert('無法連接')
+//             }
+//         })
+//     }
+// }
