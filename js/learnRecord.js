@@ -193,8 +193,8 @@ function upload(className, index) {
     const itemValue = $(`#ta${type}${index}`).val()
     const itemLevel = $(`#${type}LevelOpt${index}`).prop('value')
     
-    if (item != '請選擇' && itemValue != '')
-      record.push([sid, type, item, itemLevel, itemValue, month])
+    if (item != '請選擇' && itemValue != '' && itemLevel != '')
+      record.push([sid, type, item, itemLevel, itemValue, month])      
   }
 
   if (record.length) {

@@ -1,10 +1,53 @@
 let searchData = 'none'
 let checkMonth = []
+let searchCol = 'none'
+let searchItem = 'none'
+
 $('#nameList').change((e) => {
     const selectValue = e.target.value
     searchData = (selectValue != '請選擇') ? selectValue : 'none'
-    loadAllRecord(className, searchData, checkMonth)
+    loadAllRecord(className, searchData, checkMonth, searchCol, searchItem)
 })
+
+$('#searchColList').change((e) => {
+    const selectValue = e.target.value
+    searchCol = (selectValue != '請選擇') ? selectValue : 'none'
+    if (searchCol == 'none') searchItem = 'none'
+    seachItems(searchCol)
+    loadAllRecord(className, searchData, checkMonth, searchCol, searchItem)
+})
+
+$('#searchItemList').change((e) => {
+    const selectValue = e.target.value
+    searchItem = (selectValue != '請選擇') ? selectValue : 'none'
+    loadAllRecord(className, searchData, checkMonth, searchCol, searchItem)
+})
+
+function seachItems(searchCol) {
+    $('#searchItemList').empty()
+    if (searchCol != 'none') {
+        $.ajax({
+            url: './db/loadItems.php',
+            method: 'POST',
+            dataType: 'JSON',
+            data: {class: className, code: searchCol},
+            success(data) {
+                if (data.length) {
+                    $('#searchItemList').append(new Option('請選擇', '請選擇'))
+                    for (let row of data)
+                       $('#searchItemList').append(new Option(row[2], row[2]))
+                }
+                else
+                    $('#searchItemList').append(new Option('查無資料', '查無資料'))
+            },
+            error() {
+                $('#searchItemList').append(new Option('查無資料', '查無資料'))
+            }
+        })
+    }
+    else
+        $('#searchItemList').append(new Option('請選擇欄位項目', '請選擇欄位項目'))
+}
 
 const allchBox = document.querySelectorAll('input[type=checkbox]')
 allchBox.forEach((checkbox) => {
@@ -14,11 +57,11 @@ allchBox.forEach((checkbox) => {
         }else {
             checkMonth.splice(checkMonth.indexOf(e.target.value), 1)
         }
-        loadAllRecord(className, searchData, checkMonth)
+        loadAllRecord(className, searchData, checkMonth, searchCol, searchItem)
     })
 })
 
-function loadAllRecord(className, searchData='none', chMonth='none') {
+function loadAllRecord(className, searchData='none', chMonth='none', searchCol='none', searchItem='none') {
     if (chMonth.length == 0) chMonth = 'none'
     $('#queryList').empty()
     if (valid_dbName(className)) {
@@ -30,6 +73,8 @@ function loadAllRecord(className, searchData='none', chMonth='none') {
                 class: className,
                 search: searchData,
                 month: chMonth,
+                searchCol: searchCol,
+                searchItem: searchItem
             },
             success(data) {
                 if (data.length) {
@@ -39,49 +84,33 @@ function loadAllRecord(className, searchData='none', chMonth='none') {
                                 <td>
                                     <input type=checkbox name=choice value=${row[0]}>
                                 </td>
+                                <td>${row[0]}</td>
                                 <td>${row[1]}</td>
                                 <td>${row[2]}</td>
                                 <td>${row[3]}</td>
-                                <td>${row[4]}</td>
+                                <td id=tdLevel${row[0]}>${row[4]}</td>
                                 <td>${row[5]}</td>
                                 <td>${row[6]}</td>
                                 <td>${row[7]}</td>
                             </tr>`
                         )
+                        tdLevelBacColor(row[0], row[4])
                     }
                 }else
-                    $('#queryList').append(`<tr><td colspan=${row.length}>查無資料！</td></tr>`)                    
+                    $('#queryList').append(`<tr><td colspan=${row.length + 1}>查無資料！</td></tr>`)                    
             },
             error() {
-                $('#queryList').append(`<tr><td colspan=8>查無資料！</td></tr>`)
+                $('#queryList').append(`<tr><td colspan=9>查無資料！</td></tr>`)
             }
         })
     }else {
-        $('#queryList').append(`<tr><td colspan=8>尚未選擇班級！</td></tr>`)
+        $('#queryList').append(`<tr><td colspan=9>尚未選擇班級！</td></tr>`)
     }
 }
 
-// function delRecord(id) {
-//     if (confirm('確定刪除嗎?')) {
-//         $.ajax({
-//             url: './db/record/del.php',
-//             method: 'POST',
-//             data: {
-//                 class: className,
-//                 id: id,
-//             },
-//             success(bool) {
-//                 if (bool) {
-//                     refresh(className)
-//                     setTimeout(() => {
-//                     alert('刪除成功')
-//                     }, 0.5)
-//                 }else
-//                     alert('刪除失敗')
-//             },
-//             error() {
-//                 alert('無法連接')
-//             }
-//         })
-//     }
-// }
+function tdLevelBacColor(id, level) {
+    if (level == '強')
+        $(`#tdLevel${id}`).prop('style', 'background-color: yellow')
+    else if (level == '弱')
+        $(`#tdLevel${id}`).prop('style', 'background-color: red')
+}

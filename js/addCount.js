@@ -86,10 +86,10 @@ $('#addLevelCount').click(function(e) {
                 <td class=col-2><input type=checkbox name=${block}BoxDel></td>
                 <td class=col-2 name=${block}count></td>
                 <td class=col-1>
-                    <input type="text" name="addLevel" placeholder="EX: High">
+                    <input type="text" name="addLevel" placeholder="EX: 1">
                 </td>
                 <td class=col-1>
-                    <input type="text" name="addItemLevel" placeholder="EX: 強">
+                    <input type="text" name="addItemLevel" placeholder="EX: 弱">
                 </td>
             </tr>
         `)
@@ -99,6 +99,30 @@ $('#addLevelCount').click(function(e) {
 })
 
 $('#delAddLevelBox').click(function(e) {
+    blockCheck(block)
+    reNumber(block)
+})
+
+// ======= clas 增加筆數 =======
+$('#addClasCount').click(function(e) {
+    addN = $(`#${block}Count`).val()
+
+    for (let i = 0; i < addN; i++) {        
+        $(`#${block}Info`).append(`
+            <tr>
+                <td class=col-2><input type=checkbox name=${block}BoxDel></td>
+                <td class=col-2 name=${block}count></td>
+                <td class=col-1>
+                    <input type="text" name="addClassName" placeholder="EX: 資三A">
+                </td>
+            </tr>
+        `)
+    }
+
+    reNumber(block)
+})
+
+$('#delAddClasBox').click(function(e) {
     blockCheck(block)
     reNumber(block)
 })

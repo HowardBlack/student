@@ -1,43 +1,11 @@
-// async function defaultAddType(className) {
-
-    
-//     $('#defaultType').empty()
-//     $.ajax({
-//         url: './db/loadColumn.php',
-//         method: 'POST',
-//         dataType: 'JSON',
-//         data: {class: className},
-//         success(data) {
-//             if (data.length) {
-//                 for (let row of data) {
-//                     const type = row[0]                    
-//                     $('#defaultType').append($('<option>',{
-//                         value: type,
-//                         text: type
-//                     }))
-//                 }
-//             }else {
-//                 $('#defaultType').append(new Option('尚無資料', '尚無資料'))
-//             }
-//         },
-//         error() {
-//             $('#defaultType').append(new Option('尚無資料', '尚無資料'))
-//         }
-//     })
-// }
-
 async function defaultAddType(className) {
-    // const allDefaultType = document.getElementsByName('defaultType');
-    // allDefaultType.forEach((item, index) => {
-    //     fetchColumnValue(item)
-    // })
+
     $('select[name=defaultType]').each(function(index, item) {
         fetchColumnValue(item)
     })
 }
 
 function fetchColumnValue(item) {
-    console.log(item)
     item.innerHTML = ""
     $.ajax({
         url: './db/loadColumn.php',
@@ -45,12 +13,10 @@ function fetchColumnValue(item) {
         dataType: 'JSON',
         data: {class: className},
         success(data) {
-            if (data.length) {
-                for (let row of data) {
-                    const type = row[0]
-                    item.append(new Option(type, type))
-                }
-            }else
+            if (data.length)
+                for (let row of data)
+                    item.append(new Option(row[1], row[0]))                
+            else
                 item.append(new Option('尚無資料', '尚無資料'))            
         },
         error() {
@@ -129,6 +95,58 @@ function addLevel() {
         alert('請選擇班級！')
 }
 
+function addclas() {
+    dtName = 'classmanage'
+    if (valid_data_dt('addClassName')) {
+        addDT({
+            'dataTable': dtName,
+            'data': addDataArray
+        })
+
+        refreshClassName()
+        init('addClassName')
+    }else
+        alert('請填寫完整資料')
+}
+
+function addDT({dataTable, data}) {
+    $.ajax({
+        url: `./db/class/insert.php`,
+        method: 'POST',
+        data: {
+            datatable: dataTable,
+            data: data
+        },
+        success(bool) {
+            if (bool) {
+                refreshClassName()
+                setTimeout(() => {
+                  alert('新增成功')
+                }, 0.5)
+            }else
+                alert('新增失敗')
+        },
+        error() {
+            alert('無法連接')
+        }
+    })
+}
+
+function valid_data_dt(one) {
+    addDataArray = []
+    const addclassname = document.getElementsByName(one)
+    for (let item of addclassname) {
+        const value = item.value
+        const code = randomCode(8)
+        console.log(code)
+        if (value != '')
+            addDataArray.push([value, code])
+        else
+            return false
+    }
+    return true
+}
+
 function valid_data(one, two) {
     addDataArray = []
     const One = document.getElementsByName(one)
@@ -171,15 +189,6 @@ function addDataTable({className, dataTable, data}) {
 }
 
 function init(...args) {
-    // $('#addSid').val('')
-    // $('#addName').val('')
-    // $('#addType').val('')
-    // $('#addTypeName').val('')
-    // // $('#defaultType').val('')
-    // $('#addItemName').val('')
-    // $('#addLevel').val('')
-    // $('#addItemLevel').val('')
-
     for (let arg of args) {
         let all = document.getElementsByName(arg)
         for (let each of all) {
@@ -187,3 +196,17 @@ function init(...args) {
         }
     }
 }
+
+function randomCode(length) {
+    if (length > 0) {
+       let data = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+       let nums = "";
+       for (let i = 0; i < length; i++) {
+          let r = parseInt(Math.random() * 26);
+          nums += data[r];
+       }
+       return nums;
+    } else {
+       return false;
+    }
+ }

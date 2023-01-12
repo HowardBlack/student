@@ -21,7 +21,7 @@ async function loadInfo(className) {
                         ${info(index, studenInfo)}
                     </td>
                   </tr>`
-                )                
+                )
                 $('#nameList').append(new Option(`${studenInfo[1]}`, `${studenInfo[1]}`))
               })
             },
