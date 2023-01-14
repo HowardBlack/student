@@ -82,16 +82,17 @@ function loadAllRecord(className, searchData='none', chMonth='none', searchCol='
                         $('#queryList').append(
                             `<tr align=center>
                                 <td>
-                                    <input type=checkbox name=choice value=${row[0]}>
+                                    <input type=checkbox name=choice value="${row[0]}">
                                 </td>
                                 <td>${row[0]}</td>
                                 <td>${row[1]}</td>
                                 <td>${row[2]}</td>
                                 <td>${row[3]}</td>
-                                <td id=tdLevel${row[0]}>${row[4]}</td>
+                                <td id="tdLevel${row[0]}">${row[4]}</td>
                                 <td>${row[5]}</td>
                                 <td>${row[6]}</td>
                                 <td>${row[7]}</td>
+                                <td>${row[8]}</td>
                             </tr>`
                         )
                         tdLevelBacColor(row[0], row[4])
@@ -100,11 +101,11 @@ function loadAllRecord(className, searchData='none', chMonth='none', searchCol='
                     $('#queryList').append(`<tr><td colspan=${row.length + 1}>查無資料！</td></tr>`)                    
             },
             error() {
-                $('#queryList').append(`<tr><td colspan=9>查無資料！</td></tr>`)
+                $('#queryList').append(`<tr><td colspan=10>查無資料！</td></tr>`)
             }
         })
     }else {
-        $('#queryList').append(`<tr><td colspan=9>尚未選擇班級！</td></tr>`)
+        $('#queryList').append(`<tr><td colspan=10>尚未選擇班級！</td></tr>`)
     }
 }
 

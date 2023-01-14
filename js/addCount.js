@@ -8,8 +8,8 @@ $('#addInfoCount').click(function(e) {
     for (let i = 0; i < addN; i++) {
         $(`#${block}Info`).append(`
             <tr>
-                <td class=col-2><input type=checkbox name=${block}BoxDel></td>
-                <td class=col-2 name=${block}count></td>
+                <td class=col-2><input type="checkbox" name="${block}BoxDel"></td>
+                <td class=col-2 name="${block}count"></td>
                 <td class=col-1><input type=text name=addSid placeholder="EX: 10910110"></td>
                 <td class=col-1><input type=text name=addName placeholder="EX: 陳宏恩"></td>
             </tr>
@@ -31,8 +31,8 @@ $('#addColCount').click(function(e) {
     for (let i = 0; i < addN; i++) {
         $(`#${block}Info`).append(`
             <tr>
-                <td class=col-2><input type=checkbox name=${block}BoxDel></td>
-                <td class=col-2 name=${block}count></td>
+                <td class=col-2><input type="checkbox" name="${block}BoxDel"></td>
+                <td class=col-2 name="${block}count"></td>
                 <td class=col-1><input type="text" name="addType" placeholder="EX: read"></td>
                 <td class=col-1><input type="text" name="addTypeName" placeholder="EX: 讀"></td>
             </tr>
@@ -55,10 +55,10 @@ $('#addItemCount').click(function(e) {
         let randomCode = getRandomCode(8)
         $(`#${block}Info`).append(`
             <tr>
-                <td class=col-2><input type=checkbox name=${block}BoxDel></td>
-                <td class=col-2 name=${block}count></td>
+                <td class=col-2><input type="checkbox" name="${block}BoxDel"></td>
+                <td class=col-2 name="${block}count"></td>
                 <td class=col-1>
-                    <select name="defaultType" id=${randomCode}>
+                    <select name="defaultType" id="${randomCode}">
                         <option value="none">尚未選擇班級！</option>
                     </select>
                 </td>
@@ -83,8 +83,8 @@ $('#addLevelCount').click(function(e) {
     for (let i = 0; i < addN; i++) {        
         $(`#${block}Info`).append(`
             <tr>
-                <td class=col-2><input type=checkbox name=${block}BoxDel></td>
-                <td class=col-2 name=${block}count></td>
+                <td class=col-2><input type="checkbox" name="${block}BoxDel"></td>
+                <td class=col-2 name="${block}count"></td>
                 <td class=col-1>
                     <input type="text" name="addLevel" placeholder="EX: 1">
                 </td>
@@ -110,8 +110,8 @@ $('#addClasCount').click(function(e) {
     for (let i = 0; i < addN; i++) {        
         $(`#${block}Info`).append(`
             <tr>
-                <td class=col-2><input type=checkbox name=${block}BoxDel></td>
-                <td class=col-2 name=${block}count></td>
+                <td class=col-2><input type="checkbox" name="${block}BoxDel"></td>
+                <td class=col-2 name="${block}count"></td>
                 <td class=col-1>
                     <input type="text" name="addClassName" placeholder="EX: 資三A">
                 </td>
@@ -149,7 +149,7 @@ function reNumber(block) {
 
 function checkedBoxAll() {
     $(`input[name=${block}BoxDel]`).each(function(index, item) {
-        item.checked = true
+        item.checked = !item.checked
     })
 }
 

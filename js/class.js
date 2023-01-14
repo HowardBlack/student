@@ -16,27 +16,33 @@ function loadClassName() {
                     const id = row[0]
                     const showclassname = row[1]
                     const permission = row[2]
+                    const dbName = row[3]
+                    const createTime = row[4]
+                    const keepTime = row[5]
                     $('#clasList').append(`
                         <tr align=center>
-                            <td class=col-3>
-                                <input type=checkbox name=clas value=${id}>
+                            <td class=col-2>
+                                <input type=checkbox name=clas value="${id}">
                             </td>
-                            <td class=col-3>${id}</td>
-                            <td class=col-3>${showclassname}</td>
-                            <td class=col-3>
+                            <td class=col-1>${id}</td>
+                            <td class=col-1>${showclassname}</td>
+                            <td class=col-2>${dbName}</td>
+                            <td class=col-2>${createTime}</td>
+                            <td class=col-2>${keepTime}</td>
+                            <td class=col-1>
                                 ${defaultPermission(row)}
                             </td>
                         </tr>
                     `)
                 }
             }else {
-                $('#clasList').append(`<tr><td colspan=4>班級查無資料！</td></tr>`)
+                $('#clasList').append(`<tr><td colspan=7>班級查無資料！</td></tr>`)
                 $('#class').empty()
                 $('#class').append(new Option('請選擇', '請選擇'))
             }
         },
         error() {
-            $('#clasList').append(`<tr><td colspan=4>班級查無資料！</td></tr>`)
+            $('#clasList').append(`<tr><td colspan=7>班級查無資料！</td></tr>`)
             $('#class').empty()
             $('#class').append(new Option('請選擇', '請選擇'))
         }
@@ -62,10 +68,13 @@ function defaultPermission(data) {
     const showclassname = data[1]
     const permission = data[2]
     const dbName = data[3]
+    let css = ""
     if (permission == '0')
+        // css = 'btn btn-outline-success'
         return `<button class='btn btn-outline-success' id=enable${id} value=f onclick="addClassdb(${id}, '${showclassname}', '${permission}', '${dbName}')">啟用</button>`
     else {
-        $('#class').append(`<option id=${dbName} value=${dbName}>${showclassname}</option>`)
+        // css = 'btn btn-outline-danger'
+        $('#class').append(`<option id="${dbName}" value="${dbName}">${showclassname}</option>`)
     }
     return `<button class='btn btn-outline-danger' id=enable${id} value=t onclick="addClassdb(${id}, '${showclassname}', '${permission}', '${dbName}')">停用</button>`
 }
@@ -82,7 +91,7 @@ function addClassdb(...args) {
     let css = ''
     
     if (text == 'f') {
-        $('#class').append(`<option id=${dbName} value=${dbName}>${args[1]}</option>`)
+        $('#class').append(`<option id="${dbName}" value="${dbName}">${args[1]}</option>`)
         text = 't'
         css = 'btn btn-outline-danger'
         element.innerText = '停用'
@@ -92,7 +101,7 @@ function addClassdb(...args) {
         text = 'f'
         css = 'btn btn-outline-success'
         element.innerText = '啟用'
-        refresh(className=$('#class').value)
+        refresh(className='請選擇')
     }
     element.value = text
     element.className = css

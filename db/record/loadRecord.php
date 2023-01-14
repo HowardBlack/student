@@ -24,7 +24,7 @@ if ($searchItem != 'none')
     $where[3] = "i.item = '$searchItem'";
 
 if (empty($where))
-    $sql = "SELECT i.id, i.sid, s.name, n.typeName, l.itemLevel, i.item, i.remark, i.recordMonth
+    $sql = "SELECT i.id, i.sid, s.name, n.typeName, l.itemLevel, i.item, i.remark, i.recordMonth, i.lastRecordTime
             from choiceitem i
             JOIN studentinfo s ON i.sid = s.sid
             JOIN columnname n ON i.type = n.type
@@ -32,7 +32,7 @@ if (empty($where))
             ORDER BY l.typeLevel DESC, i.recordMonth DESC";
 else {
     $where = implode(' AND ', $where);
-    $sql = "SELECT i.id, i.sid, s.name, n.typeName, l.itemLevel, i.item, i.remark, i.recordMonth
+    $sql = "SELECT i.id, i.sid, s.name, n.typeName, l.itemLevel, i.item, i.remark, i.recordMonth, i.lastRecordTime
             from choiceitem i
             JOIN studentinfo s ON i.sid = s.sid
             JOIN columnname n ON i.type = n.type

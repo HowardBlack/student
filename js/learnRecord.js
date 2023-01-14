@@ -9,7 +9,7 @@ async function loadClass(className) {
         success(result) {
           result.forEach((studenInfo, index) => {
             $('#sList').append(`<tr align=center>
-                <td id=sid${index}>${studenInfo[0]}</td>
+                <td id="sid${index}">${studenInfo[0]}</td>
                 <td>${studenInfo[1]}</td>
                 <td>${studentDialog(index, studenInfo)}</td>
               </tr>`)
@@ -43,7 +43,7 @@ function studentDialog(index, sInfo) {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id=btnSubmit${index} data-bs-dismiss="modal" onclick=upload('${className}',${index})>Save changes</button>
+          <button type="button" class="btn btn-primary" id="btnSubmit${index}" data-bs-dismiss="modal" onclick="upload('${className}',${index})">Save changes</button>
         </div>
       </div>
     </div>
@@ -119,8 +119,8 @@ function detailsOpt(className, columnCode, index) {
   })
 
   return `
-    <select id=${optId} onchange=optionEvent('${className}','${columnCode}','${index}')></select>
-    <textarea id=ta${optId} style=resize: both; cols=10 rows=1 disabled></textarea>
+    <select id="${optId}" onchange="optionEvent('${className}','${columnCode}','${index}')"></select>
+    <textarea id="ta${optId}" style="resize: both;" cols="10" rows="1" disabled></textarea>
   `
 }
 
@@ -141,7 +141,7 @@ function detailsLevel(columnCode, index) {
     }
   })
   return `
-    <select id=${levelId} disabled></select>
+    <select id="${levelId}" disabled></select>
   `
 }
 
@@ -193,7 +193,7 @@ function upload(className, index) {
     const itemValue = $(`#ta${type}${index}`).val()
     const itemLevel = $(`#${type}LevelOpt${index}`).prop('value')
     
-    if (item != '請選擇' && itemValue != '' && itemLevel != '')
+    if (item != '請選擇' && itemValue != '' && itemLevel != 'none')
       record.push([sid, type, item, itemLevel, itemValue, month])      
   }
 

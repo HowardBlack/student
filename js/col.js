@@ -12,9 +12,9 @@ async function loadCol(className) {
               data.forEach((colInfo, index) => {
                 $('#colList').append(`<tr align=center>
                     <td>
-                      <input type=checkbox name=col value=${colInfo[0]}>
+                      <input type=checkbox name=col value="${colInfo[0]}">
                     </td>
-                    <td id=col${index}>${colInfo[0]}</td>
+                    <td id="col${index}">${colInfo[0]}</td>
                     <td>${colInfo[1]}</td>
                     <td>
                         ${column(index, colInfo)}
@@ -52,12 +52,12 @@ function column(index, colInfo) {
           <div class="modal-body">
             <p>
                 <span>欄位名稱</span>
-                <input type=text id=colName${index} value=${colInfo[1]}>
+                <input type=text id="colName${index}" value="${colInfo[1]}">
             </p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id=updateCol${index} data-bs-dismiss="modal" onclick=updateCol(${index},'${colInfo[0]}')>UPDATE</button>       
+            <button type="button" class="btn btn-primary" id="updateCol${index}" data-bs-dismiss="modal" onclick="updateCol(${index},'${colInfo[0]}')">UPDATE</button>
           </div>
         </div>
       </div>

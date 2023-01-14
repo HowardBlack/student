@@ -91,7 +91,7 @@
                             <tr align="center">
                                 <th>
                                     <button class="btn btn-danger" id="infoBoxDel">刪除</button>
-                                    <button class="btn btn-warning" onclick="cbAll()">全選</button>
+                                    <button class="btn btn-warning" id="infoCbAll">全選</button>
                                 </th>
                                 <th>學號</th>
                                 <th>姓名</th>
@@ -110,7 +110,7 @@
                             <tr align="center">
                                 <th>
                                     <button class="btn btn-danger" id="colBoxDel">刪除</button>
-                                    <button class="btn btn-warning" onclick="cbAll()">全選</button>
+                                    <button class="btn btn-warning" id="colCbAll">全選</button>
                                 </th>
                                 <th>代號</th>
                                 <th>名稱</th>
@@ -129,7 +129,7 @@
                             <tr align="center">
                                 <th>
                                     <button class="btn btn-danger" id="itemBoxDel">刪除</button>
-                                    <button class="btn btn-warning" onclick="cbAll()">全選</button>
+                                    <button class="btn btn-warning" id="itemCbAll">全選</button>
                                 </th>
                                 <th>欄位代號</th>
                                 <th>項目名稱</th>
@@ -148,7 +148,7 @@
                             <tr align="center">
                                 <th>
                                     <button class="btn btn-danger" id="levelBoxDel">刪除</button>
-                                    <button class="btn btn-warning" onclick="cbAll()">全選</button>
+                                    <button class="btn btn-warning" id="levelCbAll">全選</button>
                                 </th>
                                 <th>代號</th>
                                 <th>名稱</th>
@@ -241,7 +241,7 @@
                             <tr align="center">
                                 <th>
                                     <button class="btn btn-danger" id="choiceBoxDel">刪除</button>
-                                    <button class="btn btn-warning" onclick="cbAll()">全選</button>
+                                    <button class="btn btn-warning" id="choiceCbAll">全選</button>
                                 </th>
                                 <th>筆數</th>
                                 <th>學號</th>
@@ -251,10 +251,11 @@
                                 <th>細項</th>
                                 <th>備註</th>
                                 <th>月份</th>
+                                <th>最後修改時間</th>
                             </tr>
                         </thead>
                         <tbody id="queryList">
-                            <tr><td colspan="9">尚未選擇班級！</td></tr>
+                            <tr><td colspan="10">尚未選擇班級！</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -418,29 +419,18 @@
                             <tr align="center">
                                 <th>
                                     <button class="btn btn-danger" id="clasBoxDel">刪除資料</button>
-                                    <button class="btn btn-warning" onclick="cbAll()">全選</button>
+                                    <button class="btn btn-warning" id="clasCbAll">全選</button>
                                 </th>
                                 <th>ID</th>
                                 <th>班級名稱</th>
+                                <th>資料庫名稱</th>
+                                <th>建立時間</th>
+                                <th>已保留時間</th>
                                 <th>功能</th>
                             </tr>
                         </thead>
                         <tbody id="clasList">
-                            <tr><td colspan="4">尚未選擇班級！</td></tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-border table-hover table-sm">
-                        <thead>
-                            <tr align="center">
-                                <th class="col-4">
-                                    <button class="btn btn-danger" id="dbBoxDel">刪除資料庫</button>
-                                    <button class="btn btn-warning" id="dbAll">全選</button>
-                                </th>
-                                <th class="col-4">班級名稱</th>
-                                <th class="col-4">建立時間</th>
-                            </tr>
-                        </thead>
-                        <tbody id="dbList">
+                            <tr><td colspan="7">尚未選擇班級！</td></tr>
                         </tbody>
                     </table>
                 </div>

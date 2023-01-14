@@ -2,11 +2,25 @@
 
 require_once('./createClass.php');
 
-$data = $_POST['data'];
+$status = false;
+try
+{
+    $data = $_POST['data'];
+    $dbname = [];
 
-foreach ($data as $id) {
-    $sql = "DELETE FROM classmanage WHERE id = $id";
-    $status = mysqli_query($conn, $sql);
+    foreach ($data as $key => $id) {
+        // $sql = "DELETE FROM classmanage WHERE id = $id";
+        // if (mysqli_query($conn, $sql)) {
+        //     try {
+        //         $connN = mysqli_connect('localhost', 'root', '')
+        //     }
+        // }
+        $sql = "SELECT classname FROM classmanage";
+        $status = mysqli_query($conn, $sql);
+    }
+    
 }
-
-echo $status;
+catch (Exception $e)
+{
+    echo false;
+}

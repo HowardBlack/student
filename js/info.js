@@ -8,14 +8,14 @@ async function loadInfo(className) {
             method: 'POST',
             dataType: 'JSON',
             success(result) {
-              $('#nameList').append(new Option(`請選擇`, `請選擇`))
+              $('#nameList').append(new Option('請選擇', '請選擇'))
               result.forEach((studenInfo, index) => {
                 $('#infoList').append(
                   `<tr align=center>
                     <td>
-                      <input type=checkbox name=info value=${studenInfo[0]}>
+                      <input type="checkbox" name="info" value="${studenInfo[0]}">
                     </td>
-                    <td id=sidInfo${index}>${studenInfo[0]}</td>
+                    <td id="sidInfo${index}">${studenInfo[0]}</td>
                     <td>${studenInfo[1]}</td>
                     <td>
                         ${info(index, studenInfo)}
@@ -53,12 +53,12 @@ function info(index, sInfo) {
           <div class="modal-body">
             <p>
                 <span>姓名</span>
-                <input type=text id=sName${index} value=${sInfo[1]}>
+                <input type="text" id="sName${index}" value="${sInfo[1]}">
             </p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id=updateInfo${index} data-bs-dismiss="modal" onclick=updateInfo(${index},'${sInfo[0]}')>UPDATE</button>        
+            <button type="button" class="btn btn-primary" id="updateInfo${index}" data-bs-dismiss="modal" onclick="updateInfo(${index},'${sInfo[0]}')">UPDATE</button>        
           </div>
         </div>
       </div>

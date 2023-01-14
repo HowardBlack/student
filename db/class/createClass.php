@@ -2,7 +2,7 @@
 
 date_default_timezone_set("Asia/Taipei");
 
-
+$status = false;
 try {
     $conn = mysqli_connect('localhost', 'root', '', 'classdb');
 }catch (Exception $e){
@@ -18,12 +18,6 @@ try {
                     lastRecordTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     PRIMARY KEY (id, classname)
                 )";
-        $status = mysqli_query($conn, $sql);
-        $sql = "CREATE TABLE classnamedb(
-                    id INT(20) AUTO_INCREMENT PRIMARY KEY,
-                    classDBname VARCHAR(255) NOT NULL,
-                    lastRecordTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-                );";
         $status = mysqli_query($conn, $sql);
     }
 }

@@ -103,7 +103,6 @@ function addclas() {
             'data': addDataArray
         })
 
-        refreshClassName()
         init('addClassName')
     }else
         alert('請填寫完整資料')
@@ -144,7 +143,7 @@ function valid_data_dt(one) {
         else
             return false
     }
-    return true
+    return (addDataArray.length) ? true : false
 }
 
 function valid_data(one, two) {
@@ -161,7 +160,7 @@ function valid_data(one, two) {
         else
             return false
     }    
-    return true
+    return (addDataArray.length) ? true : false
 }
 
 function addDataTable({className, dataTable, data}) {
@@ -175,7 +174,7 @@ function addDataTable({className, dataTable, data}) {
         },
         success(bool) {
             if (bool) {
-                refresh(className)                
+                refresh(className)
                 setTimeout(() => {
                   alert('新增成功')
                 }, 0.5)

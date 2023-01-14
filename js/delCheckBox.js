@@ -1,38 +1,65 @@
 let delAllCheck = []
 
 $('#infoBoxDel').click(function() {
+    blockMenu = 'info'
     filterCheckbox(blockMenu, delAllCheckbox)
+})
+
+$('#infoCbAll').click(function() {
+    blockMenu = 'info'
+    cbAll(blockMenu)
 })
 
 $('#colBoxDel').click(function() {
+    blockMenu = 'col'
     filterCheckbox(blockMenu, delAllCheckbox)
+})
+
+$('#colCbAll').click(function() {
+    blockMenu = 'col'
+    cbAll(blockMenu)
 })
 
 $('#itemBoxDel').click(function() {
+    blockMenu = 'item'
     filterCheckbox(blockMenu, delAllCheckbox)
+})
+
+$('#itemCbAll').click(function() {
+    blockMenu = 'item'
+    cbAll(blockMenu)
 })
 
 $('#levelBoxDel').click(function() {
+    blockMenu = 'level'
     filterCheckbox(blockMenu, delAllCheckbox)
+})
+
+$('#levelCbAll').click(function() {
+    blockMenu = 'level'
+    cbAll(blockMenu)
 })
 
 $('#choiceBoxDel').click(function() {
+    blockMenu = 'choice'
     filterCheckbox(blockMenu, delAllCheckbox)
 })
 
+$('#choiceCbAll').click(function() {
+    blockMenu = 'choice'
+    cbAll(blockMenu)
+})
+
 $('#clasBoxDel').click(function() {
+    blockMenu = 'clas'
     filterCheckbox(blockMenu, delAllcb)
 })
 
-$('#dbBoxDel').click(function() {
-    blockMenu = 'db'
-    filterCheckbox(blockMenu, delAllcbDB)
+$('#clasCbAll').click(function() {
+    blockMenu = 'clas'
+    cbAll(blockMenu)
 })
 
-$('#dbAll').click(function() {
-    blockMenu = 'db'
-    cbAll()    
-})
 
 function setBlockMean(b, s) {
     blockMenu = b
@@ -74,30 +101,12 @@ function delAllCheckbox(data) {
 // 刪除班級的所有 checkbox
 function delAllcb(data) {
     $.ajax({
-        url: './db/class/deleteClassName.php',
-        method: 'POST',
-        data: {data: data},
-        success(bool) {
-            if (bool) {
-                refreshClassName()
-                alert('刪除成功')
-            }
-        },
-        error() {
-            alert('無法連接')
-        }
-    })
-}
-
-function delAllcbDB(data) {
-    $.ajax({
         url: './db/class/deleteClassNameDB.php',
         method: 'POST',
         data: {data: data},
         success(bool) {
             if (bool) {
                 refreshClassName()
-                allClassDB()
                 alert('刪除成功')
             }
         },
@@ -108,13 +117,8 @@ function delAllcbDB(data) {
 }
 
 // 選取所有 checkbox
-function cbAll() {
-
+function cbAll(blockMenu) {
     $(`input[name=${blockMenu}]`).each(function(index, item) {
-        item.checked = true
+        item.checked = !item.checked
     })
-
-    // $(`input[name=${blockMenu}]:checked`).each(function(index, item) {
-    //     item.checked = false
-    // })
 }

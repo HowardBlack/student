@@ -11,9 +11,9 @@ async function loadItems(className) {
                 const index = item[0]
                 $('#itemsList').append(`<tr align=center>
                     <td>
-                      <input type=checkbox name=item value=${item[0]}>
+                      <input type=checkbox name=item value="${item[0]}">
                     </td>
-                    <td id=items${index}>${item[1]}</td>
+                    <td id="items${index}">${item[1]}</td>
                     <td>${item[2]}</td>
                     <td>
                         ${items(index, item)}
@@ -47,12 +47,12 @@ function items(index, itemInfo) {
           <div class="modal-body">
             <p>
                 <span>項目名稱</span>
-                <input type=text id=itemName${index} value=${itemInfo[2]}>
+                <input type=text id="itemName${index}" value="${itemInfo[2]}">
             </p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id=updateItem${index} data-bs-dismiss="modal" onclick=updateItem(${index},'${itemInfo[0]}')>UPDATE</button>
+            <button type="button" class="btn btn-primary" id="updateItem${index}" data-bs-dismiss="modal" onclick="updateItem(${index},'${itemInfo[0]}')">UPDATE</button>
           </div>
         </div>
       </div>
