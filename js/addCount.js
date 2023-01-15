@@ -10,8 +10,8 @@ $('#addInfoCount').click(function(e) {
             <tr>
                 <td class=col-2><input type="checkbox" name="${block}BoxDel"></td>
                 <td class=col-2 name="${block}count"></td>
-                <td class=col-1><input type=text name=addSid placeholder="EX: 10910110"></td>
-                <td class=col-1><input type=text name=addName placeholder="EX: 陳宏恩"></td>
+                <td class=col-1><input type="text" name="addSid" placeholder="EX: 10910110"></td>
+                <td class=col-1><input type="text" name="addName" placeholder="EX: 陳宏恩"></td>
             </tr>
         `)
     }
@@ -57,12 +57,14 @@ $('#addItemCount').click(function(e) {
             <tr>
                 <td class=col-2><input type="checkbox" name="${block}BoxDel"></td>
                 <td class=col-2 name="${block}count"></td>
-                <td class=col-1>
+                <td class=col-2>
                     <select name="defaultType" id="${randomCode}">
                         <option value="none">尚未選擇班級！</option>
                     </select>
                 </td>
-                <td class=col-1><input type="text" name="addItemName" placeholder="EX: 聆聽並分享想法"></td>
+                <td>
+                    <textarea name="addItemName" placeholder="EX: 聆聽並分享想法" cols="70" rows="4"></textarea>
+                </td>
             </tr>
         `)
         fetchColumnValue(document.getElementById(randomCode))

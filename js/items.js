@@ -9,9 +9,9 @@ async function loadItems(className) {
             success(data) {
               for (let item of data) {
                 const index = item[0]
-                $('#itemsList').append(`<tr align=center>
+                $('#itemsList').append(`<tr align="center">
                     <td>
-                      <input type=checkbox name=item value="${item[0]}">
+                      <input type="checkbox" name="item" value="${item[0]}">
                     </td>
                     <td id="items${index}">${item[1]}</td>
                     <td>${item[2]}</td>
@@ -22,12 +22,12 @@ async function loadItems(className) {
               }
             },
             error() {
-              $('#itemsList').append('<tr><td colspan=4>查無資料！</td></tr>')      
+              $('#itemsList').append('<tr><td colspan="4">查無資料！</td></tr>')      
             }
         })
     }
     else
-        $('#itemsList').append('<tr><td colspan=4>尚未選擇班級</td></tr>')
+        $('#itemsList').append('<tr><td colspan="4">尚未選擇班級</td></tr>')
 }
 
 function items(index, itemInfo) {
@@ -47,7 +47,7 @@ function items(index, itemInfo) {
           <div class="modal-body">
             <p>
                 <span>項目名稱</span>
-                <input type=text id="itemName${index}" value="${itemInfo[2]}">
+                <input type=text id="itemName${index}" value="${itemInfo[2]}" size="100px">
             </p>
           </div>
           <div class="modal-footer">

@@ -2,8 +2,8 @@ async function loadLevel(className) {
     $('#levelList').empty()
     if (className != '請選擇') {
         $.ajax({
-            url: '../db/details.php',
-            data: {class: className, tableName: 'itemLevel'},
+            url: './db/details.php',
+            data: {class: className, tableName: 'itemlevel'},
             method: 'POST',
             dataType: 'JSON',
             success(data) {

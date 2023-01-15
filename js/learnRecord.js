@@ -8,7 +8,7 @@ async function loadClass(className) {
         dataType: 'JSON',
         success(result) {
           result.forEach((studenInfo, index) => {
-            $('#sList').append(`<tr align=center>
+            $('#sList').append(`<tr align="center">
                 <td id="sid${index}">${studenInfo[0]}</td>
                 <td>${studenInfo[1]}</td>
                 <td>${studentDialog(index, studenInfo)}</td>
@@ -16,12 +16,12 @@ async function loadClass(className) {
           })
         },
         error() {
-          $('#sList').append('<tr><td colspan=3>查無資料！</td></tr>')      
+          $('#sList').append('<tr><td colspan="3">查無資料！</td></tr>')      
         }
     })
 }
 else
-    $('#sList').append('<tr><td colspan=3>尚未選擇班級</td></tr>')
+    $('#sList').append('<tr><td colspan="3">尚未選擇班級</td></tr>')
 }
 
 function studentDialog(index, sInfo) {
@@ -69,7 +69,7 @@ function optionDropDown(className, index) {
       })
     },
     error() {
-      $('#columnName').append('<tr><td colspan=3>尚未建立欄位項目！</td></tr>')
+      $('#columnName').append('<tr><td colspan="3">尚未建立欄位項目！</td></tr>')
     }
   })
   
@@ -108,13 +108,13 @@ function detailsOpt(className, columnCode, index) {
     success(result) {
       columns.push(columnCode)
       columns = [...new Set(columns)]
-      $(`#${optId}`).append(`<option value=請選擇>請選擇</option>`)
+      $(`#${optId}`).append(`<option value="請選擇">請選擇</option>`)
       result.forEach((optDetails) => {
-        $(`#${optId}`).append(`<option value=${optDetails[2]}>${optDetails[2]}</option>`)
+        $(`#${optId}`).append(`<option value="${optDetails[2]}">${optDetails[2]}</option>`)
       })
     },
     error() {
-      $(`#${optId}`).append(`<option value=請選擇>請選擇</option>`)
+      $(`#${optId}`).append(`<option value="請選擇">請選擇</option>`)
     }
   })
 
@@ -137,7 +137,7 @@ function detailsLevel(columnCode, index) {
       })
     },
     error() {
-      $(`#${levelId}`).append(`<option value=none>無資料</option>`)
+      $(`#${levelId}`).append(`<option value="none">無資料</option>`)
     }
   })
   return `

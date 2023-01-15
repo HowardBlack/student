@@ -19,3 +19,7 @@
 .addcount::-webkit-outer-spin-button {
     opacity: 1;
 }
+
+.modal {
+    --bs-modal-width: 1200px;
+}

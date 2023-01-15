@@ -11,7 +11,7 @@ async function loadInfo(className) {
               $('#nameList').append(new Option('請選擇', '請選擇'))
               result.forEach((studenInfo, index) => {
                 $('#infoList').append(
-                  `<tr align=center>
+                  `<tr align="center">
                     <td>
                       <input type="checkbox" name="info" value="${studenInfo[0]}">
                     </td>
@@ -26,12 +26,12 @@ async function loadInfo(className) {
               })
             },
             error() {
-              $('#infoList').append('<tr><td colspan=4>查無資料！</td></tr>')
+              $('#infoList').append('<tr><td colspan="4">查無資料！</td></tr>')
               $('#nameList').append(new Option('查無資料', '查無資料'))
             }
         })
     }else {
-      $('#infoList').append('<tr><td colspan=4>尚未選擇班級</td></tr>')
+      $('#infoList').append('<tr><td colspan="4">尚未選擇班級</td></tr>')
       $('#nameList').append(new Option('尚未選擇班級', '尚未選擇班級'))
     }
 }

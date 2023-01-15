@@ -10,9 +10,9 @@ async function loadCol(className) {
             success(data) {
               $('#searchColList').append(new Option(`請選擇`, `請選擇`))
               data.forEach((colInfo, index) => {
-                $('#colList').append(`<tr align=center>
+                $('#colList').append(`<tr align="center">
                     <td>
-                      <input type=checkbox name=col value="${colInfo[0]}">
+                      <input type="checkbox" name="col" value="${colInfo[0]}">
                     </td>
                     <td id="col${index}">${colInfo[0]}</td>
                     <td>${colInfo[1]}</td>
@@ -24,13 +24,13 @@ async function loadCol(className) {
               })
             },
             error() {
-              $('#colList').append('<tr><td colspan=4>查無資料！</td></tr>')
+              $('#colList').append('<tr><td colspan="4">查無資料！</td></tr>')
               $('#searchColList').append(new Option('查無資料', '查無資料'))
             }
         })
     }
     else {
-        $('#colList').append('<tr><td colspan=4>尚未選擇班級</td></tr>')
+        $('#colList').append('<tr><td colspan="4">尚未選擇班級</td></tr>')
         $('#searchColList').append(new Option('尚未選擇班級', '尚未選擇班級'))
     }
 }

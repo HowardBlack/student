@@ -30,6 +30,12 @@
                     <button class="nav-link active" id="pills-learn-record-tab" data-bs-toggle="pill" data-bs-target="#learn-record" type="button" aria-selected="true">學習記錄</button>
                 </li>
                 <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-query-tab" data-bs-toggle="pill" data-bs-target="#query" type="button" aria-selected="false" onclick="setBlockMean('choice', 'choiceitem')">學生記錄查詢</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-create-tab" data-bs-toggle="pill" data-bs-target="#create" type="button" aria-selected="false">新增資料</button>
+                </li>
+                <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#info" type="button" aria-selected="false" onclick="setBlockMean('info', 'studentinfo')">基本資料</button>
                 </li>
                 <li class="nav-item" role="presentation">
@@ -40,12 +46,6 @@
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-level-tab" data-bs-toggle="pill" data-bs-target="#level" type="button" aria-selected="false" onclick="setBlockMean('level', 'itemlevel')">程度項目</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-query-tab" data-bs-toggle="pill" data-bs-target="#query" type="button" aria-selected="false" onclick="setBlockMean('choice', 'choiceitem')">學生記錄查詢</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-create-tab" data-bs-toggle="pill" data-bs-target="#create" type="button" aria-selected="false">新增資料</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-clas-tab" data-bs-toggle="pill" data-bs-target="#clas" type="button" aria-selected="false" onclick="setBlockMean('clas', 'classmanage')">班級管理</button>
@@ -317,8 +317,8 @@
                                             </thead>
                                             <tbody id="infoInfo"></tbody>
                                         </table>
-                                        <!-- <input type="file" id="userFile">
-                                        <input type="button" id="upload_file" class="btn btn-primary" value="上傳檔案"> -->
+                                        <input type="file" id="userFile">
+                                        <input type="button" id="upload_file" multiple class="btn btn-primary" value="上傳檔案">
                                     </div>
                                 </div>
                             </div>
