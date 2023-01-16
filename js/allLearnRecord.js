@@ -35,7 +35,7 @@ function seachItems(searchCol) {
                 if (data.length) {
                     $('#searchItemList').append(new Option('請選擇', '請選擇'))
                     for (let row of data)
-                       $('#searchItemList').append(new Option(row[2], row[2]))
+                       $('#searchItemList').append(new Option(row[2], row[0]))
                 }
                 else
                     $('#searchItemList').append(new Option('查無資料', '查無資料'))

@@ -11,6 +11,9 @@ async function loadClass(className) {
             $('#sList').append(`<tr align="center">
                 <td id="sid${index}">${studenInfo[0]}</td>
                 <td>${studenInfo[1]}</td>
+                <td>
+                  <a href="../10910110/詩歌.pdf" target="blank">pdf file locatiion</a>
+                </td>
                 <td>${studentDialog(index, studenInfo)}</td>
               </tr>`)
           })
@@ -110,7 +113,7 @@ function detailsOpt(className, columnCode, index) {
       columns = [...new Set(columns)]
       $(`#${optId}`).append(`<option value="請選擇">請選擇</option>`)
       result.forEach((optDetails) => {
-        $(`#${optId}`).append(`<option value="${optDetails[2]}">${optDetails[2]}</option>`)
+        $(`#${optId}`).append(`<option value="${optDetails[0]}">${optDetails[2]}</option>`)
       })
     },
     error() {
@@ -193,7 +196,7 @@ function upload(className, index) {
     const itemValue = $(`#ta${type}${index}`).val()
     const itemLevel = $(`#${type}LevelOpt${index}`).prop('value')
     
-    if (item != '請選擇' && itemValue != '' && itemLevel != 'none')
+    if (item != '請選擇' && itemLevel != 'none')
       record.push([sid, type, item, itemLevel, itemValue, month])      
   }
 
