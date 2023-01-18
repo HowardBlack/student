@@ -10,7 +10,7 @@ $bool = true;
 for ($i = 0; $i < count($data); $i++) {
     $row = $data[$i];
     if ($dataTable == 'studentinfo') {
-        $path = "../../data/$row[0]";
+        $path = "../../data/$row[0]_$row[1]";
         if (!file_exists($path)) mkdir($path, 0777, true);
     }
     try

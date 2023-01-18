@@ -77,26 +77,3 @@ function updateLevel(index, type) {
         }
     })
 }
-
-// function delLevel(type) {
-//     const status = confirm('確定刪除嗎?')
-//     if (status) {
-//         $.ajax({
-//             url: './db/level/del.php',
-//             method: 'POST',
-//             data: {class: className, type: type},
-//             success(bool) {
-//                 if (bool) {
-//                     refresh(className)
-//                     setTimeout(() => {
-//                       alert('更新成功')
-//                     }, 0.5)
-//                 }else
-//                     alert('刪除失敗')
-//             },
-//             error() {
-//                 alert('無法連接')
-//             }
-//         })
-//     }
-// }

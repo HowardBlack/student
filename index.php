@@ -76,14 +76,16 @@
                             <tr valign="center" align="center">
                                 <th>學號</th>
                                 <th>姓名</th>
+                                <th>檔案</th>
                                 <th>功能</th>
                             </tr>
                         </thead>
                         <tbody id="sList">
-                            <tr><td colspan="3">尚未選擇班級！</td></tr>
+                            <tr><td colspan="4">尚未選擇班級！</td></tr>
                         </tbody>
                     </table>
-                </div>
+                    <ul class="file_list icon mb5 h3">
+                </div>                
             <!-- 基本資料 -->
                 <div class="tab-pane fade" id="info">
                     <table class="table table-border table-hover table-sm">

@@ -59,31 +59,3 @@ function valid_dbName(className) {
     return (className != '請選擇') ? true : false
 }
 
-// function allClassDB() {
-//     $('#dbList').empty()
-//     $.ajax({
-//         url: './db/class/loadClassDB.php',
-//         method: 'POST',
-//         dataType: 'JSON',
-//         success(data) {
-//             if (data.length) {
-//                 for (let row of data) {
-//                     $('#dbList').append(`
-//                         <tr align=center>
-//                             <td>
-//                                 <input type=checkbox name=db value="${row[0]}">
-//                             </td>
-//                             <td>${row[1]}</td>
-//                             <td>${row[2]}</td>
-//                         </tr>
-//                     `)
-//                 }
-//             }else {
-//                 $('#dbList').append('<tr><td colspan=3>查無資料！</td></tr>')
-//             }
-//         },
-//         error() {
-//             $('#dbList').append('<tr><td colspan=3>查無資料！</td></tr>')
-//         }
-//     })
-// }

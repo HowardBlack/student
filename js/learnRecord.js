@@ -8,26 +8,54 @@ async function loadClass(className) {
         dataType: 'JSON',
         success(result) {
           result.forEach((studenInfo, index) => {
+            const sid = studenInfo['sid']
+            const name = studenInfo['name']
             $('#sList').append(`<tr align="center">
-                <td id="sid${index}">${studenInfo[0]}</td>
-                <td>${studenInfo[1]}</td>
-                <td>
-                  <a href="../10910110/詩歌.pdf" target="blank">pdf file locatiion</a>
-                </td>
+                <td id="sid${index}">${sid}</td>
+                <td>${name}</td>                
+                ${studentFile(index, studenInfo)}
                 <td>${studentDialog(index, studenInfo)}</td>
               </tr>`)
           })
         },
         error() {
-          $('#sList').append('<tr><td colspan="3">查無資料！</td></tr>')      
+          $('#sList').append('<tr><td colspan="4">查無資料！</td></tr>')      
         }
     })
 }
 else
-    $('#sList').append('<tr><td colspan="3">尚未選擇班級</td></tr>')
+    $('#sList').append('<tr><td colspan="4">尚未選擇班級</td></tr>')
+}
+
+function studentFile(index, sInfo) {
+  const sid = sInfo['sid']
+  const name = sInfo['name']
+  $.ajax({
+    url: './db/sfile/showDirFile.php',
+    method: 'POST',
+    data: {data: sInfo},
+    dataType: 'JSON',
+    success(dirfile) {
+      if (dirfile) {
+        dirfile.forEach((value, i) => {
+          $(`#showFile${index}`).append(`
+            <a href="./data/${sid}_${name}/${value}">${value}</a>
+          `)
+        })
+      }else {
+        $(`#showFile${index}`).text = "暫無檔案"
+      }
+    },
+    error() {
+      alert('無法連接zxcv')
+    }
+  })
+  return `<td id="showFile${index}"></td>`
 }
 
 function studentDialog(index, sInfo) {
+  const sid = sInfo['sid']
+  const name = sInfo['name']
   return `<!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#show${index}">
   查看資料
@@ -38,7 +66,7 @@ function studentDialog(index, sInfo) {
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="lab${index}">${sInfo[1]} 同學</h5>
+          <h5 class="modal-title" id="lab${index}">${name} 同學</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">

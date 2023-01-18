@@ -1,11 +1,21 @@
 <?php
 
-// require_once('db.php');
 require_once('db.php');
 
 $info = mysqli_query($conn, "SELECT * FROM studentinfo");
 
-if (mysqli_num_rows($info) > 0)
-    echo json_encode(mysqli_fetch_all($info));
+$data = array();
+if (mysqli_num_rows($info) > 0) {
+    // echo json_encode(mysqli_fetch_all($info));
+    // echo json_encode(mysqli_fetch_all($info, MYSQLI_ASSOC));
+    while ($row = mysqli_fetch_assoc($info)) {
+        $sid = $row['sid'];
+        $name = $row['name'];
+        $path = "../data/$sid"."_"."$name";
+        if (!file_exists($path)) mkdir($path);
+        $data[] = $row;
+    }
+    echo json_encode($data);
+}
 
 mysqli_close($conn);
