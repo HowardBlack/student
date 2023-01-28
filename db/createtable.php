@@ -44,7 +44,7 @@ if (mysqli_query($conn, $sql))
         $sql = "CREATE TABLE columnitems(
             id INT(20) AUTO_INCREMENT PRIMARY KEY,
             type VARCHAR(255) NOT NULL,
-            item VARCHAR(255) NOT NULL
+            item VARCHAR(255) NOT NULL            
         )";
         if (mysqli_query($conn, $sql))
 

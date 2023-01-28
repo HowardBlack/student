@@ -1,4 +1,4 @@
-async function defaultAddType(className) {
+function defaultAddType(className) {
 
     $('select[name=defaultType]').each(function(index, item) {
         fetchColumnValue(item)

@@ -1,4 +1,4 @@
-async function loadClass(className) {
+function loadClass(className) {
   $('#sList').empty()  
   if (valid_dbName(className)) {
     $.ajax({
@@ -37,17 +37,19 @@ function studentFile(index, sInfo) {
     dataType: 'JSON',
     success(dirfile) {
       if (dirfile) {
+        const regex = /^([a-zA-Z0-9\u4E00-\u9FFF\s_\\.\-:])+(.mp3|.wav|.m4a|.mp4)$/
+        let element = ''
         dirfile.forEach((value, i) => {
-          $(`#showFile${index}`).append(`
-            <a href="./data/${sid}_${name}/${value}">${value}</a>
-          `)
+          if (regex.test(value))
+            element = `<a href="./data/${sid}_${name}/${value}" data-fancybox data-type="html5video">${value}</a>`
+          else
+            element = `<a href="./data/${sid}_${name}/${value}" data-fancybox="gallery">${value}</a><br>`
+          $(`#showFile${index}`).append(element)
         })
-      }else {
-        $(`#showFile${index}`).text = "暫無檔案"
       }
     },
     error() {
-      alert('無法連接zxcv')
+      $(`#showFile${index}`).text('暫無檔案')
     }
   })
   return `<td id="showFile${index}"></td>`

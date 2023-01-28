@@ -1,4 +1,4 @@
-async function loadInfo(className) {
+function loadInfo(className) {
     $('#infoList').empty()
     $('#nameList').empty()
     if (valid_dbName(className)) {

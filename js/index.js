@@ -38,7 +38,7 @@ function refresh(className) {
     defaultAddType(className)
 }
 
-async function validDB(className) {
+function validDB(className) {
     if (valid_dbName(className)) {
         $.ajax({
             url: './db/db.php',

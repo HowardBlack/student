@@ -1,4 +1,4 @@
-async function loadItems(className) {
+function loadItems(className) {
     $('#itemsList').empty()
     if (className != '請選擇') {
         $.ajax({

@@ -1,4 +1,4 @@
-async function loadCol(className) {
+function loadCol(className) {
     $('#colList').empty()
     $('#searchColList').empty()
     if (className != '請選擇') {

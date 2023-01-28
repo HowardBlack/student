@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>學生學習紀錄</title>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.1/css/bootstrap.min.css' integrity='sha512-siwe/oXMhSjGCwLn+scraPOWrJxHlUgMBMZXdPe2Tnk3I0x3ESCoLz7WZ5NTH6SZrywMY+PB1cjyqJ5jAluCOg==' crossorigin='anonymous'/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
     <link rel="stylesheet" href="./css/index.css">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.1/js/bootstrap.min.js' integrity='sha512-vyRAVI0IEm6LI/fVSv/Wq/d0KUfrg3hJq2Qz5FlfER69sf3ZHlOrsLriNm49FxnpUGmhx+TaJKwJ+ByTLKT+Yg==' crossorigin='anonymous'></script>
 </head>
@@ -265,6 +266,10 @@
                 <div class="tab-pane fade" id="create">
                     <div class="container mt-3">
                         <div id="accordion">
+                            <div class="fileUpload mb-3">
+                                <input type="file" multiple="multiple" id="userFile">
+                                <input type="button" id="upload_file" class="btn btn-primary" value="上傳檔案">
+                            </div>
                         <!-- 新增班級 -->
                             <div class="card">
                                 <div class="card-header" data-bs-toggle="collapse" href="#collapseFive" onclick="setBlock('clas', 'classmanage')">
@@ -318,9 +323,7 @@
                                                 <th>姓名</th>
                                             </thead>
                                             <tbody id="infoInfo"></tbody>
-                                        </table>
-                                        <input type="file" id="userFile">
-                                        <input type="button" id="upload_file" multiple class="btn btn-primary" value="上傳檔案">
+                                        </table>                                        
                                     </div>
                                 </div>
                             </div>
@@ -440,6 +443,7 @@
     </div>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js' integrity='sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==' crossorigin='anonymous'></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
     <script src="./js/class.js"></script>
     <script src="./js/index.js"></script>
     <script src="./js/learnRecord.js"></script>
@@ -449,6 +453,7 @@
     <script src="./js/allLearnRecord.js"></script>
     <script src="./js/add.js"></script>
     <script src="./js/level.js"></script>
+    <script src="./js/addFile.js"></script>
     <script src="./js/addCount.js"></script>
     <script src="./js/delCheckBox.js"></script>
 
