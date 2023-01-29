@@ -77,7 +77,10 @@
                             <tr valign="center" align="center">
                                 <th>學號</th>
                                 <th>姓名</th>
-                                <th>檔案</th>
+                                <th>
+                                    檔案
+                                    <button class="btn btn-danger" id="delFileCheckbox">刪除勾選檔案</button>
+                                </th>
                                 <th>功能</th>
                             </tr>
                         </thead>

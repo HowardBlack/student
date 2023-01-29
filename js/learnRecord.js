@@ -41,9 +41,11 @@ function studentFile(index, sInfo) {
         let element = ''
         dirfile.forEach((value, i) => {
           if (regex.test(value))
-            element = `<a href="./data/${sid}_${name}/${value}" data-fancybox data-type="html5video">${value}</a>`
+            element = `<input type="checkbox" name="fileCheckbox" value="\\data\\${sid}_${name}\\${value}">
+                      <a href="./data/${sid}_${name}/${value}" data-fancybox data-type="html5video">${value}</a><br>`
           else
-            element = `<a href="./data/${sid}_${name}/${value}" data-fancybox="gallery">${value}</a><br>`
+            element = `<input type="checkbox" name="fileCheckbox" value="\\data\\${sid}_${name}\\${value}">
+                      <a href="./data/${sid}_${name}/${value}" data-fancybox="gallery">${value}</a><br>`
           $(`#showFile${index}`).append(element)
         })
       }
@@ -248,4 +250,26 @@ function upload(className, index) {
   }else
     alert('請確認資料是否填寫正確！')
 
+}
+
+$("#delFileCheckbox").click(() => {
+  let filedir = []
+  $("input[name=fileCheckbox]").each(function(index, item) {
+    if (item.checked)
+      filedir.push(item.value)    
+  })
+  delFileCheckbox(filedir)
+})
+
+function delFileCheckbox(filedir)
+{
+  $.ajax({
+    url: './db/sfile/delFile.php',
+    method: 'POST',
+    data: {fileName: filedir},
+    success(bool) {
+      console.log((bool) ? refresh(className) : 0)
+    },
+    error() {}
+  })
 }
