@@ -1,11 +1,8 @@
 $(`#upload_file`).click(function(event) {
-    // console.log(1)
     const userFile = $('#userFile')
     let formData = new FormData()
-    for(let i = 0; i < $('#userFile')[0].files.length; i++){
-        formData.append('file[]', $('#userFile')[0].files[i])
-    }
-    
+    for(let i = 0; i < userFile[0].files.length; i++)
+        formData.append('file[]', userFile[0].files[i])
     $.ajax({
         url: './db/sfile/uploadExcel.php',
         method: 'POST',
@@ -14,7 +11,7 @@ $(`#upload_file`).click(function(event) {
         processData: false,
         data: formData,
         success(bool) {
-            (bool) ? addClassDB() : alert('檔案上傳失敗！')            
+            (bool) ? addClassDB() : alert('檔案上傳失敗！')
         },
         error() {}
     })
@@ -89,6 +86,28 @@ function addClassLevel()
         data: {sheetName: 'level'},
         success(bool) {
             console.log((bool) ? 'addlevel' : 'addfaillevel')
+        },
+        error() {}
+    })
+}
+
+function addLearnFile(th, sid, name)
+{
+    let fmData = new FormData()
+    fmData.append('sinfo[]', sid)
+    fmData.append('sinfo[]', name)
+    for (let i = 0; i < th.files.length; i++)
+        fmData.append('learnfile[]', th.files[i])
+
+    $.ajax({
+        url: './db/sfile/addLearnFile.php',
+        method: 'POST',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: fmData,
+        success(bool) {
+            (bool) ? refresh(className) : alert('檔案上傳失敗！')            
         },
         error() {}
     })

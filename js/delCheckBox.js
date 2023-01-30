@@ -107,6 +107,7 @@ function delAllcb(data) {
         success(bool) {
             if (bool) {
                 refreshClassName()
+                refresh(className)
                 alert('刪除成功')
             }
         },

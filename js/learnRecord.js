@@ -1,5 +1,5 @@
 function loadClass(className) {
-  $('#sList').empty()  
+  $('#sList').empty()
   if (valid_dbName(className)) {
     $.ajax({
         url: './db/loadClass.php',
@@ -14,7 +14,10 @@ function loadClass(className) {
                 <td id="sid${index}">${sid}</td>
                 <td>${name}</td>                
                 ${studentFile(index, studenInfo)}
-                <td>${studentDialog(index, studenInfo)}</td>
+                <td>
+                  <input type="file" multiple="multiple" id="file${sid}" onchange="addLearnFile(this, '${sid}', '${name}')">
+                  ${studentDialog(index, studenInfo)}
+                </td>
               </tr>`)
           })
         },
