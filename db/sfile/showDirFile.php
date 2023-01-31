@@ -8,7 +8,7 @@ if (isset($_POST['data']))
     $name = $sInfo['name'];
     $fileName = array();
     
-    $path = "../../data/$sid"."_"."$name";
+    $path = dirname(__FILE__, 4) . "\data\\$sid"."_"."$name";
     $files = array_diff(scandir($path), array('..', '.'));        
     foreach ($files as $file)
         $fileName[] = $file;
