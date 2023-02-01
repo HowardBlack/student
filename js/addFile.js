@@ -22,15 +22,16 @@ function addClassDB()
     $.ajax({
         url: './db/sfile/addClass.php',
         method: 'POST',
+        dataType: 'JSON',
         data: {sheetName: 'class'},
-        success(bool) {
-            if (bool)
+        success(rankclass) {
+            if (rankclass != '')
             {
                 Promise.all(
-                    [addStudentInfo(),
-                    addClassColumnname(),
-                    addClassColumnitems(),
-                    addClassLevel()]
+                    [addStudentInfo('studentinfo', rankclass),
+                     addStudentInfo('columnname', rankclass),
+                     addStudentInfo('columnitems', rankclass),
+                     addStudentInfo('itemlevel', rankclass),]
                 )
             }
         },
@@ -38,54 +39,15 @@ function addClassDB()
     })
     refresh(className)
 }
-
-function addStudentInfo()
+// sheetname, datatable, classname
+function addStudentInfo(sheetName, rankclass)
 {
     $.ajax({
         url: './db/sfile/addStudentInfo.php',
         method: 'POST',
-        data: {sheetName: 'studentinfo'},
+        data: {sheetName: sheetName, classname: rankclass},
         success(bool) {
-            console.log((bool) ? 'addinfo' : 'addfailinfo')
-        },
-        error() {}
-    })
-}
-
-function addClassColumnname()
-{
-    $.ajax({
-        url: './db/sfile/addColumnname.php',
-        method: 'POST',
-        data: {sheetName: 'columnname'},
-        success(bool) {
-            console.log((bool) ? 'addcolumnname' : 'addfailcolumnname')
-        },
-        error() {}
-    })
-}
-
-function addClassColumnitems()
-{
-    $.ajax({
-        url: './db/sfile/addColumnitems.php',
-        method: 'POST',
-        data: {sheetName: 'columnitems'},
-        success(bool) {
-            console.log((bool) ? 'addcolumnitems' : 'addfailcolumnitems')
-        },
-        error() {}
-    })
-}
-
-function addClassLevel()
-{
-    $.ajax({
-        url: './db/sfile/addLevel.php',
-        method: 'POST',
-        data: {sheetName: 'level'},
-        success(bool) {
-            console.log((bool) ? 'addlevel' : 'addfaillevel')
+            console.log((bool) ? 'addfinish' : 'addfail')
         },
         error() {}
     })

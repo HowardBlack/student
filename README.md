@@ -65,3 +65,31 @@
 6. render data
     a. 班級+月份選擇完成
     b. 
+
+# 112(2023)/01/30
+# DATABASE DESIGN - classdb
+## 班級管理 - classmanage
+1. id, showclassname, classname, permission, lastRecordTime
+2. PRIMARY KEY (id, classname)
+## 學生基本資料 - studentinfo
+1. className, sid, name
+2. PRIMARY KEY (classNae, sid, name)
+## 欄位項目 - columnname
+1. className, type, item
+2. PRIMARY KEY (className, type, item)
+## 欄位細項 - columnitems
+1. className, type, items
+2. PRIMARY KEY (className, type, items)
+## 程度項目 - itemlevel
+1. className, type, level
+2. PRIMARY KEY (className, type, level)
+## 學生紀錄查詢 - choiceitem
+1. id, sid, type, item, typeLevel, remark, recordMonth, lastRecordTime
+
+## Question
+1. 班級重複問題
+2. 一筆一筆新增導致效能降低 -> 是否可以新增 array
+3. 頁面顯示方式 -> EX: 超過 10 筆就下一頁
+4. INSERT INTO TABLENAME USE ARRAY -> ONE TIME MUTIPLE DATA
+5. DELETE MUTILPE DATA USE IN
+6. 學生升班級，原始資料怎麼保留？是否重新新增，還是有方法可以copy？

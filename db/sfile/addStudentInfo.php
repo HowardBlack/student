@@ -2,38 +2,18 @@
 
 require './readSheet.php';
 
-var_dump($data);
-$className = $sql = '';
+$rankdbname = '';
+if (isset($_POST['classname'])) $rankdbname = $_POST['classname'];
+$className = '';
 $status = false;
+$value = array();
+
 foreach ($data as $row)
 {
-    $currentClass = $row[0];
-    if (empty($className))
-        $className = getClassDB($currentClass);
-    elseif ($currentClass != $className)
-        $className = getClassDB($currentClass);    
-
-    // 多次連結降低效能
-    $conn = mysqli_connect('localhost', 'root', '', "$className");
-    $sql = "INSERT INTO studentinfo
-            VALUES ('$row[1]', '$row[2]');";
-    $status = mysqli_query($conn, $sql);
+    $className = $rankdbname[$row[0]];
+    $value[] = "('$className', '$row[1]', '$row[2]')";
 }
-echo $status;
-
-// 取得班級資料庫名稱
-function getClassDB($className)
-{
-    try
-    {
-        $conn = mysqli_connect('localhost', 'root', '', 'classdb');
-        $sql = "SELECT CONCAT(classname, id) AS dbName
-                FROM classmanage
-                WHERE showclassname = '$className'";
-        $item= mysqli_query($conn, $sql);
-        
-        if (mysqli_num_rows($item) > 0)
-            return mysqli_fetch_assoc($item)['dbName'];
-    }
-    catch (Exception $e) {}
-}
+$value = implode(', ', $value);
+$sql = "INSERT INTO $sheetName
+        VALUES $value;";
+echo mysqli_query($conn, $sql);

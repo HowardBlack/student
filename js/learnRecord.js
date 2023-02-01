@@ -24,7 +24,7 @@ function loadClass(className) {
         error() {
           $('#sList').append('<tr><td colspan="4">查無資料！</td></tr>')      
         }
-    })
+    })    
 }
 else
     $('#sList').append('<tr><td colspan="4">尚未選擇班級</td></tr>')

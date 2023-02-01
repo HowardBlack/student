@@ -1,30 +1,22 @@
 <?php
 
-require_once('./createClass.php');
+require ('../db.php');
 
-$data = $_POST['data'];
-$dbname = [];
-$status = false;
-foreach ($data as $key => $id) {
-    $sql = "SELECT CONCAT(classname, id) as classname
-            FROM classmanage
-            WHERE id = $id";
-    $status = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($status) > 0) {
-        $dbname[$key] = (mysqli_fetch_assoc($status)['classname']);
-        $sql = "DELETE FROM classmanage WHERE id = $id";
-        $status = mysqli_query($conn, $sql);
-    }
-}
+$data = '';
+if (isset($_POST['data'])) $data = implode(', ', $_POST['data']);
 
-$conn = mysqli_connect('localhost', 'root', '');
-foreach ($dbname as $value) {
-    try {
-        $sql = "DROP DATABASE $value";
-        $status = mysqli_query($conn, $sql);
-    }catch(Exception $err) {
+// 尚未新增刪除其他資料表資料 (studentinfo, columnname, columnitems, itemlevel)
+$sql = "DELETE FROM classmanage WHERE id IN($data)";
+echo mysqli_query($conn, $sql);
 
-    }
-}
-
-echo $status;
+// foreach ($data as $key => $id) {
+//     $sql = "SELECT CONCAT(classname, id) as classname
+//             FROM classmanage
+//             WHERE id = $id";
+//     $status = mysqli_query($conn, $sql);
+//     if (mysqli_num_rows($status) > 0) {
+//         $dbname[$key] = (mysqli_fetch_assoc($status)['classname']);
+//         $sql = "DELETE FROM classmanage WHERE id = $id";
+//         $status = mysqli_query($conn, $sql);
+//     }
+// }
