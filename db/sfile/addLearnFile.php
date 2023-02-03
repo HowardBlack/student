@@ -5,7 +5,7 @@ if (isset($_FILES['learnfile']) and isset($_POST['sinfo']))
     $file = $_FILES['learnfile'];
     $sinfo = $_POST['sinfo'];
     
-    $datapath = dirname(__FILE__, 3) . "\data\\" . "$sinfo[0]_$sinfo[1]";
+    $datapath = dirname(__FILE__, 4) . "\data\\" . "$sinfo[0]_$sinfo[1]";
     echo $datapath;
 
     foreach ($file['error'] as $key => $value)

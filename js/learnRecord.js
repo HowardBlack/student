@@ -45,10 +45,10 @@ function studentFile(index, sInfo) {
         dirfile.forEach((value, i) => {
           if (regex.test(value))
             element = `<input type="checkbox" name="fileCheckbox" value="\\data\\${sid}_${name}\\${value}">
-                      <a href="./data/${sid}_${name}/${value}" data-fancybox data-type="html5video">${value}</a><br>`
+                      <a href="../data/${sid}_${name}/${value}" data-fancybox data-type="html5video">${value}</a><br>`
           else
             element = `<input type="checkbox" name="fileCheckbox" value="\\data\\${sid}_${name}\\${value}">
-                      <a href="./data/${sid}_${name}/${value}" data-fancybox="gallery">${value}</a><br>`
+                      <a href="../data/${sid}_${name}/${value}" data-fancybox="gallery">${value}</a><br>`
           $(`#showFile${index}`).append(element)
         })
       }

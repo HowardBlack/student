@@ -10,8 +10,10 @@ $bool = true;
 for ($i = 0; $i < count($data); $i++) {
     $row = $data[$i];
     if ($dataTable == 'studentinfo') {
-        $path = "../../data/$row[0]_$row[1]";
-        if (!file_exists($path)) mkdir($path, 0777, true);
+        $dataPath = dirname(__FILE__, 4) . "\data";
+        if (!file_exists($dataPath)) @mkdir($dataPath);
+        $path = "$dataPath\\$row[0]_$row[1]";
+        if (!file_exists($path)) @mkdir($path, 0777, true);
     }
     try
     {

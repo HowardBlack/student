@@ -4,7 +4,8 @@ $bool = false;
 if (isset($_FILES['file']))
 {
     $file = $_FILES['file'];
-    $tempPath = '../../temp/';
+    $tempPath = dirname(__FILE__, 3) . '\temp\\';
+    if (!file_exists($tempPath)) mkdir($tempPath);
     foreach ($file['error'] as $key => $value)
     {
         $temp_name = $file['tmp_name'][$key];
