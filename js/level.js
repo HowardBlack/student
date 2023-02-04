@@ -10,10 +10,10 @@ async function loadLevel(className) {
               data.forEach((levelInfo, index) => {
                 $('#levelList').append(`<tr align=center>
                     <td>
-                      <input type=checkbox name=level value="${levelInfo[0]}">
+                      <input type=checkbox name=level value="${levelInfo['type']}">
                     </td>
-                    <td id="lev${index}">${levelInfo[0]}</td>
-                    <td>${levelInfo[1]}</td>
+                    <td id="lev${index}">${levelInfo['type']}</td>
+                    <td>${levelInfo['level']}</td>
                     <td>
                         ${level(index, levelInfo)}
                     </td>
@@ -46,12 +46,12 @@ function level(index, levelInfo) {
           <div class="modal-body">
             <p>
                 <span>程度名稱</span>
-                <input type=text id="l${index}" value="${levelInfo[1]}">
+                <input type=text id="l${index}" value="${levelInfo['level']}">
             </p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="updateLevel${index}" data-bs-dismiss="modal" onclick="updateLevel('${index}','${levelInfo[0]}')">UPDATE</button>
+            <button type="button" class="btn btn-primary" id="updateLevel${index}" data-bs-dismiss="modal" onclick="updateLevel('${index}','${levelInfo['type']}')">UPDATE</button>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 <?php
 
-require_once('db.php');
+require ('db.php');
 
 $code = $_POST['code'];
 $columnItems = mysqli_query($conn, "SELECT * FROM columnitems WHERE type='$code'");

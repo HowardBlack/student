@@ -1,3 +1,10 @@
+# 112(2023)/02/04
+## Work Log
+1. add sfile/addClass characters source
+2. fix class/loadClassName select classname
+3. fix class/deleteClassNameDB.php 連動刪除其他相關資料(包含 studentinfo, columnname, columnitems, itemlevel, choiceitem)
+4. fix paths and optimize code...
+
 # 112(2023)/01/28
 ## 已完成
 1. 上傳檔案 (班級、基本資料、欄位項目、欄位細項、程度)。
@@ -85,7 +92,6 @@
 2. PRIMARY KEY (className, type, level)
 ## 學生紀錄查詢 - choiceitem
 1. id, sid, type, item, typeLevel, remark, recordMonth, lastRecordTime
-
 ## Question
 1. 班級重複問題
 2. 一筆一筆新增導致效能降低 -> 是否可以新增 array
@@ -93,3 +99,5 @@
 4. INSERT INTO TABLENAME USE ARRAY -> ONE TIME MUTIPLE DATA
 5. DELETE MUTILPE DATA USE IN
 6. 學生升班級，原始資料怎麼保留？是否重新新增，還是有方法可以copy？
+## GIT QUESTION
+1. how to update local files in cloud? (how to fetch data from the cloud and update local files? ) => git pull <branch_name>

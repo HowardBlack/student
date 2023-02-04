@@ -4,8 +4,10 @@ date_default_timezone_set("Asia/Taipei");
 
 $status = false;
 $sql = '';
+$class = '';
 try
 {
+    $class = (isset($_POST['class'])) ? $_POST['class'] : 'none';
     $conn = mysqli_connect('localhost', 'root', '', 'classdb');
 }
 catch (Exception $e)

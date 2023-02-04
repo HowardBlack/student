@@ -1,6 +1,6 @@
 <?php
 
-require_once('./createClass.php');
+require '../db.php';
 
 $id = $_POST['id'];
 $showclassname = $_POST['showclassname'];

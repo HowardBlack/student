@@ -1,6 +1,6 @@
 <?php
 
-require_once('./db.php');
+require_once 'db.php';
 
 $dataTable = $_POST['dataTable'];
 $condition = '';
@@ -17,7 +17,7 @@ $condition = 'type';
 elseif ($dataTable == 'columnitems')
 $condition = 'id';
 elseif ($dataTable == 'itemlevel')
-$condition = 'typeLevel';
+$condition = 'type';
 elseif ($dataTable == 'choiceitem')
 $condition = 'id';
 
@@ -26,7 +26,7 @@ $bool = true;
 foreach ($data as $value) {    
     try
     {
-        $sql = "DELETE FROM $dataTable WHERE $condition = '$value'";
+        $sql = "DELETE FROM $dataTable WHERE classname = '$class' AND $condition = '$value'";
         $status = mysqli_query($conn, $sql);
         $bool = $status;
     }

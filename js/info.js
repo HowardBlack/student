@@ -3,8 +3,8 @@ function loadInfo(className) {
     $('#nameList').empty()
     if (valid_dbName(className)) {
         $.ajax({
-            url: './db/loadClass.php',
-            data: {class: className},
+            url: './db/details.php',
+            data: {class: className, tableName: 'studentinfo'},
             method: 'POST',
             dataType: 'JSON',
             success(result) {

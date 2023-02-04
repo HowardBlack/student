@@ -13,20 +13,19 @@ function loadClassName() {
         success(data) { 
             if (data.length) {
                 for (let row of data) {
-                    const id = row[0]
-                    const showclassname = row[1]
-                    const permission = row[2]
-                    const dbName = row[3]
-                    const createTime = row[4]
-                    const keepTime = row[5]
+                    const id = row['id']
+                    const showclassname = row['showclassname']
+                    const classname = row['classname']
+                    const createTime = row['lastRecordTime']
+                    const keepTime = row['keepTime']
                     $('#clasList').append(`
                         <tr align=center>
                             <td class="col-2">
-                                <input type="checkbox" name="clas" value="${id}">
+                                <input type="checkbox" name="clas" value="'${classname}'">
                             </td>
                             <td class="col-1">${id}</td>
                             <td class="col-1">${showclassname}</td>
-                            <td class="col-2">${dbName}</td>
+                            <td class="col-2">${classname}</td>
                             <td class="col-2">${createTime}</td>
                             <td class="col-2">${keepTime}</td>
                             <td class="col-1">
@@ -51,7 +50,7 @@ function loadClassName() {
 
 function createClass() {
     $.ajax({
-        url: './db/class/createClass.php',
+        url: './db/db.php',
         method: 'POST',
         success(bool) {
             if (bool) alert('班級管理資料庫建立成功')
@@ -64,10 +63,10 @@ function createClass() {
 
 // 驗證顯示權限
 function defaultPermission(data) {
-    const id = data[0]
-    const showclassname = data[1]
-    const permission = data[2]
-    const dbName = data[3]
+    const id = data['id']
+    const showclassname = data['showclassname']
+    const permission = data['permission']
+    const dbName = data['classname']
     let css = ""
     if (permission == '0')
         // css = 'btn btn-outline-success'

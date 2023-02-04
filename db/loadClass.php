@@ -2,7 +2,7 @@
 
 require_once('db.php');
 
-$info = mysqli_query($conn, "SELECT * FROM studentinfo");
+$info = mysqli_query($conn, "SELECT * FROM studentinfo WHERE classname = '$class'");
 
 $data = array();
 if (mysqli_num_rows($info) > 0) {
