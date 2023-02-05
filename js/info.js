@@ -40,6 +40,7 @@ function loadInfo(className) {
 }
 
 function info(index, sInfo) {
+    const classname = sInfo['classname']
     const sid = sInfo['sid']
     const name = sInfo['name']
     return `<!-- Button trigger modal -->
@@ -56,6 +57,10 @@ function info(index, sInfo) {
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+            <p>
+                <span>班級</span>
+                <input type="text" id="sClass${index}" value="${classname}">
+            </p>
             <p>
                 <span>姓名</span>
                 <input type="text" id="sName${index}" value="${name}">

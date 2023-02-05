@@ -10,6 +10,7 @@ foreach ($data as $class)
         $RANDOM_CLASSDB_NAME = generateRandomString();
         $insert = "INSERT INTO classmanage(showclassname, classname)
                    VALUES ('$cls', '$RANDOM_CLASSDB_NAME');";
+        
         if (mysqli_query($conn, $insert)) $randclass[$cls] = $RANDOM_CLASSDB_NAME;
     }
 }

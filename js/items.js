@@ -7,19 +7,21 @@ function loadItems(className) {
             method: 'POST',
             dataType: 'JSON',
             success(data) {
-              for (let item of data) {
-                const index = item[0]
-                $('#itemsList').append(`<tr align="center">
+              data.forEach((element) => {
+                const index = element['id']
+                $('#itemsList').append(`
+                  <tr align="center">
                     <td>
-                      <input type="checkbox" name="item" value="${item[0]}">
+                      <input type="checkbox" name="item" value="${index}">
                     </td>
-                    <td id="items${index}">${item[1]}</td>
-                    <td>${item[2]}</td>
+                    <td id="items${index}">${element['type']}</td>
+                    <td>${element['item']}</td>
                     <td>
-                        ${items(index, item)}
+                        ${items(index, element)}
                     </td>
-                  </tr>`)
-              }
+                  </tr>`
+                )
+              });
             },
             error() {
               $('#itemsList').append('<tr><td colspan="4">查無資料！</td></tr>')      
@@ -47,12 +49,12 @@ function items(index, itemInfo) {
           <div class="modal-body">
             <p>
                 <span>項目名稱</span>
-                <input type=text id="itemName${index}" value="${itemInfo[2]}" size="100px">
+                <input type=text id="itemName${index}" value="${itemInfo['item']}" size="100px">
             </p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="updateItem${index}" data-bs-dismiss="modal" onclick="updateItem(${index},'${itemInfo[0]}')">UPDATE</button>
+            <button type="button" class="btn btn-primary" id="updateItem${index}" data-bs-dismiss="modal" onclick="updateItem(${index},'${itemInfo['type']}')">UPDATE</button>
           </div>
         </div>
       </div>

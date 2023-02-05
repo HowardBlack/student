@@ -66,7 +66,7 @@ function studentDialog(index, sInfo) {
   const sid = sInfo['sid']
   const name = sInfo['name']
   return `<!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#show${index}">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#show${index}" onclick="optionDropDown('${className}', ${index})">
   查看資料
   </button>
   
@@ -79,7 +79,16 @@ function studentDialog(index, sInfo) {
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ${optionDropDown(className, index)}
+            <table class="table">
+              <thead>
+                <tr>
+                  <td>欄位</td>
+                  <td>詳細資料</td>
+                  <td>程度</td>
+                </tr>
+              </thead>
+              <tbody id="columnName${index}"></toby>
+            </table>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -92,18 +101,20 @@ function studentDialog(index, sInfo) {
 
 // 資料庫訪問率太高 => 每次都需要訪問，降低效能
 function optionDropDown(className, index) {
+  $(`#columnName${index}`).empty()
    $.ajax({
-    url: './db/loadColumn.php',
-    data: {class: className},
+    url: './db/details.php',
+    data: {class: className, tableName: 'columnname'},
     method: 'POST',
     dataType: 'JSON',
     success(result) {
+      console.log(result)
       result.forEach((option) => {
         $(`#columnName${index}`).append(
           `<tr>
-            <td>${option[1]}</td>
-            <td>${detailsOpt(className, option[0], index)}</td>
-            <td>${detailsLevel(option[0], index)}</td>
+            <td>${option['typeName']}</td>
+            <td>${detailsOpt(className, option['type'], index)}</td>
+            <td>${detailsLevel(option['type'], index)}</td>
           </tr>`
         )
       })
@@ -112,19 +123,6 @@ function optionDropDown(className, index) {
       $('#columnName').append('<tr><td colspan="3">尚未建立欄位項目！</td></tr>')
     }
   })
-  
-  return `
-    <table class="table">
-      <thead>
-        <tr>
-          <td>欄位</td>
-          <td>詳細資料</td>
-          <td>程度</td>
-        </tr>
-      </thead>
-      <tbody id="columnName${index}"></toby>
-    </table>
-  `
 }
 
 $('#month').change(function() {
@@ -150,7 +148,7 @@ function detailsOpt(className, columnCode, index) {
       columns = [...new Set(columns)]
       $(`#${optId}`).append(`<option value="請選擇">請選擇</option>`)
       result.forEach((optDetails) => {
-        $(`#${optId}`).append(`<option value="${optDetails[0]}">${optDetails[2]}</option>`)
+        $(`#${optId}`).append(`<option value="${optDetails['id']}">${optDetails['item']}</option>`)
       })
     },
     error() {
@@ -173,7 +171,7 @@ function detailsLevel(columnCode, index) {
     dataType: 'JSON',
     success(data) {
       data.forEach((row) => {
-        $(`#${levelId}`).append(new Option(row[1], row[0]))
+        $(`#${levelId}`).append(new Option(row['level'], row['type']))
       })
     },
     error() {

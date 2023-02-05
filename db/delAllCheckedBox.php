@@ -8,7 +8,7 @@ $data = $_POST['data'];
 if ($dataTable == 'studentinfo') {
     $condition = 'sid';
     foreach ($data as $value) {
-        $path = "../../data/$value";
+        $path = dirname(__FILE__, 3) . "\data\\$value";
         if (file_exists($path)) rmdir($path);
     }
 }    
@@ -23,7 +23,7 @@ $condition = 'id';
 
 
 $bool = true;
-foreach ($data as $value) {    
+foreach ($data as $value) {
     try
     {
         $sql = "DELETE FROM $dataTable WHERE classname = '$class' AND $condition = '$value'";
