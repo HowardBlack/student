@@ -44,7 +44,7 @@ function info(index, sInfo) {
     const sid = sInfo['sid']
     const name = sInfo['name']
     return `<!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#info${index}">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#info${index}" onclick="allClass(${index})"">
     修改資料
     </button>
     
@@ -59,7 +59,7 @@ function info(index, sInfo) {
           <div class="modal-body">
             <p>
                 <span>班級</span>
-                <input type="text" id="sClass${index}" value="${classname}">
+                <select id="sClass${index}"></select>
             </p>
             <p>
                 <span>姓名</span>
@@ -75,11 +75,37 @@ function info(index, sInfo) {
     </div>`
 }
 
+function allClass(index)
+{
+  $(`#sClass${index}`).empty();
+  $.ajax({
+      url: './db/details.php',
+      method: 'POST',
+      dataType: 'JSON',
+      data: {tableName: 'classmanage'},
+      success(data) {
+          console.log(data);
+          if (data.length)
+              for (let row of data)
+                  $(`#sClass${index}`).append(new Option(row['showclassname'], row['classname']));
+              $(`#sClass${index}`).val(className);
+      },
+      error() {}
+  })
+}
+
 function updateInfo(index, sid) {
     $.ajax({
         url: './db/info/update.php',
         method: 'POST',
-        data: {class: className, data: [sid, $(`#sName${index}`).val()]},
+        data: {
+          class: className,
+          data: {
+            'sid': sid,
+            'newName': $(`#sName${index}`).val(),
+            'newClassName': $(`#sClass${index}`).val()
+          }
+        },
         success(bool) {
             if (bool) {
                 refresh(className)

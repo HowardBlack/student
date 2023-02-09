@@ -35,7 +35,7 @@ function seachItems(searchCol) {
                 if (data.length) {
                     $('#searchItemList').append(new Option('請選擇', '請選擇'))
                     for (let row of data)
-                       $('#searchItemList').append(new Option(row[2], row[0]))
+                       $('#searchItemList').append(new Option(row['item'], row['id']))
                 }
                 else
                     $('#searchItemList').append(new Option('查無資料', '查無資料'))
@@ -76,26 +76,35 @@ function loadAllRecord(className, searchData='none', chMonth='none', searchCol='
                 searchCol: searchCol,
                 searchItem: searchItem
             },
-            success(data) {
+            success(data) {                
                 if (data.length) {
                     for (let row of data) {
+                        const id = row['id'];
+                        const sid = row['sid'];
+                        const sname = row['name'];
+                        const typeName = row['typeName'];
+                        const level = row['level'];
+                        const item = row['item'];
+                        const remark = row['remark'];
+                        const recordmonth = row['recordMonth'];
+                        const lastRecordTime = row['lastRecordTime'];
                         $('#queryList').append(
                             `<tr align="center">
                                 <td>
-                                    <input type="checkbox" name="choice" value="${row[0]}">
+                                    <input type="checkbox" name="choice" value="${id}">
                                 </td>
-                                <td>${row[0]}</td>
-                                <td>${row[1]}</td>
-                                <td>${row[2]}</td>
-                                <td>${row[3]}</td>
-                                <td id="tdLevel${row[0]}">${row[4]}</td>
-                                <td>${row[5]}</td>
-                                <td>${row[6]}</td>
-                                <td>${row[7]}</td>
-                                <td>${row[8]}</td>
+                                <td>${id}</td>
+                                <td>${sid}</td>
+                                <td>${sname}</td>
+                                <td>${typeName}</td>
+                                <td id="tdLevel${id}">${level}</td>
+                                <td>${item}</td>
+                                <td>${remark}</td>
+                                <td>${recordmonth}</td>
+                                <td>${lastRecordTime}</td>
                             </tr>`
                         )
-                        tdLevelBacColor(row[0], row[4])
+                        tdLevelBacColor(id, level)
                     }
                 }else
                     $('#queryList').append(`<tr><td colspan="${row.length + 1}">查無資料！</td></tr>`)

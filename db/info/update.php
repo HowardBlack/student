@@ -2,12 +2,22 @@
 
 require_once('../db.php');
 
-$data = $_POST['data'];
+$data = (isset($_POST['data'])) ? $_POST['data'] : 'none';
 
-$path = "../../data/$data[0]_*";
-$searchResult = glob($path);
-if (count($searchResult) > 0) rename($searchResult[0], "../../data/$data[0]_$data[1]");
+if ($data != 'none')
+{
+    $sid = $data['sid'];
+    $newName = $data['newName'];
+    $newClassName = $data['newClassName'];
 
-$sql = "UPDATE studentinfo SET name = '$data[1]' WHERE sid='$data[0]'";
+    $path = dirname(__FILE__, 4) . "\data\\$sid_*";
+    $searchResult = glob($path);
+    if (count($searchResult) > 0)
+        rename($searchResult[0], dirname(__FILE__, 4) . "\data\\$sid_$newName");
 
-echo (mysqli_query($conn, $sql)) ? true : false;
+    $sql = "UPDATE studentinfo
+            SET classname = '$newClassName', name = '$newName'
+            WHERE (classname = '$class' AND sid = '$sid')";
+
+    echo (mysqli_query($conn, $sql)) ? true : false;
+}

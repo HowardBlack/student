@@ -1,14 +1,12 @@
 <?php
 
-require_once('./createClass.php');
+require_once('../db.php');
 
 try {
     $dataTable = $_POST['datatable'];
     $data = $_POST['data'];
     $status = false;
 
-    $classdb = [1];
-    
     foreach ($data as $key => $row) {
         $sql = "INSERT INTO $dataTable(showclassname, classname)
                 VALUES ('$row[0]', '$row[1]')";

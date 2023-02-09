@@ -4,22 +4,28 @@ require_once('db.php');
 
 $data = $_POST['data'];
 
-for ($i=0; $i < count($data); $i++) { 
+for ($i = 0; $i < count($data); $i++) { 
     $row = $data[$i];
+    $sid = $row['sid'];
+    $type = $row['type'];
+    $item = $row['item'];
+    $itemLevel = $row['itemLevel'];
+    $itemValue = $row['itemValue'];
+    $month = $row['month'];
 
     // data exist
     $search = "SELECT * FROM choiceitem
-               WHERE (sid = '$row[0]' AND type = '$row[1]') AND (item = '$row[2]' AND recordMonth = '$row[5]')";
+               WHERE (sid = '$sid' AND type = '$type') AND (item = '$item' AND recordMonth = '$month')";
 
     if (mysqli_num_rows(mysqli_query($conn, $search)) > 0) {
         // update data
         $sql = "UPDATE choiceitem
-                SET remark = '$row[4]', typeLevel = '$row[3]', lastRecordTime = CURRENT_TIMESTAMP
-                WHERE (sid = '$row[0]' AND type = '$row[1]') AND (item = '$row[2]' AND recordMonth = '$row[5]')";
+                SET remark = '$itemValue', typeLevel = '$itemLevel', lastRecordTime = CURRENT_TIMESTAMP
+                WHERE (sid = '$sid' AND type = '$type') AND (item = '$item' AND recordMonth = '$month')";
     }else {
         // insert data
-        $sql = "INSERT INTO choiceitem(sid, type, item, typeLevel, remark, recordMonth)
-                VALUES('$row[0]', '$row[1]', '$row[2]', '$row[3]', '$row[4]', '$row[5]')";
+        $sql = "INSERT INTO choiceitem(classname, sid, type, item, typeLevel, remark, recordMonth)
+                VALUES('$class', '$sid', '$type', '$item', '$itemLevel', '$itemValue', '$month')";
     }
 
     echo (mysqli_query($conn, $sql)) ? true : false;

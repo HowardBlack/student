@@ -15,7 +15,6 @@ foreach ($data as $row)
         $value[] = "(NULL, '$className', '$row[1]', '$row[2]')";
     else
         $value[] = "('$className', '$row[1]', '$row[2]')";
-
 }
 $value = implode(', ', $value);
 $sql = "INSERT INTO $sheetName

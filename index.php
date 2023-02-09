@@ -243,7 +243,7 @@
                     </p>
                 <!-- 顯示查詢結果 -->
                     <table class="table table-border table-hover table-sm">
-                        <thead>
+                        <thead class="normal">
                             <tr align="center">
                                 <th>
                                     <button class="btn btn-danger" id="choiceBoxDel">刪除</button>

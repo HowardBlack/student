@@ -63,7 +63,6 @@ function studentFile(index, sInfo) {
 }
 
 function studentDialog(index, sInfo) {
-  const sid = sInfo['sid']
   const name = sInfo['name']
   return `<!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#show${index}" onclick="optionDropDown('${className}', ${index})">
@@ -92,7 +91,7 @@ function studentDialog(index, sInfo) {
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="btnSubmit${index}" data-bs-dismiss="modal" onclick="upload('${className}',${index})">Save changes</button>
+          <button type="button" class="btn btn-primary" id="btnSubmit${index}" data-bs-dismiss="modal" onclick="upload(${index})">Save changes</button>
         </div>
       </div>
     </div>
@@ -108,12 +107,12 @@ function optionDropDown(className, index) {
     method: 'POST',
     dataType: 'JSON',
     success(result) {
-      console.log(result)
       result.forEach((option) => {
+        columns.push(option['type'])
         $(`#columnName${index}`).append(
           `<tr>
             <td>${option['typeName']}</td>
-            <td>${detailsOpt(className, option['type'], index)}</td>
+            <td>${detailsOpt(option['type'], index)}</td>
             <td>${detailsLevel(option['type'], index)}</td>
           </tr>`
         )
@@ -136,16 +135,14 @@ $('#month').change(function() {
 })
 
 // 資料庫訪問率太高 => 每次都需要訪問，降低效能
-function detailsOpt(className, columnCode, index) {
+function detailsOpt(columnCode, index) {
   const optId = `${columnCode}${index}`
   $.ajax({
     url: './db/loadItems.php',
     data: {class: className, code: columnCode},
     method: 'POST',
     dataType: 'JSON',
-    success(result) {
-      columns.push(columnCode)
-      columns = [...new Set(columns)]
+    success(result) {            
       $(`#${optId}`).append(`<option value="請選擇">請選擇</option>`)
       result.forEach((optDetails) => {
         $(`#${optId}`).append(`<option value="${optDetails['id']}">${optDetails['item']}</option>`)
@@ -153,8 +150,8 @@ function detailsOpt(className, columnCode, index) {
     },
     error() {
       $(`#${optId}`).append(`<option value="請選擇">請選擇</option>`)
-    }
-  })
+  }
+})
 
   return `
     <select id="${optId}" onchange="optionEvent('${className}','${columnCode}','${index}')"></select>
@@ -220,8 +217,7 @@ function optionEvent(className, type, index) {
 /* 上傳資料庫
 
 */
-function upload(className, index) {
-
+function upload(index) {
   const sid = $(`#sid${index}`).text()
   const month = $('#month').val()
   let record = []
@@ -232,7 +228,14 @@ function upload(className, index) {
     const itemLevel = $(`#${type}LevelOpt${index}`).prop('value')
     
     if (item != '請選擇' && itemLevel != 'none')
-      record.push([sid, type, item, itemLevel, itemValue, month])      
+      record.push({
+        'sid': sid,
+        'type': type,
+        'item': item,
+        'itemLevel': itemLevel,
+        'itemValue': itemValue,
+        'month': month
+    })
   }
 
   if (record.length) {

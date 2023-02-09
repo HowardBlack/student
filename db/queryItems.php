@@ -9,8 +9,8 @@ $month = $_POST['month'];
 
 $sql = "SELECT remark, typeLevel
         FROM choiceitem AS c
-        WHERE (recordMonth = '$month' AND sid = '$sid')
-                AND (type = '$type' AND item = '$item')";
+        WHERE (recordMonth = '$month' AND sid = '$sid') AND 
+              (type = '$type' AND item = '$item')";
 
 $dataQuery = mysqli_query($conn, $sql);
 

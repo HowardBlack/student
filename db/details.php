@@ -4,7 +4,10 @@ require_once 'db.php';
 
 $tableName = (isset($_POST['tableName'])) ? $_POST['tableName'] : 'none';
 
-$sql = "SELECT * FROM $tableName WHERE classname = '$class'";
+if ($class != 'none')
+    $sql = "SELECT * FROM $tableName WHERE classname = '$class'";
+else
+    $sql = "SELECT * FROM $tableName";
 
 $data = mysqli_query($conn, $sql);
 

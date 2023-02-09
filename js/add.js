@@ -1,5 +1,4 @@
 function defaultAddType(className) {
-
     $('select[name=defaultType]').each(function(index, item) {
         fetchColumnValue(item)
     })
@@ -8,14 +7,14 @@ function defaultAddType(className) {
 function fetchColumnValue(item) {
     item.innerHTML = ""
     $.ajax({
-        url: './db/loadColumn.php',
+        url: './db/details.php',
         method: 'POST',
         dataType: 'JSON',
-        data: {class: className},
+        data: {class: className, tableName: 'columnname'},
         success(data) {
             if (data.length)
                 for (let row of data)
-                    item.append(new Option(row[1], row[0]))                
+                    item.append(new Option(row['typeName'], row['type']))
             else
                 item.append(new Option('尚無資料', '尚無資料'))            
         },

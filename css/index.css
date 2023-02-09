@@ -23,3 +23,11 @@
 .modal {
     --bs-modal-width: 1200px;
 }
+
+thead
+{    
+    position: sticky;
+    top: 0;
+    background-color: aqua;
+}
+

@@ -14,7 +14,7 @@ function loadItems(className) {
                     <td>
                       <input type="checkbox" name="item" value="${index}">
                     </td>
-                    <td id="items${index}">${element['type']}</td>
+                    <td id="items${index}">${element['typeName']}</td>
                     <td>${element['item']}</td>
                     <td>
                         ${items(index, element)}
