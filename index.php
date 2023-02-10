@@ -442,6 +442,35 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div class="pagigation text-center">
+                <span id="limit">
+                    <span>每頁筆數</span>
+                    <input type="radio" id="limit1" name="limit" value="10" checked>
+                    <label for="limit1">10</label>
+                    <input type="radio" id="limit2" name="limit" value="25">
+                    <label for="limit2">25</label>
+                    <input type="radio" id="limit3" name="limit" value="50">
+                    <label for="limit3">50</label>
+                    <input type="radio" id="limit4" name="limit" value="100">
+                    <label for="limit4">100</label>
+                    <input type="radio" id="limit5" name="limit" value="200">
+                    <label for="limit5">200</label>
+                    <input type="radio" id="limit6" name="limit" value="500">
+                    <label for="limit6">500</label>
+                </span>
+                <ul class="pagination justify-content-center" id="paginationList">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">Previous</a>
+                    </li>                    
+                    <li class="page-item">
+                        <a class="page-link" href="#">3</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>                
+            </div>
         </div>
     </div>
 
@@ -459,6 +488,7 @@
     <script src="./js/addFile.js"></script>
     <script src="./js/addCount.js"></script>
     <script src="./js/delCheckBox.js"></script>
+    <script src="./js/pagination.js"></script>
 
     <!-- <script src="./js/addFile.js"></script> -->
 </body>

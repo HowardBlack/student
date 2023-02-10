@@ -3,17 +3,18 @@ function loadClass(className) {
   if (valid_dbName(className)) {
     $.ajax({
         url: './db/loadClass.php',
-        data: {class: className, tableName: 'studentinfo'},
+        data: {class: className, tableName: 'studentinfo', page: 1,showPageCount: showPageCount},
         method: 'POST',
         dataType: 'JSON',
         success(result) {
+          console.log(result)
           result.forEach((studenInfo, index) => {
             const sid = studenInfo['sid']
             const name = studenInfo['name']
             $('#sList').append(`
               <tr align="center">
                 <td id="sid${index}">${sid}</td>
-                <td>${name}</td>                
+                <td>${name}</td>
                 ${studentFile(index, studenInfo)}
                 <td>
                   <input type="file" multiple="multiple" id="file${sid}" onchange="addLearnFile(this, '${sid}', '${name}')">
