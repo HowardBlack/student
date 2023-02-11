@@ -1,13 +1,22 @@
 async function loadLevel(className) {
     $('#levelList').empty()
+    $('#paginationList').empty();
     if (className != '請選擇') {
         $.ajax({
             url: './db/details.php',
-            data: {class: className, tableName: 'itemlevel'},
+            data: {
+                class: className,
+                tableName: 'itemlevel',
+                page: page,
+                showPageCount: showPageCount
+            },
             method: 'POST',
             dataType: 'JSON',
             success(data) {
-              data.forEach((levelInfo, index) => {
+              for (let i = 1; i <= data[0]; i++)
+                  $(`#paginationList`).append(new Option(i, i));
+              $('#paginationList').val(page);
+              data[1].forEach((levelInfo, index) => {
                 $('#levelList').append(`<tr align=center>
                     <td>
                       <input type=checkbox name=level value="${levelInfo['type']}">

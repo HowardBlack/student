@@ -6,13 +6,18 @@ function loadClassName() {
     $('#class').empty()
     $('#class').append(new Option('請選擇', '請選擇'))
     $('#clasList').empty()
+    $('#paginationList').empty();
+    className = '請選擇';
     $.ajax({
         url: './db/class/loadClassName.php',
         method: 'POST',
         dataType: 'JSON',
-        success(data) { 
-            if (data.length) {
-                for (let row of data) {
+        success(data) {
+            for (let i = 1; i <= data[0]; i++)
+                  $(`#paginationList`).append(new Option(i, i));
+            $('#paginationList').val(page);
+            if (data[1].length) {
+                for (let row of data[1]) {
                     const id = row['id']
                     const showclassname = row['showclassname']
                     const classname = row['classname']

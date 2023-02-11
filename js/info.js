@@ -1,16 +1,24 @@
 function loadInfo(className) {
     $('#infoList').empty()
     $('#nameList').empty()
+    $('#paginationList').empty();
     if (valid_dbName(className)) {
         $.ajax({
             url: './db/details.php',
-            data: {class: className, tableName: 'studentinfo'},
+            data: {
+                class: className,
+                tableName: 'studentinfo',
+                page: page,
+                showPageCount: showPageCount
+            },
             method: 'POST',
             dataType: 'JSON',
             success(result) {
-              $('#nameList').append(new Option('請選擇', '請選擇'))
-              
-              result.forEach((studenInfo, index) => {
+              for (let i = 1; i <= result[0]; i++)
+                  $(`#paginationList`).append(new Option(i, i));
+              $('#paginationList').val(page);
+              $('#nameList').append(new Option('請選擇', '請選擇'))              
+              result[1].forEach((studenInfo, index) => {
                 const sid = studenInfo['sid']
                 const name = studenInfo['name']
                 $('#infoList').append(

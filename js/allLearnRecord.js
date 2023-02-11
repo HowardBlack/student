@@ -6,21 +6,22 @@ let searchItem = 'none'
 $('#nameList').change((e) => {
     const selectValue = e.target.value
     searchData = (selectValue != '請選擇') ? selectValue : 'none'
-    loadAllRecord(className, searchData, checkMonth, searchCol, searchItem)
+    loadAllRecord(className)
 })
 
 $('#searchColList').change((e) => {
     const selectValue = e.target.value
     searchCol = (selectValue != '請選擇') ? selectValue : 'none'
+    searchItem = 'none'
     if (searchCol == 'none') searchItem = 'none'
     seachItems(searchCol)
-    loadAllRecord(className, searchData, checkMonth, searchCol, searchItem)
+    loadAllRecord(className)
 })
 
 $('#searchItemList').change((e) => {
     const selectValue = e.target.value
     searchItem = (selectValue != '請選擇') ? selectValue : 'none'
-    loadAllRecord(className, searchData, checkMonth, searchCol, searchItem)
+    loadAllRecord(className)
 })
 
 function seachItems(searchCol) {
@@ -57,13 +58,15 @@ allchBox.forEach((checkbox) => {
         }else {
             checkMonth.splice(checkMonth.indexOf(e.target.value), 1)
         }
-        loadAllRecord(className, searchData, checkMonth, searchCol, searchItem)
+        loadAllRecord(className)
     })
 })
 
-function loadAllRecord(className, searchData='none', chMonth='none', searchCol='none', searchItem='none') {
-    if (chMonth.length == 0) chMonth = 'none'
+function loadAllRecord(className) {
+    let cMonth = 'none';
+    cMonth = (checkMonth.length == 0) ? 'none' : checkMonth;
     $('#queryList').empty()
+    $('#paginationList').empty();
     if (valid_dbName(className)) {
         $.ajax({
             url: './db/record/loadRecord.php',
@@ -72,13 +75,18 @@ function loadAllRecord(className, searchData='none', chMonth='none', searchCol='
             data: {
                 class: className,
                 search: searchData,
-                month: chMonth,
+                month: cMonth,
                 searchCol: searchCol,
-                searchItem: searchItem
+                searchItem: searchItem,
+                page: page,
+                showPageCount: showPageCount
             },
-            success(data) {                
-                if (data.length) {
-                    for (let row of data) {
+            success(data) {
+                for (let i = 1; i <= data[0]; i++)
+                    $(`#paginationList`).append(new Option(i, i));
+                $('#paginationList').val(page);
+                if (data[1].length) {
+                    for (let row of data[1]) {
                         const id = row['id'];
                         const sid = row['sid'];
                         const sname = row['name'];

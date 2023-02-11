@@ -1,15 +1,24 @@
 function loadCol(className) {
     $('#colList').empty()
     $('#searchColList').empty()
+    $('#paginationList').empty();
     if (className != '請選擇') {
         $.ajax({
             url: './db/details.php',
-            data: {class: className, tableName: 'columnname'},
+            data: {
+                class: className,
+                tableName: 'columnname',
+                page: page,
+                showPageCount: showPageCount                
+            },
             method: 'POST',
             dataType: 'JSON',
             success(data) {
+              for (let i = 1; i <= data[0]; i++)
+                  $(`#paginationList`).append(new Option(i, i));
+              $('#paginationList').val(page);
               $('#searchColList').append(new Option(`請選擇`, `請選擇`))
-              data.forEach((colInfo, index) => {
+              data[1].forEach((colInfo, index) => {
                 $('#colList').append(`<tr align="center">
                     <td>
                       <input type="checkbox" name="col" value="${colInfo['type']}">

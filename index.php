@@ -28,28 +28,28 @@
             </p>
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="pills-learn-record-tab" data-bs-toggle="pill" data-bs-target="#learn-record" type="button" aria-selected="true">學習記錄</button>
+                    <button class="nav-link active" id="pills-learn-record-tab" data-bs-toggle="pill" data-bs-target="#learn-record" type="button" aria-selected="true" onclick="setBlockMean('none', 'none', loadClass)">學習記錄</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-query-tab" data-bs-toggle="pill" data-bs-target="#query" type="button" aria-selected="false" onclick="setBlockMean('choice', 'choiceitem')">學生記錄查詢</button>
+                    <button class="nav-link" id="pills-query-tab" data-bs-toggle="pill" data-bs-target="#query" type="button" aria-selected="false" onclick="setBlockMean('choice', 'choiceitem', loadAllRecord)">學生記錄查詢</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-create-tab" data-bs-toggle="pill" data-bs-target="#create" type="button" aria-selected="false">新增資料</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#info" type="button" aria-selected="false" onclick="setBlockMean('info', 'studentinfo')">基本資料</button>
+                    <button class="nav-link" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#info" type="button" aria-selected="false" onclick="setBlockMean('info', 'studentinfo', loadInfo)">基本資料</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-col-tab" data-bs-toggle="pill" data-bs-target="#col" type="button" aria-selected="false" onclick="setBlockMean('col', 'columnname')">欄位項目</button>
+                    <button class="nav-link" id="pills-col-tab" data-bs-toggle="pill" data-bs-target="#col" type="button" aria-selected="false" onclick="setBlockMean('col', 'columnname', loadCol)">欄位項目</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-items-tab" data-bs-toggle="pill" data-bs-target="#items" type="button" aria-selected="false" onclick="setBlockMean('item', 'columnitems')">欄位細項</button>
+                    <button class="nav-link" id="pills-items-tab" data-bs-toggle="pill" data-bs-target="#items" type="button" aria-selected="false" onclick="setBlockMean('item', 'columnitems', loadItems)">欄位細項</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-level-tab" data-bs-toggle="pill" data-bs-target="#level" type="button" aria-selected="false" onclick="setBlockMean('level', 'itemlevel')">程度項目</button>
+                    <button class="nav-link" id="pills-level-tab" data-bs-toggle="pill" data-bs-target="#level" type="button" aria-selected="false" onclick="setBlockMean('level', 'itemlevel', loadLevel)">程度項目</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-clas-tab" data-bs-toggle="pill" data-bs-target="#clas" type="button" aria-selected="false" onclick="setBlockMean('clas', 'classmanage')">班級管理</button>
+                    <button class="nav-link" id="pills-clas-tab" data-bs-toggle="pill" data-bs-target="#clas" type="button" aria-selected="false" onclick="setBlockMean('clas', 'classmanage', loadClassName)">班級管理</button>
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
@@ -443,7 +443,7 @@
                     </table>
                 </div>
             </div>
-            <div class="pagigation text-center">
+            <div class="text-center">
                 <span id="limit">
                     <span>每頁筆數</span>
                     <input type="radio" id="limit1" name="limit" value="10" checked>
@@ -459,17 +459,9 @@
                     <input type="radio" id="limit6" name="limit" value="500">
                     <label for="limit6">500</label>
                 </span>
-                <ul class="pagination justify-content-center" id="paginationList">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#">Previous</a>
-                    </li>                    
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>                
+                <span>第</span>
+                <select id="paginationList"></select>
+                <span>頁</span>
             </div>
         </div>
     </div>

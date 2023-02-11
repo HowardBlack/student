@@ -11,14 +11,16 @@ $(() => {
     className = $('#class').val()
     createClass()
     refreshClassName()
-    refresh(className)
+    // refresh(className)
 })
 
 $('#class').change((e) => {
     columns = []
     className = e.target.value
     clear()
-    refresh(className)
+    // refresh(className)
+    loadName(className)
+    defaultAddType(className)
 })
 
 function clear() {
@@ -34,7 +36,7 @@ function refresh(className) {
     loadCol(className)
     loadItems(className)
     loadLevel(className)
-    loadAllRecord(className, searchData='none', checkMonth, searchCol='none', searchItem='none')
+    loadAllRecord(className)
     defaultAddType(className)
 }
 

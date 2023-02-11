@@ -1,14 +1,22 @@
 function loadClass(className) {
-  $('#sList').empty()
+  $('#sList').empty();
+  $('#paginationList').empty();
   if (valid_dbName(className)) {
     $.ajax({
         url: './db/loadClass.php',
-        data: {class: className, tableName: 'studentinfo', page: 1,showPageCount: showPageCount},
+        data: {
+            class: className,
+            tableName: 'studentinfo',
+            page: page,
+            showPageCount: showPageCount
+        },
         method: 'POST',
         dataType: 'JSON',
         success(result) {
-          console.log(result)
-          result.forEach((studenInfo, index) => {
+          for (let i = 1; i <= result[0]; i++)
+              $(`#paginationList`).append(new Option(i, i));
+          $('#paginationList').val(page);
+          result[1].forEach((studenInfo, index) => {
             const sid = studenInfo['sid']
             const name = studenInfo['name']
             $('#sList').append(`
@@ -103,7 +111,7 @@ function studentDialog(index, sInfo) {
 function optionDropDown(className, index) {
   $(`#columnName${index}`).empty()
    $.ajax({
-    url: './db/details.php',
+    url: './db/detailsTwo.php',
     data: {class: className, tableName: 'columnname'},
     method: 'POST',
     dataType: 'JSON',
@@ -151,8 +159,8 @@ function detailsOpt(columnCode, index) {
     },
     error() {
       $(`#${optId}`).append(`<option value="請選擇">請選擇</option>`)
-  }
-})
+    }
+  })
 
   return `
     <select id="${optId}" onchange="optionEvent('${className}','${columnCode}','${index}')"></select>
@@ -163,7 +171,7 @@ function detailsOpt(columnCode, index) {
 function detailsLevel(columnCode, index) {
   const levelId = `${columnCode}LevelOpt${index}`
   $.ajax({
-    url: './db/details.php',
+    url: './db/detailsTwo.php',
     data: {class: className, tableName: 'itemlevel'},
     method: 'POST',
     dataType: 'JSON',

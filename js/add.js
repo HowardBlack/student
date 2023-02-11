@@ -7,7 +7,7 @@ function defaultAddType(className) {
 function fetchColumnValue(item) {
     item.innerHTML = ""
     $.ajax({
-        url: './db/details.php',
+        url: './db/detailsTwo.php',
         method: 'POST',
         dataType: 'JSON',
         data: {class: className, tableName: 'columnname'},

@@ -1,13 +1,21 @@
 function loadItems(className) {
     $('#itemsList').empty()
+    $('#paginationList').empty();
     if (className != '請選擇') {
         $.ajax({
             url: './db/items/loadItems.php',
-            data: {class: className},
+            data: {
+                class: className,
+                page: page,
+                showPageCount: showPageCount
+            },
             method: 'POST',
             dataType: 'JSON',
             success(data) {
-              data.forEach((element) => {
+              for (let i = 1; i <= data[0]; i++)
+                  $(`#paginationList`).append(new Option(i, i));
+              $('#paginationList').val(page);
+              data[1].forEach((element) => {
                 const index = element['id']
                 $('#itemsList').append(`
                   <tr align="center">

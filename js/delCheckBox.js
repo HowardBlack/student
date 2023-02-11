@@ -61,9 +61,15 @@ $('#clasCbAll').click(function() {
 })
 
 
-function setBlockMean(b, s) {
+function setBlockMean(b, s, load) {
     blockMenu = b
     dtName = s
+    loadName = load
+    page = 1
+    showPageCount = 10
+    $('#limit1').prop('checked', true)
+    $('#paginationList').val(page)
+    loadName(className)
 }
 
 function filterCheckbox(blockMenu, callback) {
@@ -84,7 +90,7 @@ function delAllCheckbox(data) {
         data: {class: className, dataTable: dtName, data: data},
         success(bool) {
             if (bool) {
-                refresh(className)
+                loadName(className)
                 setTimeout(() => {
                     alert('刪除成功')
                   }, 0.5)
@@ -107,7 +113,7 @@ function delAllcb(data) {
         success(bool) {
             if (bool) {
                 refreshClassName()
-                refresh(className)
+                loadName(className)
                 alert('刪除成功')
             }
         },
