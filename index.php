@@ -34,7 +34,7 @@
                     <button class="nav-link" id="pills-query-tab" data-bs-toggle="pill" data-bs-target="#query" type="button" aria-selected="false" onclick="setBlockMean('choice', 'choiceitem', loadAllRecord)">學生記錄查詢</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-create-tab" data-bs-toggle="pill" data-bs-target="#create" type="button" aria-selected="false">新增資料</button>
+                    <button class="nav-link" id="pills-create-tab" data-bs-toggle="pill" data-bs-target="#create" type="button" aria-selected="false" onclick="setBlockMean('', '', loadClass)">新增資料</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#info" type="button" aria-selected="false" onclick="setBlockMean('info', 'studentinfo', loadInfo)">基本資料</button>
