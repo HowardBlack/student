@@ -19,6 +19,8 @@ $('#class').change((e) => {
     className = e.target.value
     clear()
     // refresh(className)
+    page = 1
+    showPageCount = 10
     loadName(className)
     defaultAddType(className)
 })
