@@ -23,6 +23,8 @@ $('#class').change((e) => {
     showPageCount = 10
     loadName(className)
     defaultAddType(className)
+    loadSearchName(className)
+    loadSearchCol(className)
 })
 
 function clear() {
@@ -63,3 +65,63 @@ function valid_dbName(className) {
     return (className != '請選擇') ? true : false
 }
 
+function loadSearchName(classname)
+{
+    $('#nameList').empty()
+    if (valid_dbName(className))
+    {
+        $.ajax({
+            url: './db/detailsTwo.php',
+            data: {
+                class: className,
+                tableName: 'studentinfo',
+            },
+            method: 'POST',
+            dataType: 'JSON',
+            success(result) {
+                $('#nameList').append(new Option('請選擇', '請選擇'))
+                result.forEach((studenInfo, index) => {
+                    const name = studenInfo['name']                    
+                    $('#nameList').append(new Option(`${name}`, `${name}`))
+                })
+            },
+            error() {
+                $('#nameList').append(new Option('查無資料', '查無資料'))
+            }
+        })
+    }
+    else
+    {
+        $('#nameList').append(new Option('尚未選擇班級', '尚未選擇班級'))
+    }
+}
+
+function loadSearchCol(classname)
+{
+    $('#searchColList').empty()
+    if (valid_dbName(className))
+    {
+        $.ajax({
+            url: './db/detailsTwo.php',
+            data: {
+                class: className,
+                tableName: 'columnname',
+            },
+            method: 'POST',
+            dataType: 'JSON',
+            success(result) {
+                $('#searchColList').append(new Option(`請選擇`, `請選擇`))
+                result.forEach((colInfo, index) => {
+                    $('#searchColList').append(new Option(`${colInfo['typeName']}`, `${colInfo['type']}`))
+                })
+            },
+            error() {
+                $('#searchColList').append(new Option('查無資料', '查無資料'))
+            }
+        })
+    }
+    else
+    {
+        $('#searchColList').append(new Option('尚未選擇班級', '尚未選擇班級'))
+    }
+}

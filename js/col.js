@@ -1,6 +1,5 @@
 function loadCol(className) {
-    $('#colList').empty()
-    $('#searchColList').empty()
+    $('#colList').empty()    
     $('#paginationList').empty();
     if (className != '請選擇') {
         $.ajax({
@@ -17,7 +16,7 @@ function loadCol(className) {
               for (let i = 1; i <= data[0]; i++)
                   $(`#paginationList`).append(new Option(i, i));
               $('#paginationList').val(page);
-              $('#searchColList').append(new Option(`請選擇`, `請選擇`))
+              
               data[1].forEach((colInfo, index) => {
                 $('#colList').append(`<tr align="center">
                     <td>
@@ -29,18 +28,17 @@ function loadCol(className) {
                         ${column(index, colInfo)}
                     </td>
                   </tr>`)
-                $('#searchColList').append(new Option(`${colInfo['typeName']}`, `${colInfo['type']}`))
+                
               })
             },
             error() {
               $('#colList').append('<tr><td colspan="4">查無資料！</td></tr>')
-              $('#searchColList').append(new Option('查無資料', '查無資料'))
+              
             }
         })
     }
     else {
-        $('#colList').append('<tr><td colspan="4">尚未選擇班級</td></tr>')
-        $('#searchColList').append(new Option('尚未選擇班級', '尚未選擇班級'))
+        $('#colList').append('<tr><td colspan="4">尚未選擇班級</td></tr>')        
     }
 }
 

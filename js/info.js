@@ -1,6 +1,5 @@
 function loadInfo(className) {
-    $('#infoList').empty()
-    $('#nameList').empty()
+    $('#infoList').empty()    
     $('#paginationList').empty();
     if (valid_dbName(className)) {
         $.ajax({
@@ -16,8 +15,7 @@ function loadInfo(className) {
             success(result) {
               for (let i = 1; i <= result[0]; i++)
                   $(`#paginationList`).append(new Option(i, i));
-              $('#paginationList').val(page);
-              $('#nameList').append(new Option('請選擇', '請選擇'))              
+              $('#paginationList').val(page);              
               result[1].forEach((studenInfo, index) => {
                 const sid = studenInfo['sid']
                 const name = studenInfo['name']
@@ -43,7 +41,7 @@ function loadInfo(className) {
         })
     }else {
       $('#infoList').append('<tr><td colspan="4">尚未選擇班級</td></tr>')
-      $('#nameList').append(new Option('尚未選擇班級', '尚未選擇班級'))
+      
     }
 }
 
