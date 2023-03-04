@@ -13,13 +13,13 @@ if ($dataTable == 'studentinfo') {
     }
 }    
 elseif ($dataTable == 'columnname')
-$condition = 'type';
+    $condition = 'type';
 elseif ($dataTable == 'columnitems')
-$condition = 'id';
+    $condition = 'id';
 elseif ($dataTable == 'itemlevel')
-$condition = 'type';
+    $condition = 'type';
 elseif ($dataTable == 'choiceitem')
-$condition = 'id';
+    $condition = 'id';
 
 
 $bool = true;

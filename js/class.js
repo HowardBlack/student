@@ -11,6 +11,7 @@ function loadClassName() {
     $.ajax({
         url: './db/class/loadClassName.php',
         method: 'POST',
+        data: {page: page, showPageCount: showPageCount},
         dataType: 'JSON',
         success(data) {
             for (let i = 1; i <= data[0]; i++)

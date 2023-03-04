@@ -90,6 +90,7 @@ function delAllCheckbox(data) {
         data: {class: className, dataTable: dtName, data: data},
         success(bool) {
             if (bool) {
+                page = 1
                 loadName(className)
                 setTimeout(() => {
                     alert('刪除成功')
@@ -112,7 +113,7 @@ function delAllcb(data) {
         data: {data: data},
         success(bool) {
             if (bool) {
-                refreshClassName()
+                page = 1
                 loadName(className)
                 alert('刪除成功')
             }

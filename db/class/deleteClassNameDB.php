@@ -2,6 +2,7 @@
 
 require '../db.php';
 
+// 無法刪除 data 資料夾的學生資料
 $data = '';
 if (isset($_POST['data'])) {
     $data = implode(', ', $_POST['data']);    
