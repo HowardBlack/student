@@ -15,6 +15,7 @@ $(`#upload_file`).click(function(event) {
         },
         error() {}
     })
+    $('#userFile').val("");
 })
 
 function addClassDB()
