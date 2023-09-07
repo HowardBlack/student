@@ -11,6 +11,6 @@ if (isset($_FILES['file']))
         $temp_name = $file['tmp_name'][$key];
         $name = $file['name'][$key];
         $bool = move_uploaded_file($temp_name, "$tempPath/$name");
+        echo ($bool) ? $name : false;
     }
 }
-echo $bool;

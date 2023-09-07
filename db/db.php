@@ -8,15 +8,15 @@ $class = '';
 try
 {
     $class = (isset($_POST['class'])) ? $_POST['class'] : 'none';
-    $conn = mysqli_connect('localhost', 'root', '', 'classdb');
+    $conn = mysqli_connect('localhost', 'root', 'chihlee168@@', 'classdb', '3307');
 }
 catch (Exception $e)
 {
-    $conn = mysqli_connect('localhost', 'root', '');
+    $conn = mysqli_connect('localhost', 'root', 'chihlee168@@', '', '3307');
     $sql = "CREATE DATABASE classdb";
     if (mysqli_query($conn, $sql))
     {
-        $conn = mysqli_connect('localhost', 'root', '', 'classdb');
+        $conn = mysqli_connect('localhost', 'root', 'chihlee168@@', 'classdb', '3307');
         $sql = "CREATE TABLE classmanage (
                     id INT AUTO_INCREMENT,
                     showclassname VARCHAR(255) NOT NULL,
@@ -61,7 +61,6 @@ catch (Exception $e)
                     recordMonth INT(10) NOT NULL,
                     lastRecordTime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
                 );";
-        $status = mysqli_multi_query($conn, $sql);
+        echo mysqli_multi_query($conn, $sql);
     }
-    echo $status;
 }

@@ -54,17 +54,19 @@ function loadClassName() {
     })
 }
 
+// 網頁進入時，建立初始化資料庫。
 function createClass() {
     $.ajax({
         url: './db/db.php',
         method: 'POST',
         success(bool) {
-            if (bool) alert('班級管理資料庫建立成功')
+            if (bool) alert('班級管理資料庫建立成功');
         },
         error() {
-            alert('無法連接')
+            alert('無法連接');
         }
     })
+    // $.post()
 }
 
 // 驗證顯示權限

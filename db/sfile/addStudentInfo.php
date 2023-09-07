@@ -1,6 +1,6 @@
 <?php
 
-require './readSheet.php';
+require_once './readSheet.php';
 
 $rankdbname = '';
 if (isset($_POST['classname'])) $rankdbname = $_POST['classname'];

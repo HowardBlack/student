@@ -10,43 +10,44 @@ $(`#upload_file`).click(function(event) {
         contentType: false,
         processData: false,
         data: formData,
-        success(bool) {
-            (bool) ? addClassDB() : alert('檔案上傳失敗！')
+        success(result) {
+            (result) ? addClassDB(result) : alert('檔案上傳失敗！')
         },
         error() {}
     })
     $('#userFile').val("");
 })
 
-function addClassDB()
+function addClassDB(uploadFileName)
 {
     $.ajax({
         url: './db/sfile/addClass.php',
         method: 'POST',
         dataType: 'JSON',
-        data: {sheetName: 'class'},
+        data: {sheetName: 'class', fileName: uploadFileName},
         success(rankclass) {
             if (rankclass != '')
             {
                 Promise.all(
-                    [addStudentInfo('studentinfo', rankclass),
-                     addStudentInfo('columnname', rankclass),
-                     addStudentInfo('columnitems', rankclass),
-                     addStudentInfo('itemlevel', rankclass),]
+                    [addStudentInfo('studentinfo', rankclass, uploadFileName),
+                     addStudentInfo('columnname', rankclass, uploadFileName),
+                     addStudentInfo('columnitems', rankclass, uploadFileName),
+                     addStudentInfo('itemlevel', rankclass, uploadFileName),]
                 )
             }
+            alert('新增完成');
         },
         error() {}
     })
     refresh(className)
 }
 // sheetname, datatable, classname
-function addStudentInfo(sheetName, rankclass)
-{
+function addStudentInfo(sheetName, rankclass, uploadFileName)
+{    
     $.ajax({
         url: './db/sfile/addStudentInfo.php',
         method: 'POST',
-        data: {sheetName: sheetName, classname: rankclass},
+        data: {sheetName: sheetName, classname: rankclass, fileName: uploadFileName},
         success(bool) {
             console.log((bool) ? 'addfinish' : 'addfail')
         },

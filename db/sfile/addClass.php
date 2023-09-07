@@ -1,6 +1,6 @@
 <?php
 
-require './readSheet.php';
+require_once './readSheet.php';
 
 $randclass = array();
 foreach ($data as $class)
