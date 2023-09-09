@@ -10,8 +10,8 @@ $(`#upload_file`).click(function(event) {
         contentType: false,
         processData: false,
         data: formData,
-        success(result) {
-            (result) ? addClassDB(result) : alert('檔案上傳失敗！')
+        success(uploadFileName) {
+            (uploadFileName) ? addClassDB(uploadFileName) : alert('檔案上傳失敗！')
         },
         error() {}
     })
@@ -35,7 +35,6 @@ function addClassDB(uploadFileName)
                      addStudentInfo('itemlevel', rankclass, uploadFileName),]
                 )
             }
-            alert('新增完成');
         },
         error() {}
     })

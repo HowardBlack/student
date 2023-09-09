@@ -62,6 +62,7 @@ $('#clasCbAll').click(function() {
 
 
 function setBlockMean(b, s, load) {
+    if (b == 'choice') initAllRecordCondition();
     blockMenu = b
     dtName = s
     loadName = load

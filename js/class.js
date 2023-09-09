@@ -66,7 +66,6 @@ function createClass() {
             alert('無法連接');
         }
     })
-    // $.post()
 }
 
 // 驗證顯示權限
@@ -125,6 +124,5 @@ function addClassdb(...args) {
         }
     })
 
-    // refreshClassName()
 }
 

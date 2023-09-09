@@ -3,7 +3,10 @@ let dtName = "studentinfo"
 let className = "請選擇"
 let block = 'info'
 let blockMenu = 'info'
-
+let searchData = 'none'
+let checkMonth = []
+let searchCol = 'none'
+let searchItem = 'none'
 
 // open web page init
 $(() => {
@@ -11,29 +14,35 @@ $(() => {
     className = $('#class').val()
     createClass()
     refreshClassName()
-    // refresh(className)
 })
 
 $('#class').change((e) => {
-    columns = []
-    className = e.target.value
-    clear()
-    // refresh(className)
-    page = 1
-    showPageCount = 10
-    loadName(className)
-    defaultAddType(className)
-    loadSearchName(className)
-    loadSearchCol(className)
+    columns = [];
+    className = e.target.value;
+    initAllRecordCondition();
+    loadName(className);
+    defaultAddType(className);
+    loadSearchName(className);
+    loadSearchCol(className);
 })
 
-function clear() {
-    $('#searchItemList').empty()
-    $('#searchItemList').append(new Option('請選擇欄位項目', '請選擇欄位項目'))
+function initAllRecordCondition() {
+    searchData = 'none';
+    checkMonth = [];
+    searchCol = 'none';
+    searchItem = 'none';
+    page = 1;
+    showPageCount = 10;
+    $('#searchItemList').empty();
+    $('#searchItemList').append(new Option('請選擇欄位項目', '請選擇欄位項目'));
+    $("input[name='chBox']").each((_index, item) => {item.checked = false; });
+    $("#nameList option").first().prop('selected', true);
+    $("#searchColList option").first().prop('selected', true);
+    $("#searchItemList option").first().prop('selected', true);
 }
 
 function refresh(className) {
-    clear()
+    initAllRecordCondition()
     validDB(className)
     loadClass(className)
     loadInfo(className)

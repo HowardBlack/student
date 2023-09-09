@@ -482,6 +482,5 @@
     <script src="./js/delCheckBox.js"></script>
     <script src="./js/pagination.js"></script>
 
-    <!-- <script src="./js/addFile.js"></script> -->
 </body>
 </html>

@@ -1,17 +1,12 @@
-let searchData = 'none'
-let checkMonth = []
-let searchCol = 'none'
-let searchItem = 'none'
-
 $('#nameList').change((e) => {
-    test()
+    initPage()
     const selectValue = e.target.value
     searchData = (selectValue != '請選擇') ? selectValue : 'none'
     loadAllRecord(className)
 })
 
 $('#searchColList').change((e) => {
-    test()
+    initPage()
     const selectValue = e.target.value
     searchCol = (selectValue != '請選擇') ? selectValue : 'none'
     searchItem = 'none'
@@ -21,7 +16,7 @@ $('#searchColList').change((e) => {
 })
 
 $('#searchItemList').change((e) => {
-    test()
+    initPage()
     const selectValue = e.target.value
     searchItem = (selectValue != '請選擇') ? selectValue : 'none'
     loadAllRecord(className)
@@ -61,7 +56,7 @@ allchBox.forEach((checkbox) => {
         }else {
             checkMonth.splice(checkMonth.indexOf(e.target.value), 1)
         }
-        test()
+        initPage()
         loadAllRecord(className)
     })
 })
@@ -137,7 +132,7 @@ function tdLevelBacColor(id, level) {
         $(`#tdLevel${id}`).prop('style', 'background-color: red')
 }
 
-function test()
+function initPage()
 {
     page = 1;
 }
