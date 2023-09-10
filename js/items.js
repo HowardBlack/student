@@ -32,7 +32,7 @@ function loadItems(className) {
               });
             },
             error() {
-              $('#itemsList').append('<tr><td colspan="4">查無資料！</td></tr>')      
+              $('#itemsList').append('<tr><td colspan="4">查無資料！</td></tr>')
             }
         })
     }
@@ -76,7 +76,8 @@ function updateItem(index, type) {
         data: {class: className, data: [index, $(`#itemName${index}`).val()]},
         success(bool) {
             if (bool) {
-                refresh(className)
+                // refresh(className)
+                loadItems(className);
                 setTimeout(() => {
                   alert('更新成功')
                 }, 0.5)

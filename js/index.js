@@ -19,14 +19,14 @@ $(() => {
 $('#class').change((e) => {
     columns = [];
     className = e.target.value;
-    initAllRecordCondition();
+    initAllRecordCondition(className);
     loadName(className);
     defaultAddType(className);
     loadSearchName(className);
     loadSearchCol(className);
 })
 
-function initAllRecordCondition() {
+function initAllRecordCondition(className) {
     searchData = 'none';
     checkMonth = [];
     searchCol = 'none';
@@ -42,7 +42,7 @@ function initAllRecordCondition() {
 }
 
 function refresh(className) {
-    initAllRecordCondition()
+    initAllRecordCondition(className)
     validDB(className)
     loadClass(className)
     loadInfo(className)
@@ -51,6 +51,7 @@ function refresh(className) {
     loadLevel(className)
     loadAllRecord(className)
     defaultAddType(className)
+    // 更改成 callback function -> className
 }
 
 function validDB(className) {

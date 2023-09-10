@@ -4,9 +4,13 @@ require_once 'db.php';
 
 $tableName = (isset($_POST['tableName'])) ? $_POST['tableName'] : 'none';
 
-$sql = "SELECT *
-        FROM $tableName
-        WHERE classname = '$class'";
+if ($tableName == 'classmanage') {
+    $sql = "SELECT * FROM $tableName";
+}else {
+    $sql = "SELECT *
+            FROM $tableName
+            WHERE classname = '$class'";
+}
 
 $status = mysqli_query($conn, $sql);
 

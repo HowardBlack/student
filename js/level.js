@@ -74,7 +74,8 @@ function updateLevel(index, type) {
         data: {class: className, data: [type, $(`#l${index}`).val()]},
         success(bool) {
             if (bool) {
-                refresh(className)
+                // refresh(className)
+                loadLevel(className);
                 setTimeout(() => {
                   alert('更新成功')
                 }, 0.5)

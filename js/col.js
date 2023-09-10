@@ -78,7 +78,8 @@ function updateCol(index, type) {
         data: {class: className, data: [type, $(`#colName${index}`).val()]},
         success(bool) {
             if (bool) {
-                refresh(className)
+                // refresh(className)
+                loadCol(className);
                 setTimeout(() => {
                   alert('更新成功')
                 }, 0.5)

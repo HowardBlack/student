@@ -253,7 +253,8 @@ function upload(index) {
       data: {class: className, data: record},
       method: 'POST',
       success() {
-        refresh(className)
+        // refresh(className)
+        loadClass(className);
         setTimeout(() => {
           alert('資料新增/修改成功！')
         }, 0.5)
@@ -283,7 +284,7 @@ function delFileCheckbox(filedir)
     method: 'POST',
     data: {fileName: filedir},
     success(bool) {
-      console.log((bool) ? refresh(className) : 0)
+      console.log((bool) ? loadClass(className) : 0)
     },
     error() {}
   })

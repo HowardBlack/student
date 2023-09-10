@@ -38,7 +38,7 @@ function addClassDB(uploadFileName)
         },
         error() {}
     })
-    refresh(className)
+    // refresh(className)
 }
 // sheetname, datatable, classname
 function addStudentInfo(sheetName, rankclass, uploadFileName)
