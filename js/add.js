@@ -173,9 +173,11 @@ function addDataTable({className, dataTable, data}) {
         },
         success(bool) {
             if (bool) {
-                refresh(className)
+                // refresh(className)
+                defaultAddType(className)
+                loadClass(className); // 更新的位置是班級管理，其實不需要使用這寫法，但目前無想法...為了解決下拉頁數重複問題(暫時)
                 setTimeout(() => {
-                  alert('新增成功')
+                    alert('新增成功');
                 }, 0.5)
             }else
                 alert('新增失敗！請檢查資料是否重複或資料表不存在')

@@ -12,7 +12,7 @@ let searchItem = 'none'
 $(() => {
     columns = []
     className = $('#class').val()
-    createClass()
+    // createClass()
     refreshClassName()
 })
 
@@ -20,7 +20,7 @@ $('#class').change((e) => {
     columns = [];
     className = e.target.value;
     initAllRecordCondition(className);
-    loadName(className);
+    loadName(className); // 重新載入當前選項的清單項目
     defaultAddType(className);
     loadSearchName(className);
     loadSearchCol(className);
@@ -43,7 +43,7 @@ function initAllRecordCondition(className) {
 
 function refresh(className) {
     initAllRecordCondition(className)
-    validDB(className)
+    // validDB(className)
     loadClass(className)
     loadInfo(className)
     loadCol(className)

@@ -70,7 +70,7 @@ function addLearnFile(th, sid, name)
         processData: false,
         data: fmData,
         success(bool) {
-            (bool) ? refresh(className) : alert('檔案上傳失敗！')            
+            (bool) ? loadClass(className) : alert('檔案上傳失敗！')            
         },
         error() {}
     })

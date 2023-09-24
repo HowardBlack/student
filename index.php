@@ -34,7 +34,7 @@
                     <button class="nav-link" id="pills-query-tab" data-bs-toggle="pill" data-bs-target="#query" type="button" aria-selected="false" onclick="setBlockMean('choice', 'choiceitem', loadAllRecord)">學生記錄查詢</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-create-tab" data-bs-toggle="pill" data-bs-target="#create" type="button" aria-selected="false" onclick="setBlockMean('', '', loadClass)">新增資料</button>
+                    <button class="nav-link" id="pills-create-tab" data-bs-toggle="pill" data-bs-target="#create" type="button" aria-selected="false" onclick="defaultAddType(`${$('#class').val()}`)">新增資料</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-info-tab" data-bs-toggle="pill" data-bs-target="#info" type="button" aria-selected="false" onclick="setBlockMean('info', 'studentinfo', loadInfo)">基本資料</button>
@@ -50,6 +50,9 @@
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-clas-tab" data-bs-toggle="pill" data-bs-target="#clas" type="button" aria-selected="false" onclick="setBlockMean('clas', 'classmanage', loadClassName)">班級管理</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-explain-tab" data-bs-toggle="pill" data-bs-target="#explain" type="button" aria-selected="false">系統操作手冊</button>
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
@@ -253,8 +256,8 @@
                                 <th>學號</th>
                                 <th>姓名</th>
                                 <th>項目</th>
-                                <th>程度</th>
                                 <th>細項</th>
+                                <th>程度</th>
                                 <th>備註</th>
                                 <th>月份</th>
                                 <th>最後修改時間</th>
@@ -418,6 +421,7 @@
                                 </div>
                             </div>
                         </div>
+                        <p style="color: red; text-align: center;"><strong>P.S.此頁無提供下方的頁數切換功能</strong></p>
                     </div>
                 </div>
             <!-- 班級管理 -->
@@ -441,6 +445,10 @@
                             <tr><td colspan="7">尚未選擇班級！</td></tr>
                         </tbody>
                     </table>
+                </div>
+            <!-- 系統操作手冊 -->
+                <div class="tab-pane fade" id="explain">
+                    test
                 </div>
             </div>
             <div class="text-center">

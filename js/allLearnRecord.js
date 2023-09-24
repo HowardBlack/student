@@ -104,8 +104,8 @@ function loadAllRecord(className) {
                                 <td>${sid}</td>
                                 <td>${sname}</td>
                                 <td>${typeName}</td>
-                                <td id="tdLevel${id}">${level}</td>
                                 <td>${item}</td>
+                                <td id="tdLevel${id}">${level}</td>
                                 <td>${remark}</td>
                                 <td>${recordmonth}</td>
                                 <td>${lastRecordTime}</td>

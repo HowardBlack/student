@@ -25,7 +25,7 @@ function loadInfo(className) {
                       <input type="checkbox" name="info" value="${sid}">
                     </td>
                     <td id="sidInfo${index}">${sid}</td>
-                    <td>${name}</td>
+                    <td id="sOriginName${index}">${name}</td>
                     <td>
                         ${info(index, studenInfo)}
                     </td>
@@ -107,6 +107,7 @@ function updateInfo(index, sid) {
           class: className,
           data: {
             'sid': sid,
+            'originName': $(`#sOriginName${index}`).text(),
             'newName': $(`#sName${index}`).val(),
             'newClassName': $(`#sClass${index}`).val()
           }

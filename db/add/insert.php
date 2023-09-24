@@ -1,6 +1,9 @@
 <?php
 
-include_once('../db.php');
+require_once '../db.php';
+
+// 確認資料庫是否可連線
+if (!$conn) die(false);
 
 $dataTable = $_POST['datatable'];
 $data = $_POST['data'];
@@ -12,8 +15,7 @@ for ($i = 0; $i < count($data); $i++) {
     try
     {
         $sql = "INSERT INTO $dataTable VALUES('$class', '$row[0]', '$row[1]')";
-        $status = mysqli_query($conn, $sql);
-        $bool = $status;
+        $bool = mysqli_query($conn, $sql);
         if ($dataTable == 'studentinfo') {
             $dataPath = dirname(__FILE__, 4) . "\data";
             if (!file_exists($dataPath)) @mkdir($dataPath);
@@ -26,14 +28,14 @@ for ($i = 0; $i < count($data); $i++) {
         try
         {
             $sql = "INSERT INTO $dataTable VALUES(NULL, '$class', '$row[0]', '$row[1]')";
-            $status = mysqli_query($conn, $sql);
-            $bool = $status;
+            $bool = mysqli_query($conn, $sql);
         }
         catch (Exception $err)
         {
             $bool = false;
         }
     }
+    if (!$bool) die(false);
 }
 
 echo $bool;

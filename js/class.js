@@ -7,7 +7,7 @@ function loadClassName() {
     $('#class').append(new Option('請選擇', '請選擇'))
     $('#clasList').empty()
     $('#paginationList').empty();
-    className = '請選擇';
+    // className = '請選擇';
     $.ajax({
         url: './db/class/loadClassName.php',
         method: 'POST',
@@ -40,6 +40,13 @@ function loadClassName() {
                         </tr>
                     `)
                 }
+                // 判斷先前的班級選項是否存在，若存在則預設那個值，不存在則預設第一個選項值，並更新 className
+                try {
+                    $("#class").val(className);
+                }
+                catch (err) {
+                    $("#class").val("請選擇");
+                }
             }else {
                 $('#clasList').append(`<tr><td colspan="7">班級查無資料！</td></tr>`)
                 $('#class').empty()
@@ -55,18 +62,19 @@ function loadClassName() {
 }
 
 // 網頁進入時，建立初始化資料庫。
-function createClass() {
-    $.ajax({
-        url: './db/db.php',
-        method: 'POST',
-        success(bool) {
-            if (bool) alert('班級管理資料庫建立成功');
-        },
-        error() {
-            alert('無法連接');
-        }
-    })
-}
+// function createClass() {
+//     $.ajax({
+//         url: './db/db.php',
+//         method: 'POST',
+//         success(bool) {
+//             message = (bool) ? '班級管理資料庫建立成功' : '無法連接資料庫，請聯繫系統管理員，謝謝！';
+//             alert(message);
+//         },
+//         error() {
+//             alert('無法連接');
+//         }
+//     })
+// }
 
 // 驗證顯示權限
 function defaultPermission(data) {
@@ -117,7 +125,7 @@ function addClassdb(...args) {
         method: 'POST',
         data: {id: args[0], showclassname: args[1], status: text},
         success(bool) {
-            (bool) ? console.log(1) : console.log(0)
+            (bool) ? loadClassName() : console.log(0)
         },
         error() {
             alert('無法連接')
