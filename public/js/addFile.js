@@ -26,7 +26,7 @@ function addClassDB(uploadFileName)
         dataType: 'JSON',
         data: {sheetName: 'class', fileName: uploadFileName},
         success(rankclass) {
-            if (rankclass != '')
+            if (rankclass != false)
             {
                 Promise.all(
                     [addStudentInfo('studentinfo', rankclass, uploadFileName),
@@ -34,9 +34,13 @@ function addClassDB(uploadFileName)
                      addStudentInfo('columnitems', rankclass, uploadFileName),
                      addStudentInfo('itemlevel', rankclass, uploadFileName),]
                 )
+                    .then((values) => alert('新增完成'))
+                    .catch((reason) => alert('上傳檔案新增失敗'))
             }
         },
-        error() {}
+        error() {
+            alert('上傳檔案失敗，請先確認是否有更改上傳檔案注意事項');
+        }
     })
     // refresh(className)
 }
@@ -50,7 +54,9 @@ function addStudentInfo(sheetName, rankclass, uploadFileName)
         success(bool) {
             console.log((bool) ? 'addfinish' : 'addfail')
         },
-        error() {}
+        error() {
+            alert('上傳檔案失敗');
+        }
     })
 }
 

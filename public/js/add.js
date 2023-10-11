@@ -1,9 +1,12 @@
 function defaultAddType(className) {
     $('select[name=defaultType]').each(function(index, item) {
-        fetchColumnValue(item)
+        fetchColumnValue(item);
     })
 }
 
+// <summary>
+// 新增資料 / 欄位細項 更新
+// </summary>
 function fetchColumnValue(item) {
     item.innerHTML = ""
     $.ajax({
@@ -16,12 +19,13 @@ function fetchColumnValue(item) {
                 for (let row of data)
                     item.append(new Option(row['typeName'], row['type']))
             else
-                item.append(new Option('尚無資料', '尚無資料'))            
+                item.append(new Option('尚無資料', '尚無資料'))
         },
         error() {
             item.append(new Option('檢查班級是否選擇或資料未新增', '檢查班級是否選擇或資料未新增'))
         }
     })
+    // loadSearchData(className, 'columnname', item);
 }
 
 let addDataArray = []
@@ -101,7 +105,6 @@ function addclas() {
             'dataTable': dtName,
             'data': addDataArray
         })
-
         init('addClassName')
     }else
         alert('請填寫完整資料')
@@ -116,13 +119,7 @@ function addDT({dataTable, data}) {
             data: data
         },
         success(bool) {
-            if (bool) {
-                refreshClassName()
-                setTimeout(() => {
-                  alert('新增成功')
-                }, 0.5)
-            }else
-                alert('新增失敗')
+            alert((bool) ? '新增成功' : '新增失敗');
         },
         error() {
             alert('無法連接')

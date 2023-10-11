@@ -4,6 +4,8 @@ require_once 'db.php';
 
 $tableName = (isset($_POST['tableName'])) ? $_POST['tableName'] : 'none';
 
+// none 未防呆
+
 if ($tableName == 'classmanage') {
     $sql = "SELECT * FROM $tableName";
 }else {

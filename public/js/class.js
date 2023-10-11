@@ -1,23 +1,18 @@
-function refreshClassName() {
-    loadClassName()
-}
-
 function loadClassName() {
-    $('#class').empty()
-    $('#class').append(new Option('請選擇', '請選擇'))
-    $('#clasList').empty()
+    $('#clasList').empty();
     $('#paginationList').empty();
-    // className = '請選擇';
     $.ajax({
         url: './db/class/loadClassName.php',
         method: 'POST',
         data: {page: page, showPageCount: showPageCount},
         dataType: 'JSON',
         success(data) {
+            // 加入分頁下拉選單
             for (let i = 1; i <= data[0]; i++)
                   $(`#paginationList`).append(new Option(i, i));
+            // 設定目前的頁數
             $('#paginationList').val(page);
-            if (data[1].length) {
+            if (data[1].length) { // 如果有資料逐筆新增至 clasList
                 for (let row of data[1]) {
                     const id = row['id']
                     const showclassname = row['showclassname']
@@ -31,7 +26,6 @@ function loadClassName() {
                             </td>
                             <td class="col-1">${id}</td>
                             <td class="col-1">${showclassname}</td>
-                            <td class="col-2">${classname}</td>
                             <td class="col-2">${createTime}</td>
                             <td class="col-2">${keepTime}</td>
                             <td class="col-1">
@@ -47,53 +41,51 @@ function loadClassName() {
                 catch (err) {
                     $("#class").val("請選擇");
                 }
-            }else {
-                $('#clasList').append(`<tr><td colspan="7">班級查無資料！</td></tr>`)
+            }else { // 查無資料
+                $('#clasList').append(`<tr><td colspan="6">班級查無資料！</td></tr>`)
                 $('#class').empty()
                 $('#class').append(new Option('請選擇', '請選擇'))
             }
         },
         error() {
-            $('#clasList').append(`<tr><td colspan="7">班級查無資料！</td></tr>`)
+            $('#clasList').append(`<tr><td colspan="6">班級查無資料！</td></tr>`)
             $('#class').empty()
             $('#class').append(new Option('請選擇', '請選擇'))
         }
     })
 }
 
-// 網頁進入時，建立初始化資料庫。
-// function createClass() {
-//     $.ajax({
-//         url: './db/db.php',
-//         method: 'POST',
-//         success(bool) {
-//             message = (bool) ? '班級管理資料庫建立成功' : '無法連接資料庫，請聯繫系統管理員，謝謝！';
-//             alert(message);
-//         },
-//         error() {
-//             alert('無法連接');
-//         }
-//     })
-// }
-
-// 驗證顯示權限
+//<summary>
+//判斷班級是否啟用
+//</summary>
+//<param name="data">每筆班級資訊</param>
+//<return>未啟用及啟用的按鈕</return>
 function defaultPermission(data) {
     const id = data['id']
     const showclassname = data['showclassname']
     const permission = data['permission']
     const dbName = data['classname']
-    let css = ""
-    if (permission == '0')
-        // css = 'btn btn-outline-success'
-        return `<button class="btn btn-outline-success" id="enable${id}" value="f" onclick="addClassdb(${id}, '${showclassname}', '${permission}', '${dbName}')">啟用</button>`
-    else {
-        // css = 'btn btn-outline-danger'
-        $('#class').append(`<option id="${dbName}" value="${dbName}">${showclassname}</option>`)
+    let css, showText, showValue = '';
+    if (permission == '0') { //未啟用的班級
+        css = 'btn btn-outline-success';
+        showText = '啟用';
+        showValue = 'f';
     }
-    return `<button class="btn btn-outline-danger" id="enable${id}" value="t" onclick="addClassdb(${id}, '${showclassname}', '${permission}', '${dbName}')">停用</button>`
+    else { //已啟用的班級
+        css = 'btn btn-outline-danger';
+        showText = '停用';
+        showValue = 't';
+    }
+    return `<button class="${css}" id="enable${id}" value="${showValue}" onclick="addClassdb(${id}, '${showclassname}', '${permission}', '${dbName}')">${showText}</button>`
 }
 
-// 判斷可顯示及不可顯示的內容
+//<summary>
+//點擊班級管理的啟用or停用按鈕事件
+//</summary>
+//<param index="0" name="id">編號</param>
+//<param index="1" name="showclassname">班級名稱</param>
+//<param index="2" name="permission">權限( 0 or 1 )</param>
+//<param index="3" name="dbName">資料庫名稱</param>
 function addClassdb(...args) {
     /*
         1. 啟用 => 新增班級, 按鈕為紅色, 文字變停用, permission = 1；停用 => 刪除班級, 按鈕為綠色, 文字變啟用, permission = 0
@@ -115,7 +107,7 @@ function addClassdb(...args) {
         text = 'f'
         css = 'btn btn-outline-success'
         element.innerText = '啟用'
-        refresh(className='請選擇')
+        // refresh(className='請選擇')
     }
     element.value = text
     element.className = css
@@ -134,3 +126,25 @@ function addClassdb(...args) {
 
 }
 
+//<summary>
+//於頁面初始化及班級管理資訊變更時，更新班級下拉選單
+//</summary>
+function resetClassOption() {
+    $('#class').empty();
+    $('#class').append(new Option('請選擇', '請選擇'));
+    $('#class').val('請選擇');
+    $.post("./db/class/resetClassOption.php", {dataTable: 'classmanage'}, (resultData, status) => {
+        if (status === 'success') {
+            if (resultData.length) {
+                resultData.forEach((rowClass) => {
+                    let showclassname = rowClass['showclassname'];
+                    let dbName = rowClass['classname'];
+                    $('#class').append(`<option id="${dbName}" value="${dbName}">${showclassname}</option>`);
+                })
+            };
+        };
+    }, 'json')
+        .fail((error) => {
+            alert('目前無啟用班級或無班級資料');
+        });
+}

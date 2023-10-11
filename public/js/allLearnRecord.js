@@ -1,3 +1,11 @@
+// <summary>
+// 學習記錄查詢
+// </summary>
+
+
+// <summary>
+// 班級學生下拉選項
+// </summary>
 $('#nameList').change((e) => {
     initPage()
     const selectValue = e.target.value
@@ -5,16 +13,21 @@ $('#nameList').change((e) => {
     loadAllRecord(className)
 })
 
+// <summary>
+// 欄位項目下拉選項
+// </summary>
 $('#searchColList').change((e) => {
     initPage()
     const selectValue = e.target.value
     searchCol = (selectValue != '請選擇') ? selectValue : 'none'
     searchItem = 'none'
-    if (searchCol == 'none') searchItem = 'none'
     seachItems(searchCol)
     loadAllRecord(className)
 })
 
+// <summary>
+// 欄位細項下拉選項
+// </summary>
 $('#searchItemList').change((e) => {
     initPage()
     const selectValue = e.target.value
@@ -22,6 +35,9 @@ $('#searchItemList').change((e) => {
     loadAllRecord(className)
 })
 
+// <summary>
+// 欄位細項刷新功能
+// </summary>
 function seachItems(searchCol) {
     $('#searchItemList').empty()
     if (searchCol != 'none') {
@@ -61,11 +77,16 @@ allchBox.forEach((checkbox) => {
     })
 })
 
+// <summary>
+// 預設載入所有學生記錄；可根據 班級、欄位項目、欄位細項、月份 查詢條件回傳記錄
+// </summary>
 function loadAllRecord(className) {
     let cMonth = 'none';
     cMonth = (checkMonth.length == 0) ? 'none' : checkMonth;
     $('#queryList').empty()
     $('#paginationList').empty();
+    loadSearchData(className, 'studentinfo', 'nameList', searchData, 'name', 'name');
+    loadSearchData(className, 'columnname', 'searchColList', searchCol, 'typeName', 'type');
     if (valid_dbName(className)) {
         $.ajax({
             url: './db/record/loadRecord.php',
@@ -125,6 +146,9 @@ function loadAllRecord(className) {
     }
 }
 
+// <summary>
+// 區分學生記錄 強與弱 的顏色
+// </summary>
 function tdLevelBacColor(id, level) {
     if (level == '強')
         $(`#tdLevel${id}`).prop('style', 'background-color: yellow')

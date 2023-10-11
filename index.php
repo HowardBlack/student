@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>學生學習紀錄</title>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.1/css/bootstrap.min.css' integrity='sha512-siwe/oXMhSjGCwLn+scraPOWrJxHlUgMBMZXdPe2Tnk3I0x3ESCoLz7WZ5NTH6SZrywMY+PB1cjyqJ5jAluCOg==' crossorigin='anonymous'/>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
-    <link rel="stylesheet" href="./css/index.css">
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.1/js/bootstrap.min.js' integrity='sha512-vyRAVI0IEm6LI/fVSv/Wq/d0KUfrg3hJq2Qz5FlfER69sf3ZHlOrsLriNm49FxnpUGmhx+TaJKwJ+ByTLKT+Yg==' crossorigin='anonymous'></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css' integrity='sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==' crossorigin='anonymous'/>
+    <link rel="stylesheet" href="./public/css/index.css">
 </head>
 <body>
     <div class="container">
@@ -16,7 +15,6 @@
         <div class="container-fluid p-3 mb-3 bg-black text-white text-center">
             <h1>學習記錄</h1>
         </div>
-
     <!-- content -->
         <div class="content">
             <!-- 選單 -->  
@@ -74,6 +72,7 @@
                             <option value="7">七月</option>
                             <option value="8">八月</option>
                         </select>
+                        <strong class="notice">P.S.目前檔案可支援副檔名：.mp3 .mp4 .jpg .png .pdf</strong>
                     </p>
                     <table class="table table-border table-hover table-sm">
                         <thead>
@@ -426,6 +425,9 @@
                 </div>
             <!-- 班級管理 -->
                 <div class="tab-pane fade" id="clas">
+                    <p style="color: red; text-align: center;">
+                        <strong>P.S.按鈕文字顯示啟用為尚未啟用；按鈕文字顯示停用為已啟用</strong>
+                    </p>
                     <table class="table table-border table-hover table-sm">
                         <thead>
                             <tr align="center">
@@ -435,22 +437,81 @@
                                 </th>
                                 <th>ID</th>
                                 <th>班級名稱</th>
-                                <th>資料庫名稱</th>
                                 <th>建立時間</th>
                                 <th>已保留時間</th>
                                 <th>功能</th>
                             </tr>
                         </thead>
                         <tbody id="clasList">
-                            <tr><td colspan="7">尚未選擇班級！</td></tr>
+                            <tr><td colspan="6">尚未選擇班級！</td></tr>
                         </tbody>
                     </table>
                 </div>
             <!-- 系統操作手冊 -->
                 <div class="tab-pane fade" id="explain">
-                    test
+                    <ul>
+                        <li>
+                            <h5>使用 Excel 匯入</h5>
+                            <p>
+                                <ol>
+                                    <li>
+                                        <span>使用前，請務必詳閱以下幾點注意事項：</span>
+                                        <ol type="a">
+                                            <li>
+                                                <strong class="notice">
+                                                    無論班級是否相同，每次上傳檔案系統皆會視為新資料，並不會累加到先前的資料。
+                                                </strong>
+                                            </li>
+                                            <li>
+                                                <strong class="notice">
+                                                    建議每學期使用 Excel 一次匯入所有學生資訊，其餘使用 逐筆新增 的方式新增資料。
+                                                </strong>
+                                            </li>
+                                            <li>
+                                                <strong class="notice">
+                                                    各個工作表名稱及第一列欄位名稱勿更動(因程式設計需抓取對應的資訊)。
+                                                </strong>
+                                            </li>
+                                            <li>
+                                                <strong class="notice">
+                                                    歡迎使用，請點擊下載右側
+                                                    <a href="../../ExcelFileUpload/ClassExample.xlsx" download>Excel 範例檔案</a>。
+                                                </strong>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li>
+                                        <h6>檔案依真實資料修改後，請至 新增資料區塊 / 選擇上傳檔案 / 點擊上傳</h6>
+                                        <img src="./public/images/SystemOperationManual/AddUploadFile.png" alt="檔案上傳步驟" class="exampleImage">
+                                    </li>
+                                    <li>
+                                        <h6>新增成功系統會顯示視窗告知『新增完成』</h6>
+                                        <img src="./public/images/SystemOperationManual/AddUploadFileSuccess.png" alt="檔案上傳成功" class="exampleImage">
+                                    </li>
+                                    <li>
+                                        <h6>至班級管理確認班級已新增完成即可開始使用</h6>
+                                    </li>
+                                </ol>
+                            </p>
+                        </li>
+                        <li>
+                            <h5>不使用 Excel 匯入(逐筆新增)</h5>
+                            <ol>
+                                <li>
+                                    <h6>新增班級</h6>
+                                    <img src="./public/images/SystemOperationManual/AddClass.png" alt="新增班級" class="exampleImage">
+                                </li>
+                                <li>
+                                    <h6>先選擇班級，再依序新增該班級學生基本資料、欄位項目、欄位細項、程度項目等(各項新增步驟如下圖所示)</h6>
+                                    <img src="./public/images/SystemOperationManual/AddClassItem.png" alt="新增學生基本資料" class="exampleImage">
+                                </li>
+                            </ol>
+                        </li>
+                    </ul>
+                    <p style="color: red; text-align: center;"><strong>P.S.此頁無提供下方的頁數切換功能</strong></p>
                 </div>
             </div>
+        <!-- 每頁筆數 -->
             <div class="text-center">
                 <span id="limit">
                     <span>每頁筆數</span>
@@ -474,21 +535,22 @@
         </div>
     </div>
 
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.1/js/bootstrap.min.js' integrity='sha512-vyRAVI0IEm6LI/fVSv/Wq/d0KUfrg3hJq2Qz5FlfER69sf3ZHlOrsLriNm49FxnpUGmhx+TaJKwJ+ByTLKT+Yg==' crossorigin='anonymous'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js' integrity='sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==' crossorigin='anonymous'></script>
-    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
-    <script src="./js/class.js"></script>
-    <script src="./js/index.js"></script>
-    <script src="./js/learnRecord.js"></script>
-    <script src="./js/info.js"></script>
-    <script src="./js/col.js"></script>
-    <script src="./js/items.js"></script>
-    <script src="./js/allLearnRecord.js"></script>
-    <script src="./js/add.js"></script>
-    <script src="./js/level.js"></script>
-    <script src="./js/addFile.js"></script>
-    <script src="./js/addCount.js"></script>
-    <script src="./js/delCheckBox.js"></script>
-    <script src="./js/pagination.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js' integrity='sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==' crossorigin='anonymous'></script>
+    <script src="./public/js/class.js"></script>
+    <script src="./public/js/index.js"></script>
+    <script src="./public/js/learnRecord.js"></script>
+    <script src="./public/js/info.js"></script>
+    <script src="./public/js/col.js"></script>
+    <script src="./public/js/items.js"></script>
+    <script src="./public/js/allLearnRecord.js"></script>
+    <script src="./public/js/add.js"></script>
+    <script src="./public/js/level.js"></script>
+    <script src="./public/js/addFile.js"></script>
+    <script src="./public/js/addCount.js"></script>
+    <script src="./public/js/delCheckBox.js"></script>
+    <script src="./public/js/pagination.js"></script>
 
 </body>
 </html>

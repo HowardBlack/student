@@ -9,7 +9,7 @@ if (isset($_POST['sheetName'])) $sheetName = $_POST['sheetName'];
 if (isset($_POST['fileName'])) $uploadFileName = $_POST['fileName'];
 $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
 $reader -> setReadDataOnly(true);
-$spreadsheet = $reader -> load("../../temp/$uploadFileName");
+$spreadsheet = $reader -> load("../../../ExcelFileUpload/$uploadFileName");
 $sheet = $spreadsheet -> getSheetByName("$sheetName");
 $data = $sheet -> toArray();
 
