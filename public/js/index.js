@@ -8,11 +8,12 @@ let checkMonth = []
 let searchCol = 'none'
 let searchItem = 'none'
 
-// open web page init
+// 網頁閇啟預先執行
 $(() => {
-    columns = []
-    className = $('#class').val()
-    refreshClassName()
+    columns = [];
+    className = $('#class').val();
+    // loadClassName()
+    resetClassOption();
 })
 
 // <summary>
@@ -42,6 +43,7 @@ function initAllRecordCondition(className) {
     $("#nameList option").first().prop('selected', true);
     $("#searchColList option").first().prop('selected', true);
     $("#searchItemList option").first().prop('selected', true);
+    $("input[name='limit']").first().prop('checked', true);
 }
 
 function refresh(className) {
@@ -64,11 +66,16 @@ function valid_dbName(className) {
     return (className != '請選擇');
 }
 
-// <summary> 
-// 學生記錄查詢之搜尋功能
-// 載入 班級學生下拉名單、班級欄位項目下拉名稱
-// params： 班級、資料表、下拉元素ID、儲存參數位置、文字對應欄位、值對應欄位 等資料
-// </summary>
+//<summary> 
+//學生記錄查詢之搜尋功能
+//載入 班級學生下拉名單、班級欄位項目下拉名稱
+//</summary>
+//<param name="className">班級</param>
+//<param name="dataTable">資料表</param>
+//<param name="idElement">下拉元素ID</param>
+//<param name="storeLocation">儲存參數位置</param>
+//<param name="optionTextCol">文字對應欄位</param>
+//<param name="optionValueCol">值對應欄位</param>
 function loadSearchData(className, dataTable, idElement, storeLocation, optionTextCol, optionValueCol) {
     $(`#${idElement}`).empty();
     if (valid_dbName(className)) {

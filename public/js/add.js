@@ -105,7 +105,6 @@ function addclas() {
             'dataTable': dtName,
             'data': addDataArray
         })
-
         init('addClassName')
     }else
         alert('請填寫完整資料')
@@ -120,13 +119,7 @@ function addDT({dataTable, data}) {
             data: data
         },
         success(bool) {
-            if (bool) {
-                refreshClassName()
-                setTimeout(() => {
-                  alert('新增成功')
-                }, 0.5)
-            }else
-                alert('新增失敗')
+            alert((bool) ? '新增成功' : '新增失敗');
         },
         error() {
             alert('無法連接')

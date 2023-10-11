@@ -2,10 +2,13 @@
 
 require_once('../db.php');
 
-$data = $_POST['data'];
+$data = (isset($_POST['data'])) ? $_POST['data'] : 'none';
 
-$sql = "UPDATE columnitems
-        SET item = '$data[1]'
-        WHERE (classname = '$class' AND id = '$data[0]')";
+if ($data != 'none') {
+    $sql = "UPDATE columnitems
+            SET item = '$data[1]'
+            WHERE (classname = '$class' AND id = '$data[0]')";
 
-echo (mysqli_query($conn, $sql)) ? true : false;
+    echo (mysqli_query($conn, $sql));
+} else
+    echo false;

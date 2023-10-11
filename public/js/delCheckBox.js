@@ -51,8 +51,9 @@ $('#choiceCbAll').click(function() {
 })
 
 $('#clasBoxDel').click(function() {
-    blockMenu = 'clas'
-    filterCheckbox(blockMenu, delAllcb)
+    blockMenu = 'clas';
+    filterCheckbox(blockMenu, delAllcb);
+    resetClassOption();
 })
 
 $('#clasCbAll').click(function() {

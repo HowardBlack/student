@@ -25,8 +25,26 @@
 }
 
 thead
-{    
+{
     position: sticky;
     top: 0;
     background-color: aqua;
+}
+
+.nav-item {
+    transition: 0.5s;
+}
+
+.nav-link:hover {
+    background-color: yellow;
+    border-radius: 10px;
+    color: black;
+}
+
+.notice {
+    color: red;
+}
+
+.exampleImage {
+    border: 1px solid black;
 }

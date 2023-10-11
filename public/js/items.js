@@ -62,7 +62,7 @@ function items(index, itemInfo) {
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="updateItem${index}" data-bs-dismiss="modal" onclick="updateItem(${index},'${itemInfo['type']}')">UPDATE</button>
+            <button type="button" class="btn btn-primary" id="updateItem${index}" data-bs-dismiss="modal" onclick="updateItem(${index},'${itemInfo['typeName']}')">UPDATE</button>
           </div>
         </div>
       </div>

@@ -35,7 +35,7 @@ CREATE TABLE columnitems (
     classname VARCHAR(255) NOT NULL,
     type VARCHAR(255) NOT NULL,
     item VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id, classname, type, item)                    
+    PRIMARY KEY (id, classname, type, item)
 );
 CREATE TABLE itemlevel (
     classname VARCHAR(255) NOT NULL,
